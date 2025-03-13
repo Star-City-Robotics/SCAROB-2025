@@ -1,12 +1,7 @@
 package frc.robot.state.sequencer.positions;
 
+// (Evens) This class is used to store the positions for the robot
+// TODO define doubles used to store the positions for the state machine
 public class Positions {
-  public double raiseElevatorPosition;
-  public double raiseElevatorThreshold;
-  public double secondStageElevatorPosition;
-  public double lowerElevatorThreshold;
-  public double armForwardPosition;
-  public double armScoringPosition;
-  public double clamperIntakePosition;
-  public double clamperHoldPosition;
+  public double moveElevatorPosition;
 }

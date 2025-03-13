@@ -7,6 +7,7 @@ public enum SequenceInput implements Input {
   SCORE,
   RESET_DONE,
   BUTTON_RELEASED,
+  SENSOR_SCORE,
   LEVEL_CHANGED,
 
   // Subsystem feedback

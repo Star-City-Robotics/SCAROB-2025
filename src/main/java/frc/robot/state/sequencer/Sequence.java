@@ -6,8 +6,8 @@ public enum Sequence {
   INTAKE_ALGAE_L2,
   INTAKE_ALGAE_L3,
   INTAKE_ALGAE_FLOOR,
-  SHOOT_ALGAE,
-  HANDOFF_ALGAE,
+  SHOOT_ALGAE, // Barge score
+  HANDOFF_ALGAE, // Processor score
 
   INTAKE_CORAL_FEEDER,
   INTAKE_CORAL_FLOOR,

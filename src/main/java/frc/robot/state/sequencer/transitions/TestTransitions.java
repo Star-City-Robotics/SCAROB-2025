@@ -5,6 +5,7 @@ import frc.robot.state.sequencer.SequenceState;
 
 public class TestTransitions {
   private static final Object transitionTable[][] = {
+
     // CURRENT                              INPUT                                     OPERATION
     //               NEXT
     {SequenceState.HOME, SequenceInput.BEGIN, "raiseElevator", SequenceState.RAISING_ELEVATOR},

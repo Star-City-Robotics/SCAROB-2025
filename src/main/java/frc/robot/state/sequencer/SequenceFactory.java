@@ -2,57 +2,84 @@ package frc.robot.state.sequencer;
 
 import frc.robot.state.sequencer.positions.Positions;
 import frc.robot.state.sequencer.positions.PositionsFactory;
-import frc.robot.state.sequencer.transitions.AlgaeFloorPickupTransitions;
-import frc.robot.state.sequencer.transitions.AlgaeHandoffTransitions;
-import frc.robot.state.sequencer.transitions.AlgaeReefPickupTransitions;
-import frc.robot.state.sequencer.transitions.AlgaeScoreBargeTransitions;
-import frc.robot.state.sequencer.transitions.CoralFeederPickupTransitions;
 import frc.robot.state.sequencer.transitions.ResetTransitions;
-import frc.robot.state.sequencer.transitions.TestTransitions;
+import frc.robot.state.sequencer.transitions.ScoreCoralTransitions; // you will need to import the
 
+// transition tables you make
+
+// (Evens) This takes the selected game peice and level and determines which transition table and
+// positions to use
 public class SequenceFactory {
-  // public static Sequence getSequence(Level levelSelection, GamePiece pieceSelection, Action
-  // actionSelection) {
-  public static Sequence getSequence(Level levelSelection) {
+  public static Sequence getSequence(
+      Level levelSelection, GamePiece pieceSelection, Action actionSelection) {
     /*
      * CORAL SEQUENCES
      */
     // Coral intake
-    // Currently disabled may not need
-    // if(pieceSelection == GamePiece.CORAL && levelSelection == Level.L1 && actionSelection ==
-    // Action.INTAKE) return Sequence.INTAKE_CORAL_FLOOR;
-    // if(pieceSelection == GamePiece.CORAL && levelSelection == Level.L1 && actionSelection ==
-    // Action.INTAKE) return Sequence.INTAKE_CORAL_FLOOR_UPRIGHT;
-    // if(levelSelection == Level.L2) return Sequence.INTAKE_CORAL_FEEDER;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L1
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FLOOR;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L1
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FLOOR_UPRIGHT;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L2
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FEEDER;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L3
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FEEDER;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L4
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FEEDER;
+
     // Coral score
-    if (levelSelection == Level.L1) return Sequence.SCORE_CORAL_L1;
-    if (levelSelection == Level.L2) return Sequence.SCORE_CORAL_L2;
-    if (levelSelection == Level.L3) return Sequence.SCORE_CORAL_L3;
-    if (levelSelection == Level.L4) return Sequence.SCORE_CORAL_L4;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L1
+        && actionSelection == Action.SCORE) return Sequence.SCORE_CORAL_L1;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L2
+        && actionSelection == Action.SCORE) return Sequence.SCORE_CORAL_L2;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L3
+        && actionSelection == Action.SCORE) return Sequence.SCORE_CORAL_L3;
+    if (pieceSelection == GamePiece.CORAL
+        && levelSelection == Level.L4
+        && actionSelection == Action.SCORE) return Sequence.SCORE_CORAL_L4;
 
     /*
      * ALGAE SEQUENCES
      */
     // Algae intake
-    // if(pieceSelection == GamePiece.ALGAE && levelSelection == Level.L1 && actionSelection ==
-    // Action.INTAKE) return Sequence.INTAKE_ALGAE_FLOOR;
-    // if(pieceSelection == GamePiece.ALGAE && levelSelection == Level.L2 && actionSelection ==
-    // Action.INTAKE) return Sequence.INTAKE_ALGAE_L2;
-    // if(pieceSelection == GamePiece.ALGAE && levelSelection == Level.L3 && actionSelection ==
-    // Action.INTAKE) return Sequence.INTAKE_ALGAE_L3;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L1
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_ALGAE_FLOOR;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L2
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_ALGAE_L2;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L3
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_ALGAE_L3;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L4
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_ALGAE_L3;
     // Algae score
-    // if(pieceSelection == GamePiece.ALGAE && levelSelection == Level.L1 && actionSelection ==
-    // Action.SCORE) return Sequence.HANDOFF_ALGAE;
-    // if(pieceSelection == GamePiece.ALGAE && levelSelection == Level.L2 && actionSelection ==
-    // Action.SCORE) return Sequence.SHOOT_ALGAE;
-    // if(pieceSelection == GamePiece.ALGAE && levelSelection == Level.L3 && actionSelection ==
-    // Action.SCORE) return Sequence.SHOOT_ALGAE;
-    // if(pieceSelection == GamePiece.ALGAE && levelSelection == Level.L4 && actionSelection ==
-    // Action.SCORE) return Sequence.SHOOT_ALGAE;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L1
+        && actionSelection == Action.SCORE) return Sequence.HANDOFF_ALGAE;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L2
+        && actionSelection == Action.SCORE) return Sequence.SHOOT_ALGAE;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L3
+        && actionSelection == Action.SCORE) return Sequence.SHOOT_ALGAE;
+    if (pieceSelection == GamePiece.ALGAE
+        && levelSelection == Level.L4
+        && actionSelection == Action.SCORE) return Sequence.SHOOT_ALGAE;
 
     return null;
   }
-
+  // (Evens) this is what chooses which transition table to use based on what is returned above
+  // ^^^^^^^
   public static Object[][] getTransitionTable(Sequence sequence) {
     switch (sequence) {
       case RESET:
@@ -61,36 +88,39 @@ public class SequenceFactory {
          * CORAL TRANSITIONS
          */
       case INTAKE_CORAL_FEEDER:
-        return CoralFeederPickupTransitions.getTransitionTable();
+        return null; // TODO: need to return transitions for coral feeder
       case INTAKE_CORAL_FLOOR:
-        return null; // TODO not defined yet
+        return null; // TODO: need to return transitions for coral floor pickup
       case INTAKE_CORAL_FLOOR_UPRIGHT:
-        // Currently disabled, may not need
-        return null; // return CoralUprightFloorPickupTransitions.getTransitionTable();
+        return null; // TODO: need to return transitions to pick the 3 upright coral on the field
       case SCORE_CORAL_L1:
+        // you might not this this depending on how different your L1 score is
+        return null; // TODO: need to return transitions for L1 score
       case SCORE_CORAL_L2:
       case SCORE_CORAL_L3:
       case SCORE_CORAL_L4:
-        return TestTransitions.getTransitionTable();
+        // return TestTransitions.getTransitionTable();
+        return ScoreCoralTransitions.getTransitionTable();
 
         /*
          * ALGAE TRANSITIONS
          */
       case INTAKE_ALGAE_L2:
       case INTAKE_ALGAE_L3:
-        return AlgaeReefPickupTransitions.getTransitionTable();
+        return null; // TODO: need to return transitions for taking algae off the reef
       case INTAKE_ALGAE_FLOOR:
-        return AlgaeFloorPickupTransitions.getTransitionTable();
+        return null; // TODO: need to return transitions for picking up algae off the floor
       case SHOOT_ALGAE:
-        return AlgaeScoreBargeTransitions.getTransitionTable();
+        return null; // TODO: need to return transitions for scoring algae in barge
       case HANDOFF_ALGAE:
-        return AlgaeHandoffTransitions.getTransitionTable();
+        return null; // TODO: need to return transitions for scoring algae in processor
 
       default:
         return null;
     }
   }
-
+  // (Evens) this is what sets the positions for the state machine, using the values from the
+  // PositionConstants
   public static Positions getPositions(Sequence sequence) {
     switch (sequence) {
       case RESET:
@@ -98,11 +128,12 @@ public class SequenceFactory {
         /*
          * CORAL POSITIONS
          */
-        // case INTAKE_CORAL_FEEDER: return PositionsFactory.getCoralFeederPickupPositions();
-        // case INTAKE_CORAL_FLOOR: return null; // TODO needs definition
-        // Currently disabled may not need
-        // case INTAKE_CORAL_FLOOR_UPRIGHT: return
-        // PositionsFactory.getCoralUprightFloorPickupPositions();
+      case INTAKE_CORAL_FEEDER:
+        return PositionsFactory.getCoralFeederPickupPositions();
+      case INTAKE_CORAL_FLOOR:
+        return PositionsFactory.getCoralFloorPickupPositions();
+      case INTAKE_CORAL_FLOOR_UPRIGHT:
+        return PositionsFactory.getCoralUprightFloorPickupPositions();
       case SCORE_CORAL_L1:
         return PositionsFactory.getCoralScoreL1Positions();
       case SCORE_CORAL_L2:
@@ -115,11 +146,16 @@ public class SequenceFactory {
         /*
          * ALGAE POSITIONS
          */
-        // case INTAKE_ALGAE_L2: return PositionsFactory.getAlgaeReefL2PickupPositions();
-        // case INTAKE_ALGAE_L3: return PositionsFactory.getAlgaeReefL3PickupPositions();
-        // case INTAKE_ALGAE_FLOOR: return PositionsFactory.getAlgaeFloorPickupPositions();
-        // case SHOOT_ALGAE: return PositionsFactory.getAlgaeScoreBargePositions();
-        // case HANDOFF_ALGAE: return PositionsFactory.getAlgaeHandoffPositions();
+      case INTAKE_ALGAE_L2:
+        return PositionsFactory.getAlgaeReefL2PickupPositions();
+      case INTAKE_ALGAE_L3:
+        return PositionsFactory.getAlgaeReefL3PickupPositions();
+      case INTAKE_ALGAE_FLOOR:
+        return PositionsFactory.getAlgaeFloorPickupPositions();
+      case SHOOT_ALGAE:
+        return PositionsFactory.getAlgaeScoreBargePositions();
+      case HANDOFF_ALGAE:
+        return PositionsFactory.getAlgaeHandoffPositions();
 
       default:
         return null;
