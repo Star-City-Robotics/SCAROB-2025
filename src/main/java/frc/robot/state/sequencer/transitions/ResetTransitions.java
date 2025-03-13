@@ -5,10 +5,9 @@ import frc.robot.state.sequencer.SequenceState;
 
 public class ResetTransitions {
   private static final Object transitionTable[][] = {
-    // CURRENT                              INPUT                                     OPERATION
-    //               NEXT
-    {SequenceState.INIT_RESET, SequenceInput.BEGIN, "startIntakeReset", SequenceState.RESETTING},
-    {SequenceState.RESETTING, SequenceInput.RESET_DONE, "resetState", SequenceState.HOME},
+    // CURRENT                              INPUT                                     OPERATION                     NEXT
+    {SequenceState.INIT_RESET,              SequenceInput.BEGIN,                      "startIntakeReset",           SequenceState.RESETTING},
+    {SequenceState.RESETTING,               SequenceInput.RESET_DONE,                 "resetState",                 SequenceState.HOME},
   };
 
   public static Object[][] getTransitionTable() {

@@ -11,6 +11,7 @@ public enum SequenceState implements State {
   WAITING, // for driver feedback or intake sensor feedback
   SCORING,
   INTAKING,
+  MOVING_SLAPDOWN_OUT,
   STOPPING_INTAKE,
   LOWERING,
   UPDATING_LEVEL,

@@ -9,6 +9,7 @@ public enum SequenceInput implements Input {
   BUTTON_RELEASED,
   SENSOR_SCORE,
   LEVEL_CHANGED,
+  SLAPDOWN_OUT_DONE,
 
   // Subsystem feedback
   ELEVATOR_THRESHOLD_MET,

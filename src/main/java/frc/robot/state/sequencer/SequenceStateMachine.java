@@ -102,7 +102,7 @@ public class SequenceStateMachine extends StateMachine {
    * will be in other sequences. If you need something custom for a specific sequence, spin off a separate method.
    */
 
-  public boolean raiseElevatorAndArmForBarge() {
+  public boolean raiseElevatorForBarge() {
     // elevatorSubsystem.moveElevatorNormalSpeed(positions.raiseElevatorPosition, subsystemCallback,
     // positions.raiseElevatorThreshold);
     // armSubsystem.moveArmSlowSpeed(-8.0);
@@ -110,15 +110,14 @@ public class SequenceStateMachine extends StateMachine {
   }
 
   public boolean raiseElevator() {
-    // elevatorSubsystem.moveElevatorNormalSpeed(positions.raiseElevatorPosition, subsystemCallback,
-    // positions.raiseElevatorThreshold);
+    elevatorSubsystem.moveElevator(positions.moveElevator, subsystemCallback,
+    positions.moveElevator);
     return true;
   }
 
   public boolean moveElevatorHome() {
-    // isResetting = true;
-    // elevatorSubsystem.moveElevatorNormalSpeed(ElevatorConstants.elevatorHomePosition,
-    // subsystemCallback, positions.lowerElevatorThreshold);
+    isResetting = true;
+    elevatorSubsystem.moveElevator(ElevatorConstants.elevatorHomePosition, subsystemCallback);
     return true;
   }
 
