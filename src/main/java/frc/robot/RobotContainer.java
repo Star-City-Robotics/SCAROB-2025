@@ -56,11 +56,11 @@ public class RobotContainer {
 
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
 
-  private final CoralManipulatorSubsystem intakeSubsystem = new CoralManipulatorSubsystem();
+  private final CoralManipulatorSubsystem coralManipulatorSubsystem = new CoralManipulatorSubsystem();
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
   private final SensorSubsytem sensorSubsytem = new SensorSubsytem();
 
-  private final IntakeCoral intakeCoralCommand = new IntakeCoral(intakeSubsystem, sensorSubsytem);
+  private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
   private final SlapdownIntake slapdownIntake =
       new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
 
