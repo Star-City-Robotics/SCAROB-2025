@@ -27,7 +27,8 @@ public class CoralManipulatorSubsystem extends SubsystemBase {
   }
 
   public boolean coralDetected() {
-    if (coralSensor.getMeasurement() != null) {
+    LaserCan.Measurement measurement = coralSensor.getMeasurement();
+    if (measurement.distance_mm <= 20) {
       return true;
     }
     return false;
