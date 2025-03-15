@@ -37,28 +37,28 @@ public class PositionsFactory {
 
   public static Positions getCoralScoreL1Positions() {
     Positions positions = new Positions();
-    positions.moveElevatorPosition = CORAL_L1.moveElevatorPosition;
+    positions.moveElevator = CORAL_L1.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
 
   public static Positions getCoralScoreL2Positions() {
     Positions positions = new Positions();
-    positions.moveElevatorPosition = CORAL_L2.moveElevatorPosition;
+    positions.moveElevator = CORAL_L2.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
 
   public static Positions getCoralScoreL3Positions() {
     Positions positions = new Positions();
-    positions.moveElevatorPosition = CORAL_L3.moveElevatorPosition;
+    positions.moveElevator = CORAL_L3.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
 
   public static Positions getCoralScoreL4Positions() {
     Positions positions = new Positions();
-    positions.moveElevatorPosition = CORAL_L4.moveElevatorPosition;
+    positions.moveElevator = CORAL_L4.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
@@ -71,14 +71,14 @@ public class PositionsFactory {
 
   public static Positions getAlgaeReefL2PickupPositions() {
     Positions positions = new Positions();
-    positions.moveElevatorPosition = ALGAE_REEF_L2.moveElevatorPosition;
+    positions.moveElevator = ALGAE_REEF_L2.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
 
   public static Positions getAlgaeReefL3PickupPositions() {
     Positions positions = new Positions();
-    positions.moveElevatorPosition = ALGAE_REEF_L3.moveElevatorPosition;
+    positions.moveElevator = ALGAE_REEF_L3.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
@@ -91,7 +91,7 @@ public class PositionsFactory {
 
   public static Positions getAlgaeScoreBargePositions() {
     Positions positions = new Positions();
-    positions.moveElevatorPosition = ALGAE_SCORE_BARGE.moveElevatorPosition;
+    positions.moveElevator = ALGAE_SCORE_BARGE.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
