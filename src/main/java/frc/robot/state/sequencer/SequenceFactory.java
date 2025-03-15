@@ -146,7 +146,7 @@ public class SequenceFactory {
       case SCORE_ALGAE_BARGE:
         return PositionsFactory.getAlgaeScoreBargePositions();
       case SCORE_ALGAE_PROCESSOR:
-        return PositionsFactory.getAlgaeHandoffPositions();
+        return PositionsFactory.getAlgaeScoreProcessorPositions();
 
       default:
         return null;

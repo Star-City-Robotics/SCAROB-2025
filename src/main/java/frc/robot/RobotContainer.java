@@ -61,8 +61,7 @@ public class RobotContainer {
   private final SensorSubsytem sensorSubsytem = new SensorSubsytem();
 
   private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
-  private final SlapdownIntake slapdownIntake =
-      new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
+  private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
 
   /* Driver Buttons */
   private final Trigger dStart = xboxDriverController.start();
