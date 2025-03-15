@@ -3,7 +3,7 @@ package frc.robot.state.sequencer.transitions;
 import frc.robot.state.sequencer.SequenceInput;
 import frc.robot.state.sequencer.SequenceState;
 
-public class IntakeAlgaeTransitions {
+public class IntakeAlgaeReefTransitions {
     private static final Object transitionTable[][] = {
         // CURRENT                              INPUT                                     OPERATION                     NEXT
         {SequenceState.HOME,                    SequenceInput.BEGIN,                      "moveSlapdownOut",            SequenceState.MOVING_SLAPDOWN_OUT},

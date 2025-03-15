@@ -2,6 +2,7 @@ package frc.robot.state.sequencer;
 
 import frc.robot.state.sequencer.positions.Positions;
 import frc.robot.state.sequencer.positions.PositionsFactory;
+import frc.robot.state.sequencer.transitions.IntakeCoralTransitions;
 import frc.robot.state.sequencer.transitions.ResetTransitions;
 import frc.robot.state.sequencer.transitions.ScoreCoralTransitions; // you will need to import the
 
@@ -18,19 +19,16 @@ public class SequenceFactory {
     // Coral intake
     if (pieceSelection == GamePiece.CORAL
         && levelSelection == Level.L1
-        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FLOOR;
-    if (pieceSelection == GamePiece.CORAL
-        && levelSelection == Level.L1
-        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FLOOR_UPRIGHT;
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL;
     if (pieceSelection == GamePiece.CORAL
         && levelSelection == Level.L2
-        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FEEDER;
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL;
     if (pieceSelection == GamePiece.CORAL
         && levelSelection == Level.L3
-        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FEEDER;
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL;
     if (pieceSelection == GamePiece.CORAL
         && levelSelection == Level.L4
-        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL_FEEDER;
+        && actionSelection == Action.INTAKE) return Sequence.INTAKE_CORAL;
 
     // Coral score
     if (pieceSelection == GamePiece.CORAL
@@ -87,12 +85,8 @@ public class SequenceFactory {
         /*
          * CORAL TRANSITIONS
          */
-      case INTAKE_CORAL_FEEDER:
-        return null; // TODO: need to return transitions for coral feeder
-      case INTAKE_CORAL_FLOOR:
-        return null; // TODO: need to return transitions for coral floor pickup
-      case INTAKE_CORAL_FLOOR_UPRIGHT:
-        return null; // TODO: need to return transitions to pick the 3 upright coral on the field
+      case INTAKE_CORAL:
+        return IntakeCoralTransitions.getTransitionTable();
       case SCORE_CORAL_L1:
         // you might not this this depending on how different your L1 score is
         return null; // TODO: need to return transitions for L1 score
@@ -128,12 +122,8 @@ public class SequenceFactory {
         /*
          * CORAL POSITIONS
          */
-      case INTAKE_CORAL_FEEDER:
+      case INTAKE_CORAL:
         return PositionsFactory.getCoralFeederPickupPositions();
-      case INTAKE_CORAL_FLOOR:
-        return PositionsFactory.getCoralFloorPickupPositions();
-      case INTAKE_CORAL_FLOOR_UPRIGHT:
-        return PositionsFactory.getCoralUprightFloorPickupPositions();
       case SCORE_CORAL_L1:
         return PositionsFactory.getCoralScoreL1Positions();
       case SCORE_CORAL_L2:
