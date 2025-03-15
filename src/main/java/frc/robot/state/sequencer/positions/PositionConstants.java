@@ -8,7 +8,7 @@ public final class PositionConstants {
    * CORAL INTAKE POSITION CONSTANTS
    * !!!!!!!!!!!!!!!!!!!!!!!!
    */
-  
+
   public static final class CORAL_INTAKE {
     public static final class CORAL_FEEDER {
       public static final double moveElevatorPosition = 0; // TODO: define value
@@ -85,4 +85,27 @@ public final class PositionConstants {
       public static final double moveElevatorPosition = 0; // TODO: define value
     }
   }
+
+  /*
+   * !!!!!!!!!!!!!!!!!!!!!!!!
+   * SLAPDOWN POSITION CONSTANTS
+   * !!!!!!!!!!!!!!!!!!!!!!!!
+   */
+  
+  public static final class SLAPDOWN_DOWN {
+    public static final double moveSlapdownPosition = 0; // TODO: define value
+  }
+
+  public static final class SLAPDOWN_UP {
+    public static final double moveSlapdownPosition = 0; // TODO: define value
+  }
+
+  public static final class SLAPDOWN_OUT {
+    public static final double moveSlapdownPosition = 0; // TODO: define value
+  }
+
+  public static final class SLAPDOWN_MIDDLE {
+    public static final double moveSlapdownPosition = 0; // TODO: define value
+  }
+
 }
