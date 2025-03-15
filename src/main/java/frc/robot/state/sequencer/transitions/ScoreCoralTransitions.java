@@ -7,8 +7,8 @@ public class ScoreCoralTransitions {
   private static final Object transitionTable[][] = {
 
     // CURRENT                              INPUT                                     OPERATION                         NEXT
-    {SequenceState.HOME,                    SequenceInput.BEGIN,                      "slapDownMoveOut",                SequenceState.MOVING_SLAPDOWN_OUT},
-    {SequenceState.MOVING_SLAPDOWN_OUT,     SequenceInput.SLAPDOWN_OUT_DONE,          "raiseElevator",                  SequenceState.RAISING_ELEVATOR},
+    {SequenceState.HOME,                    SequenceInput.BEGIN,                      "moveSlapdownOut",                SequenceState.MOVING_SLAPDOWN_OUT},
+    {SequenceState.MOVING_SLAPDOWN_OUT,     SequenceInput.SLAPDOWN_OUT,               "raiseElevator",                  SequenceState.RAISING_ELEVATOR},
     {SequenceState.RAISING_ELEVATOR,        SequenceInput.ELEVATOR_DONE,               null,                            SequenceState.WAITING},
     {SequenceState.WAITING,                 SequenceInput.BUTTON_RELEASED,            "outTaking",                      SequenceState.SCORING},
     {SequenceState.SCORING,                 SequenceInput.DONE_SCORING,               "moveElevatorHome",               SequenceState.FINISHING},
