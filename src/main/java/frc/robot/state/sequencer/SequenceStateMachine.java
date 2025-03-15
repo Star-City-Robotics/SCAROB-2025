@@ -5,11 +5,14 @@ import frc.robot.state.StateMachine;
 import frc.robot.state.StateMachineCallback;
 import frc.robot.state.sequencer.positions.Positions;
 import frc.robot.subsystems.Elevator.*;
+import frc.robot.subsystems.intake.*;
 // TODO: import the rest of the subsystems
 
 public class SequenceStateMachine extends StateMachine {
   // subsystems
   private ElevatorSubsystem elevatorSubsystem;
+  private SlapdownSubsystem SlapdownSubsystem;
+  private CoralManipulatorSubsystem coralManipulatorSubsystem;
 
   // sequence tracking
   private Sequence currentSequence;
@@ -20,11 +23,15 @@ public class SequenceStateMachine extends StateMachine {
   // reset/abort tracking
   private boolean isResetting = false;
   private boolean elevatorResetDone = false;
-  private boolean armResetDone = false;
+  private boolean armResetDone = false; 
 
   // TODO: add the rest of the subsystems to this
-  public SequenceStateMachine(ElevatorSubsystem elevatorSubsystem) {
+  public SequenceStateMachine(ElevatorSubsystem elevatorSubsystem ,
+                              SlapdownSubsystem SlapdownSubsystem, 
+                              CoralManipulatorSubsystem coralManipulatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
+    this.SlapdownSubsystem = SlapdownSubsystem;
+    this.coralManipulatorSubsystem = coralManipulatorSubsystem; 
     setCurrentState(SequenceState.HOME);
   }
 
@@ -132,6 +139,19 @@ public class SequenceStateMachine extends StateMachine {
   public boolean elevatorSecondStage() {
     // elevatorSubsystem.moveElevatorNormalSpeed(positions.secondStageElevatorPosition,
     // subsystemCallback);
+    return true;
+  }
+
+  /*
+   * SLAPDOWN OPERATIONAL METHODS 
+   */
+
+  public boolean moveSlapdownDown() {
+    SlapdownSubsystem.angleIntake(positions.moveSlapdown);
+    return true;
+  }
+  public boolean intakeRollers() {
+    SlapdownSubsystem.intakeRollers();
     return true;
   }
 
