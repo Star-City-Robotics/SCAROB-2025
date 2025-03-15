@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1-CoralPathTop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TopNewCoral-1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TopCoral-2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TopNewCoral-2"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

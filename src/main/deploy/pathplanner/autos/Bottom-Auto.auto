@@ -1,0 +1,99 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1-CoralPathBottom"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Coral-outtake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BottomNewCoral-1"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Coral-Intake"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BottomCoral-2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Coral-outtake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BottomNewCoral-2"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Coral-Intake"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BottomCoral-3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Coral-outtake"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
