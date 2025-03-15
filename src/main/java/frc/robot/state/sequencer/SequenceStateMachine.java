@@ -174,7 +174,7 @@ public class SequenceStateMachine extends StateMachine {
   }
 
   public boolean outtakeCoral() {
-    coralManipulatorSubsystem.outtake();
+    coralManipulatorSubsystem.intake();
     return true;
   }
 
