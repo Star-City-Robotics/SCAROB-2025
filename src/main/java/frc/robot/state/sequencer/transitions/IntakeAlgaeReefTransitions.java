@@ -21,7 +21,7 @@ public class IntakeAlgaeReefTransitions {
         {SequenceState.INTAKING_ROLLERS,        SequenceInput.BUTTON_RELEASED,            "startReset",                 SequenceState.FINISHING}
     };
 
-    public static Object getTransitionTable() {
+    public static Object[][] getTransitionTable() {
         return transitionTable;
     }
 }

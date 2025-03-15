@@ -2,8 +2,12 @@ package frc.robot.state.sequencer;
 
 import frc.robot.state.sequencer.positions.Positions;
 import frc.robot.state.sequencer.positions.PositionsFactory;
+import frc.robot.state.sequencer.transitions.IntakeAlgaeGroundTransitions;
+import frc.robot.state.sequencer.transitions.IntakeAlgaeReefTransitions;
 import frc.robot.state.sequencer.transitions.IntakeCoralTransitions;
 import frc.robot.state.sequencer.transitions.ResetTransitions;
+import frc.robot.state.sequencer.transitions.ScoreAlgaeBargeTransitions;
+import frc.robot.state.sequencer.transitions.ScoreAlgaeProcessorTransitions;
 import frc.robot.state.sequencer.transitions.ScoreCoralTransitions; // you will need to import the
 
 // transition tables you make
@@ -63,16 +67,16 @@ public class SequenceFactory {
     // Algae score
     if (pieceSelection == GamePiece.ALGAE
         && levelSelection == Level.L1
-        && actionSelection == Action.SCORE) return Sequence.HANDOFF_ALGAE;
+        && actionSelection == Action.SCORE) return Sequence.SCORE_ALGAE_PROCESSOR;
     if (pieceSelection == GamePiece.ALGAE
         && levelSelection == Level.L2
-        && actionSelection == Action.SCORE) return Sequence.SHOOT_ALGAE;
+        && actionSelection == Action.SCORE) return Sequence.SCORE_ALGAE_BARGE;
     if (pieceSelection == GamePiece.ALGAE
         && levelSelection == Level.L3
-        && actionSelection == Action.SCORE) return Sequence.SHOOT_ALGAE;
+        && actionSelection == Action.SCORE) return Sequence.SCORE_ALGAE_BARGE;
     if (pieceSelection == GamePiece.ALGAE
         && levelSelection == Level.L4
-        && actionSelection == Action.SCORE) return Sequence.SHOOT_ALGAE;
+        && actionSelection == Action.SCORE) return Sequence.SCORE_ALGAE_BARGE;
 
     return null;
   }
@@ -88,12 +92,9 @@ public class SequenceFactory {
       case INTAKE_CORAL:
         return IntakeCoralTransitions.getTransitionTable();
       case SCORE_CORAL_L1:
-        // you might not this this depending on how different your L1 score is
-        return null; // TODO: need to return transitions for L1 score
       case SCORE_CORAL_L2:
       case SCORE_CORAL_L3:
       case SCORE_CORAL_L4:
-        // return TestTransitions.getTransitionTable();
         return ScoreCoralTransitions.getTransitionTable();
 
         /*
@@ -101,13 +102,13 @@ public class SequenceFactory {
          */
       case INTAKE_ALGAE_L2:
       case INTAKE_ALGAE_L3:
-        return null; // TODO: need to return transitions for taking algae off the reef
+        return IntakeAlgaeReefTransitions.getTransitionTable();
       case INTAKE_ALGAE_FLOOR:
-        return null; // TODO: need to return transitions for picking up algae off the floor
-      case SHOOT_ALGAE:
-        return null; // TODO: need to return transitions for scoring algae in barge
-      case HANDOFF_ALGAE:
-        return null; // TODO: need to return transitions for scoring algae in processor
+        return IntakeAlgaeGroundTransitions.getTransitionTable();
+      case SCORE_ALGAE_BARGE:
+        return ScoreAlgaeBargeTransitions.getTransitionTable();
+      case SCORE_ALGAE_PROCESSOR:
+        return ScoreAlgaeProcessorTransitions.getTransitionTable();
 
       default:
         return null;
@@ -142,9 +143,9 @@ public class SequenceFactory {
         return PositionsFactory.getAlgaeReefL3PickupPositions();
       case INTAKE_ALGAE_FLOOR:
         return PositionsFactory.getAlgaeFloorPickupPositions();
-      case SHOOT_ALGAE:
+      case SCORE_ALGAE_BARGE:
         return PositionsFactory.getAlgaeScoreBargePositions();
-      case HANDOFF_ALGAE:
+      case SCORE_ALGAE_PROCESSOR:
         return PositionsFactory.getAlgaeHandoffPositions();
 
       default:

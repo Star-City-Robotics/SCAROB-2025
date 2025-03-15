@@ -17,7 +17,7 @@ public class ScoreAlgaeProcessorTransitions {
         
     };
 
-    public static Object getTransitionTable() {
+    public static Object[][] getTransitionTable() {
         return transitionTable;
     }
 }

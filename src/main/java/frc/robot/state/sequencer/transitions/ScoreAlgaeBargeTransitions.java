@@ -18,7 +18,7 @@ public class ScoreAlgaeBargeTransitions {
         
     };
 
-    public static Object getTransitionTable() {
+    public static Object[][] getTransitionTable() {
         return transitionTable;
     }
 }
