@@ -27,5 +27,6 @@ public enum SequenceInput implements Input {
   ALGAE_ABSENT,
   MOVE_SLAPDOWN_UP,
   MOVE_SLAPDOWN_OUT,
-  ELEVATOR_HOME
+  ELEVATOR_HOME,
+  ELEVATOR_BARGE
 }
