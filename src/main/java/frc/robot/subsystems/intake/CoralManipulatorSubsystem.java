@@ -21,6 +21,11 @@ public class CoralManipulatorSubsystem extends SubsystemBase {
     coralManipulator2.set(0.1);
   }
 
+  public void outtake() {
+    coralManipulator1.set(-0.1);
+    coralManipulator2.set(-0.1);
+  }
+
   public void stopMotors() {
     coralManipulator1.stopMotor();
     coralManipulator2.stopMotor();

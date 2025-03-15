@@ -8,8 +8,8 @@ public class IntakeCoralTransitions {
 
     // CURRENT                              INPUT                                     OPERATION                         NEXT
     {SequenceState.HOME,                    SequenceInput.BEGIN,                      "intakeCoral",                    SequenceState.INTAKING_CORAL},
-    {SequenceState.INTAKING_CORAL,          SequenceInput.CORAL_PRESENT,              "runExtraRotations",              SequenceState.RUNNING_ROTATIONS},
-    {SequenceState.RUNNING_ROTATIONS,       SequenceInput.ROTATIONS_FINISHED,         "stopIntake",                     SequenceState.STOPPING_INTAKE},
+    {SequenceState.INTAKING_CORAL,          SequenceInput.CORAL_PRESENT,              "detectRotations",                SequenceState.RUNNING_ROTATIONS},
+    {SequenceState.RUNNING_ROTATIONS,       SequenceInput.ROTATIONS_FINISHED,         "stopIntakeMotors",               SequenceState.STOPPING_INTAKE},
     {SequenceState.STOPPING_INTAKE,         SequenceInput.STOPPED_INTAKE,             "resetState",                     SequenceState.HOME},
 
     // Abort sequences
