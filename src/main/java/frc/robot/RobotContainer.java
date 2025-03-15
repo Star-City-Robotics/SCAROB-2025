@@ -19,14 +19,21 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeCoral;
+import frc.robot.commands.ResetSequenceCommand;
+import frc.robot.commands.RunSequenceCommand;
 import frc.robot.commands.SlapdownIntake;
 import frc.robot.generated.TunerConstants;
+import frc.robot.state.sequencer.Action;
+import frc.robot.state.sequencer.GamePiece;
+import frc.robot.state.sequencer.Level;
+import frc.robot.state.sequencer.SequenceManager;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
@@ -94,6 +101,7 @@ public class RobotContainer {
   private final Trigger opPOVUp = xboxOperatorController.povUp();
   private final Trigger opPOVLeft = xboxOperatorController.povLeft();
   private final Trigger opPOVRight = xboxOperatorController.povRight();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     switch (Constants.currentMode) {
@@ -166,27 +174,27 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Elevator
-    dY.whileTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(37)))
-        .onFalse(
-            new InstantCommand(
-                () ->
-                    elevatorSubsystem.moveElevator(
-                        0.1))); // if not pressed set defualt to Level 2  on
-    // dB.whileTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(17)))
-    //     .onFalse(
-    //         new InstantCommand(
-    //             () ->
-    //                 elevatorSubsystem.moveElevator(
-    //                     0.1))); // if not pressed set defualt to Level 2 on
-    dA.whileTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(9)))
-        .onFalse(
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(0.1))); // while pressed set to Level 3on
-    dX.whileTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(4)))
-        .onFalse(
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(0.1))); // while pressed set to Level 1
+    
+    opLeftTrigger.whileTrue(new SequentialCommandGroup(
+        new InstantCommand(()-> SequenceManager.setActionSelection(Action.INTAKE)),
+        new ResetSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem),
+        new RunSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem)
+    ));
+
+    opRightTrigger.whileTrue(new SequentialCommandGroup(
+        new InstantCommand(()-> SequenceManager.setActionSelection(Action.SCORE)),
+        new ResetSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem),
+        new RunSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem)
+    ));
+
+    opA.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L1)));
+    opB.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L2)));
+    opY.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L3)));
+    opX.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L4)));
+
+    opLeftBumper.whileTrue(new InstantCommand(()-> SequenceManager.setGamePieceSelection(GamePiece.CORAL)));
+    opRightBumper.whileTrue(new InstantCommand(()-> SequenceManager.setGamePieceSelection(GamePiece.ALGAE)));
+
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
@@ -210,17 +218,6 @@ public class RobotContainer {
 
     // Reset gyro to 0° when B button is pressed
     dB.onTrue(Commands.runOnce(() -> drive.resetGyro()));
-
-    dLeftBumper
-        .whileTrue(new InstantCommand(() -> slapdownSubsystem.intakeRollers()))
-        .onFalse(new InstantCommand(() -> slapdownSubsystem.stopRollers()));
-    dRightBumper
-        .whileTrue(new InstantCommand(() -> slapdownSubsystem.outtakeRollers()))
-        .onFalse(new InstantCommand(() -> slapdownSubsystem.stopRollers()));
-    dLeftTrigger.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(-3)));
-    dRightTrigger.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(0)));
-    dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(-3.353)));
-    // dLeftTrigger.onTrue(new InstantCommand(() -> sensorSubsytem.stopSensorBasedCommads()));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
