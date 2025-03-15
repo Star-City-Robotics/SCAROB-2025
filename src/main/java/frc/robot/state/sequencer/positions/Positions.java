@@ -4,6 +4,7 @@ package frc.robot.state.sequencer.positions;
 // TODO define doubles used to store the positions for the state machine
 public class Positions {
   public double moveElevator;
+  public double moveElevatorHome;
   public double moveSlapdownDown = 0;
   public double moveSlapdownUp = 0;
   public double moveSlapdownMiddle = 0;
