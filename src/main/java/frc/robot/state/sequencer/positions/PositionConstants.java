@@ -8,21 +8,21 @@ public final class PositionConstants {
    * CORAL INTAKE POSITION CONSTANTS
    * !!!!!!!!!!!!!!!!!!!!!!!!
    */
-
+  
   public static final class CORAL_INTAKE {
     public static final class CORAL_FEEDER {
       public static final double moveElevatorPosition = 0; // TODO: define value
     }
 
-    public static final class CORAL_FLOOR_INTAKE {
-      public static final class CORAL_FEEDER {
-        public static final double moveElevatorPosition = 0; // TODO: define value
-      }
-    }
+    //public static final class CORAL_FLOOR_INTAKE {
+      //public static final class CORAL_FEEDER {
+        //public static final double moveElevatorPosition = 0; // TODO: define value
+      //}
+    //}
 
-    public static final class CORAL_FLOOR_UPRIGHT {
-      public static final double moveElevatorPosition = 0; // TODO: define value
-    }
+    //public static final class CORAL_FLOOR_UPRIGHT {
+      //public static final double moveElevatorPosition = 0; // TODO: define value
+    //}
   }
 
   /*

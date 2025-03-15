@@ -1,8 +1,11 @@
 package frc.robot.state.sequencer.positions;
 
+import frc.robot.state.sequencer.positions.PositionConstants.ALGAE_INTAKE.ALGAE_FLOOR;
 import frc.robot.state.sequencer.positions.PositionConstants.ALGAE_INTAKE.ALGAE_REEF_L2;
 import frc.robot.state.sequencer.positions.PositionConstants.ALGAE_INTAKE.ALGAE_REEF_L3;
 import frc.robot.state.sequencer.positions.PositionConstants.ALGAE_SCORE.ALGAE_SCORE_BARGE;
+import frc.robot.state.sequencer.positions.PositionConstants.ALGAE_SCORE.ALGAE_SCORE_PROCESSOR;
+import frc.robot.state.sequencer.positions.PositionConstants.CORAL_INTAKE.CORAL_FEEDER;
 import frc.robot.state.sequencer.positions.PositionConstants.CORAL_SCORE.CORAL_L1;
 import frc.robot.state.sequencer.positions.PositionConstants.CORAL_SCORE.CORAL_L2;
 import frc.robot.state.sequencer.positions.PositionConstants.CORAL_SCORE.CORAL_L3;
@@ -20,20 +23,21 @@ public class PositionsFactory {
   public static Positions getCoralFeederPickupPositions() {
     Positions positions = new Positions();
     // TODO:
+    positions.moveElevator = CORAL_FEEDER.moveElevatorPosition;
     return positions;
   }
 
-  public static Positions getCoralFloorPickupPositions() {
-    Positions positions = new Positions();
-    // TODO:
-    return positions;
-  }
+  // public static Positions getCoralFloorPickupPositions() {
+  //   Positions positions = new Positions();
+  //   // TODO:
+  //   return positions;
+  // }
 
-  public static Positions getCoralUprightFloorPickupPositions() {
-    Positions positions = new Positions();
-    // TODO: list the positions needed and apply the value stored in PositionsConstants
-    return positions;
-  }
+  // public static Positions getCoralUprightFloorPickupPositions() {
+  //   Positions positions = new Positions();
+  //   // TODO: list the positions needed and apply the value stored in PositionsConstants
+  //   return positions;
+  // }
 
   public static Positions getCoralScoreL1Positions() {
     Positions positions = new Positions();
@@ -85,6 +89,7 @@ public class PositionsFactory {
 
   public static Positions getAlgaeFloorPickupPositions() {
     Positions positions = new Positions();
+    positions.moveElevator = ALGAE_FLOOR.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
@@ -96,8 +101,9 @@ public class PositionsFactory {
     return positions;
   }
 
-  public static Positions getAlgaeHandoffPositions() {
+  public static Positions getAlgaeScoreProcessorPositions() {
     Positions positions = new Positions();
+    positions.moveElevator = ALGAE_SCORE_PROCESSOR.moveElevatorPosition;
     // TODO: list the positions needed and apply the value stored in PositionsConstants
     return positions;
   }
