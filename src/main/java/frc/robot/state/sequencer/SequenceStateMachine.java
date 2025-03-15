@@ -11,7 +11,7 @@ import frc.robot.subsystems.intake.*;
 public class SequenceStateMachine extends StateMachine {
   // subsystems
   private ElevatorSubsystem elevatorSubsystem;
-  private SlapdownSubsystem SlapdownSubsystem;
+  private SlapdownSubsystem slapdownSubsystem;
   private CoralManipulatorSubsystem coralManipulatorSubsystem;
 
   // sequence tracking
@@ -30,7 +30,7 @@ public class SequenceStateMachine extends StateMachine {
                               SlapdownSubsystem SlapdownSubsystem, 
                               CoralManipulatorSubsystem coralManipulatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
-    this.SlapdownSubsystem = SlapdownSubsystem;
+    this.slapdownSubsystem = SlapdownSubsystem;
     this.coralManipulatorSubsystem = coralManipulatorSubsystem; 
     setCurrentState(SequenceState.HOME);
   }
@@ -147,11 +147,11 @@ public class SequenceStateMachine extends StateMachine {
    */
 
   public boolean moveSlapdownDown() {
-    SlapdownSubsystem.angleIntake(positions.moveSlapdown);
+    slapdownSubsystem.angleIntake(positions.moveSlapdownDown);
     return true;
   }
   public boolean intakeRollers() {
-    SlapdownSubsystem.intakeRollers();
+    slapdownSubsystem.intakeRollers();
     return true;
   }
 

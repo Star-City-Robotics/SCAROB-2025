@@ -6,10 +6,14 @@ import frc.robot.state.sequencer.SequenceInput;
 import frc.robot.state.sequencer.SequenceManager;
 import frc.robot.state.sequencer.SequenceStateMachine;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
+import frc.robot.subsystems.intake.CoralManipulatorSubsystem;
+import frc.robot.subsystems.intake.SlapdownSubsystem;
 
 public class ResetSequenceCommand extends Command {
   SequenceStateMachine m_scoreStateMachine;
   ElevatorSubsystem m_elevatorSubsystem;
+  SlapdownSubsystem m_slapdownSubsystem;
+  CoralManipulatorSubsystem m_coralManipulatorSubsystem;
   boolean m_sequenceDone = false;
 
   private CommandCallback stateMachineCallback =
@@ -29,10 +33,12 @@ public class ResetSequenceCommand extends Command {
   //     addRequirements(m_elevatorSubsystem, m_armSubsystem, m_clamperSubsystem,
   // m_intakeSubsystem);
   // }
-  public ResetSequenceCommand(ElevatorSubsystem elevatorSubsystem) {
-    m_scoreStateMachine = SequenceManager.getStateMachine(elevatorSubsystem);
+  public ResetSequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, CoralManipulatorSubsystem coralManipulatorSubsystem) {
+    m_scoreStateMachine = SequenceManager.getStateMachine(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
     m_elevatorSubsystem = elevatorSubsystem;
-    addRequirements(m_elevatorSubsystem);
+    m_slapdownSubsystem = slapdownSubsystem;
+    m_coralManipulatorSubsystem = coralManipulatorSubsystem;
+    addRequirements(m_elevatorSubsystem, m_slapdownSubsystem, m_coralManipulatorSubsystem);
   }
 
   @Override
