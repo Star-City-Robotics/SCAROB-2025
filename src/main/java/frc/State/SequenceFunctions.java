@@ -8,43 +8,43 @@ public class SequenceFunctions {
     private static Sequence.GamePiece gamePieceSelection;
     private static Sequence.Level levelSelction;
     
-    public void setState(Sequence.State state) {
+    public static void setState(Sequence.State state) {
         stateSelection = state;
     }
 
-    public void setInput(Sequence.Input input) {
+    public static void setInput(Sequence.Input input) {
         inputSelection = input;
     }
 
-    public void setAction(Sequence.Action action) {
+    public static void setAction(Sequence.Action action) {
         actionSelection = action;
     }
 
-    public void setGamePiece(Sequence.GamePiece gamePiece) {
+    public static void setGamePiece(Sequence.GamePiece gamePiece) {
         gamePieceSelection = gamePiece;
     }
 
-    public void setLevel(Sequence.Level level) {
+    public static void setLevel(Sequence.Level level) {
         levelSelction = level;
     }
 
-    public Sequence.State getState() {
+    public static Sequence.State getState() {
         return stateSelection;
     }
 
-    public Sequence.Input geInput() {
+    public static Sequence.Input geInput() {
         return inputSelection;
     }
 
-    public Sequence.Action getAction() {
+    public static Sequence.Action getAction() {
         return actionSelection;
     }
 
-    public Sequence.GamePiece getGamePiece() {
+    public static Sequence.GamePiece getGamePiece() {
         return gamePieceSelection;
     }
 
-    public Sequence.Level getLevel() {
+    public static Sequence.Level getLevel() {
         return levelSelction;
     }
 
