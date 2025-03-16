@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.State.SequenceCommand;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.TestCommand;
 // import frc.robot.commands.IntakeCoral;
@@ -67,8 +68,9 @@ public class RobotContainer {
   private final CoralManipulatorSubsystem coralManipulatorSubsystem = new CoralManipulatorSubsystem();
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
   private final SensorSubsytem sensorSubsytem = new SensorSubsytem();
+  private final SequenceCommand sequenceCommand = new SequenceCommand();
 
-  private final TestCommand testCommand = new TestCommand(elevatorSubsystem, slapdownSubsystem);
+  private final TestCommand testCommand = new TestCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
   // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
 
