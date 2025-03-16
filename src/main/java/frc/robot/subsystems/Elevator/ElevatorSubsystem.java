@@ -12,8 +12,8 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.state.Score.ScoreInput;
-import frc.robot.state.StateMachineCallback;
+// import frc.robot.state.Score.ScoreInput;
+// import frc.robot.state.StateMachineCallback;
 import frc.robot.subsystems.ToggleableSubsystem;
 import org.littletonrobotics.junction.Logger;
 
@@ -30,7 +30,7 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
   private final NeutralOut brake = new NeutralOut();
 
   // state machine callback handling
-  private StateMachineCallback stateMachineCallback;
+  // private StateMachineCallback stateMachineCallback;
   private boolean callbackOnThreshold = false;
   private double positionThreshold = 0;
   private boolean raisingThreshold = false;
@@ -68,18 +68,18 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
         mmReq1.withPosition(desiredPosition).withFeedForward(arbitraryFeedForward));
   }
 
-  public void moveElevator(double position, StateMachineCallback callback) {
-    stateMachineCallback = callback;
-    moveElevator(position);
-  }
+  // public void moveElevator(double position, StateMachineCallback callback) {
+  //   stateMachineCallback = callback;
+  //   moveElevator(position);
+  // }
 
-  public void moveElevator(double position, StateMachineCallback callback, double threshold) {
-    stateMachineCallback = callback;
-    callbackOnThreshold = true;
-    positionThreshold = threshold * ElevatorConstants.gearRatioModifier;
-    raisingThreshold = threshold < position;
-    moveElevator(position);
-  }
+  // public void moveElevator(double position, StateMachineCallback callback, double threshold) {
+  //   stateMachineCallback = callback;
+  //   callbackOnThreshold = true;
+  //   positionThreshold = threshold * ElevatorConstants.gearRatioModifier;
+  //   raisingThreshold = threshold < position;
+  //   moveElevator(position);
+  // }
 
   public void stopElevator() {
     if (!enabled) return;
@@ -150,33 +150,33 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
     followerMotor.setNeutralMode(NeutralModeValue.Brake); // TODO: check if this is needed
   }
 
-  public void periodic() {
-    if (!enabled) return;
+  // public void periodic() {
+  //   if (!enabled) return;
 
-    /*
-     * Score State Machine callback handling
-     */
-    if (isAtPosition(desiredPosition) && stateMachineCallback != null) {
-      // final position reached, notify the state machine
+  //   /*
+  //    * Score State Machine callback handling
+  //    */
+  //   if (isAtPosition(desiredPosition) && stateMachineCallback != null) {
+  //     // final position reached, notify the state machine
 
-      stateMachineCallback.setInput(ScoreInput.ELEVATOR_DONE);
-      stateMachineCallback = null;
-    } else if (callbackOnThreshold && stateMachineCallback != null) {
-      // check to see if the threshold was met, if so notify the state machine
-      boolean thresholdMet =
-          raisingThreshold && getElevatorPosition() >= positionThreshold
-              || !raisingThreshold && getElevatorPosition() <= positionThreshold;
-      if (thresholdMet) {
-        stateMachineCallback.setInput(ScoreInput.ELEVATOR_THRESHOLD_MET);
-        callbackOnThreshold = false;
-        positionThreshold = 0;
-      }
-    }
+  //     stateMachineCallback.setInput(ScoreInput.ELEVATOR_DONE);
+  //     stateMachineCallback = null;
+  //   } else if (callbackOnThreshold && stateMachineCallback != null) {
+  //     // check to see if the threshold was met, if so notify the state machine
+  //     boolean thresholdMet =
+  //         raisingThreshold && getElevatorPosition() >= positionThreshold
+  //             || !raisingThreshold && getElevatorPosition() <= positionThreshold;
+  //     if (thresholdMet) {
+  //       stateMachineCallback.setInput(ScoreInput.ELEVATOR_THRESHOLD_MET);
+  //       callbackOnThreshold = false;
+  //       positionThreshold = 0;
+  //     }
+  //   }
 
-    log();
+  //   log();
 
-    Logger.recordOutput("Elevator/Position", getElevatorPosition());
-  }
+  //   Logger.recordOutput("Elevator/Position", getElevatorPosition());
+  // }
 
   public double getElevatorPosition() {
     if (!enabled) return 0;

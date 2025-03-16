@@ -174,26 +174,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
-    opLeftTrigger.whileTrue(new SequentialCommandGroup(
-        new InstantCommand(()-> SequenceManager.setActionSelection(Action.INTAKE)),
-        new ResetSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem),
-        new RunSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem)
-    ));
-
-    opRightTrigger.whileTrue(new SequentialCommandGroup(
-        new InstantCommand(()-> SequenceManager.setActionSelection(Action.SCORE)),
-        new ResetSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem),
-        new RunSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem)
-    ));
-
-    opA.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L1)));
-    opB.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L2)));
-    opY.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L3)));
-    opX.whileTrue(new InstantCommand(()-> SequenceManager.setLevelSelection(Level.L4)));
-
-    opLeftBumper.whileTrue(new InstantCommand(()-> SequenceManager.setGamePieceSelection(GamePiece.CORAL)));
-    opRightBumper.whileTrue(new InstantCommand(()-> SequenceManager.setGamePieceSelection(GamePiece.ALGAE)));
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
@@ -203,9 +183,6 @@ public class RobotContainer {
             () -> xboxDriverController.getLeftX(),
             () -> -xboxDriverController.getRightX()));
 
-
-    //testetstss
-    
     // Lock to 0° when A button is held
     // xboxDriverController
     //     .a()
