@@ -68,7 +68,7 @@ public class RobotContainer {
   private final CoralManipulatorSubsystem coralManipulatorSubsystem = new CoralManipulatorSubsystem();
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
   private final SensorSubsytem sensorSubsytem = new SensorSubsytem();
-  private final SequenceCommand sequenceCommand = new SequenceCommand();
+  private final SequenceCommand sequenceCommand = new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
 
   private final TestCommand testCommand = new TestCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
