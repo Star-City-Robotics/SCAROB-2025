@@ -14,15 +14,15 @@ public final class PositionConstants {
       public static final double moveElevatorPosition = 0; // TODO: define value
     }
 
-    //public static final class CORAL_FLOOR_INTAKE {
-      //public static final class CORAL_FEEDER {
-        //public static final double moveElevatorPosition = 0; // TODO: define value
-      //}
-    //}
+    // public static final class CORAL_FLOOR_INTAKE {
+    // public static final class CORAL_FEEDER {
+    // public static final double moveElevatorPosition = 0; // TODO: define value
+    // }
+    // }
 
-    //public static final class CORAL_FLOOR_UPRIGHT {
-      //public static final double moveElevatorPosition = 0; // TODO: define value
-    //}
+    // public static final class CORAL_FLOOR_UPRIGHT {
+    // public static final double moveElevatorPosition = 0; // TODO: define value
+    // }
   }
 
   /*
@@ -91,7 +91,7 @@ public final class PositionConstants {
    * SLAPDOWN POSITION CONSTANTS
    * !!!!!!!!!!!!!!!!!!!!!!!!
    */
-  
+
   public static final class SLAPDOWN_DOWN {
     public static final double moveSlapdownPosition = 0; // TODO: define value
   }
@@ -107,5 +107,4 @@ public final class PositionConstants {
   public static final class SLAPDOWN_MIDDLE {
     public static final double moveSlapdownPosition = 0; // TODO: define value
   }
-
 }

@@ -33,8 +33,13 @@ public class ResetSequenceCommand extends Command {
   //     addRequirements(m_elevatorSubsystem, m_armSubsystem, m_clamperSubsystem,
   // m_intakeSubsystem);
   // }
-  public ResetSequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, CoralManipulatorSubsystem coralManipulatorSubsystem) {
-    m_scoreStateMachine = SequenceManager.getStateMachine(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
+  public ResetSequenceCommand(
+      ElevatorSubsystem elevatorSubsystem,
+      SlapdownSubsystem slapdownSubsystem,
+      CoralManipulatorSubsystem coralManipulatorSubsystem) {
+    m_scoreStateMachine =
+        SequenceManager.getStateMachine(
+            elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
     m_elevatorSubsystem = elevatorSubsystem;
     m_slapdownSubsystem = slapdownSubsystem;
     m_coralManipulatorSubsystem = coralManipulatorSubsystem;

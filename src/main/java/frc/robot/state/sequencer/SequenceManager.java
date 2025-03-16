@@ -1,6 +1,5 @@
 package frc.robot.state.sequencer;
 
-import frc.robot.Constants.CoralManipulator;
 import frc.robot.subsystems.Elevator.*;
 import frc.robot.subsystems.intake.CoralManipulatorSubsystem;
 import frc.robot.subsystems.intake.SlapdownSubsystem;
@@ -57,9 +56,13 @@ public class SequenceManager {
     }
   }
 
-  public static SequenceStateMachine getStateMachine(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, CoralManipulatorSubsystem coralManipulatorSubsystem) {
+  public static SequenceStateMachine getStateMachine(
+      ElevatorSubsystem elevatorSubsystem,
+      SlapdownSubsystem slapdownSubsystem,
+      CoralManipulatorSubsystem coralManipulatorSubsystem) {
     if (stateMachine == null) {
-      stateMachine = new SequenceStateMachine(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
+      stateMachine =
+          new SequenceStateMachine(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
     }
     return stateMachine;
   }

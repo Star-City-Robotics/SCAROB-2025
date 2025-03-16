@@ -23,15 +23,16 @@ public class SequenceStateMachine extends StateMachine {
   // reset/abort tracking
   private boolean isResetting = false;
   private boolean elevatorResetDone = false;
-  private boolean armResetDone = false; 
+  private boolean armResetDone = false;
 
   // TODO: add the rest of the subsystems to this
-  public SequenceStateMachine(ElevatorSubsystem elevatorSubsystem ,
-                              SlapdownSubsystem SlapdownSubsystem, 
-                              CoralManipulatorSubsystem coralManipulatorSubsystem) {
+  public SequenceStateMachine(
+      ElevatorSubsystem elevatorSubsystem,
+      SlapdownSubsystem SlapdownSubsystem,
+      CoralManipulatorSubsystem coralManipulatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = SlapdownSubsystem;
-    this.coralManipulatorSubsystem = coralManipulatorSubsystem; 
+    this.coralManipulatorSubsystem = coralManipulatorSubsystem;
     setCurrentState(SequenceState.HOME);
   }
 
@@ -88,13 +89,14 @@ public class SequenceStateMachine extends StateMachine {
       // if (input == SequenceInput.RELEASED_PIECE) closeHandWithoutCallback();
       // if (input == SequenceInput.DETECTED_PIECE && currentGamePiece == GamePiece.CORAL)
       //   holdCoralPiece();
-      // if (currentSequence == Sequence.SCORE_CORAL_L2 && input == SequenceInput.SENSOR_SCORE) return;
+      // if (currentSequence == Sequence.SCORE_CORAL_L2 && input == SequenceInput.SENSOR_SCORE)
+      // return;
       // if (currentSequence == Sequence.SCORE_CORAL_L2
       //     && input == SequenceInput.ARM_DONE
       //     && currentState == SequenceState.SCORING) {
       //   releaseCoralPiece();
       //   return;
-      //}
+      // }
       setInput(input);
     }
   }
@@ -104,13 +106,14 @@ public class SequenceStateMachine extends StateMachine {
   }
 
   /*
-   * SLAPDOWN OPERATIONAL METHODS 
+   * SLAPDOWN OPERATIONAL METHODS
    */
 
   public boolean moveSlapdownDown() {
     slapdownSubsystem.angleIntake(positions.moveSlapdownDown);
     return true;
   }
+
   public boolean intakeRollers() {
     slapdownSubsystem.intakeRollers();
     return true;
@@ -125,7 +128,7 @@ public class SequenceStateMachine extends StateMachine {
     slapdownSubsystem.angleIntake(positions.moveSlapdownUp);
     return true;
   }
-  
+
   public boolean moveSlapdownOut() {
     slapdownSubsystem.angleIntake(positions.moveSlapdownOut);
     return true;
@@ -140,31 +143,31 @@ public class SequenceStateMachine extends StateMachine {
    * ELEVATOR OPERATIONAL METHOS
    */
 
-   public boolean raiseElevator() {
+  public boolean raiseElevator() {
     elevatorSubsystem.moveElevator(positions.moveElevator);
     return true;
-   }
-   
-   public boolean moveElevatorHome() {
+  }
+
+  public boolean moveElevatorHome() {
     elevatorSubsystem.moveElevator(positions.moveElevatorHome);
     return true;
-   }
+  }
 
-   public boolean moveElevatorForBarge() {
+  public boolean moveElevatorForBarge() {
     elevatorSubsystem.moveElevator(positions.moveElevator);
     return true;
-   }
+  }
 
   /*
    * CORAL MANIPULATOR OPERATIONAL METHODS
    */
 
-   public boolean intakeCoral() {
+  public boolean intakeCoral() {
     coralManipulatorSubsystem.intake();
     return true;
-   }
+  }
 
-   public boolean detectRotations() {
+  public boolean detectRotations() {
     return coralManipulatorSubsystem.reachedPosition();
   }
 

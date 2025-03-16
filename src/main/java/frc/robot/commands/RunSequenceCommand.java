@@ -34,8 +34,13 @@ public class RunSequenceCommand extends Command {
   //     addRequirements(m_elevatorSubsystem, m_armSubsystem, m_clamperSubsystem,
   // m_intakeSubsystem);
   // }
-  public RunSequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, CoralManipulatorSubsystem coralManipulatorSubsystem) {
-    m_scoreStateMachine = SequenceManager.getStateMachine(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
+  public RunSequenceCommand(
+      ElevatorSubsystem elevatorSubsystem,
+      SlapdownSubsystem slapdownSubsystem,
+      CoralManipulatorSubsystem coralManipulatorSubsystem) {
+    m_scoreStateMachine =
+        SequenceManager.getStateMachine(
+            elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
     m_elevatorSubsystem = elevatorSubsystem;
     m_slapdownSubsystem = slapdownSubsystem;
     m_coralManipulatorSubsystem = coralManipulatorSubsystem;
