@@ -70,6 +70,10 @@ public class SlapdownSubsystem extends SubsystemBase {
   public void angleIntake(double rotation) {
     slapdown_controller.setReference(rotation, ControlType.kPosition);
   }
+
+  public double getIntakePosition() {
+    return slapdownAngleMotor.getEncoder().getPosition();
+  }
   // public void angleDown() {
   //   slapdownAngleMotor.set(0.1);
   // }

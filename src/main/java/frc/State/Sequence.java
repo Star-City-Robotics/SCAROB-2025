@@ -21,9 +21,20 @@ public class Sequence {
 
     public enum State {
         HOME,
+        ElEVATOR_RAISED,
+        ELEVATOR_HOME,
+        SLAPDOWN_UP,
+        SLAPDOWN_DOWN,
+        SLAPDOWN_OUT
     }
 
     public enum Input {
         BEGIN,
+        FINISHED,
+        RAISE_ELEVATOR,
+        MOVE_ELEVATOR_HOME,
+        MOVE_SLAPDOWN_UP,
+        MOVE_SLAPDOWN_DOWN,
+        MOVE_SLAPDOWN_OUT
     }
 }
