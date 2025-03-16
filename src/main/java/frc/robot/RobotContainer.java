@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.TestCommand;
 // import frc.robot.commands.IntakeCoral;
 // import frc.robot.commands.ResetSequenceCommand;
 // import frc.robot.commands.RunSequenceCommand;
@@ -67,6 +68,7 @@ public class RobotContainer {
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
   private final SensorSubsytem sensorSubsytem = new SensorSubsytem();
 
+  private final TestCommand testCommand = new TestCommand(elevatorSubsystem, slapdownSubsystem);
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
   // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
 
@@ -174,6 +176,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+
+    dRightTrigger.whileTrue(testCommand);
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(

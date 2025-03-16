@@ -32,7 +32,7 @@ public class SequenceFunctions {
         return stateSelection;
     }
 
-    public static Sequence.Input geInput() {
+    public static Sequence.Input getInput() {
         return inputSelection;
     }
 
