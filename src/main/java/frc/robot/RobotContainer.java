@@ -18,8 +18,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -65,14 +63,19 @@ public class RobotContainer {
 
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
 
-  private final CoralManipulatorSubsystem coralManipulatorSubsystem = new CoralManipulatorSubsystem();
+  private final CoralManipulatorSubsystem coralManipulatorSubsystem =
+      new CoralManipulatorSubsystem();
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
   private final SensorSubsytem sensorSubsytem = new SensorSubsytem();
-  private final SequenceCommand sequenceCommand = new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
+  private final SequenceCommand sequenceCommand =
+      new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
 
-  private final TestCommand testCommand = new TestCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
-  // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
-  // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
+  private final TestCommand testCommand =
+      new TestCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
+  // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem,
+  // sensorSubsytem);
+  // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem,
+  // sensorSubsytem);
 
   /* Driver Buttons */
   private final Trigger dStart = xboxDriverController.start();
@@ -178,7 +181,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
 
     dRightTrigger.whileTrue(testCommand);
 

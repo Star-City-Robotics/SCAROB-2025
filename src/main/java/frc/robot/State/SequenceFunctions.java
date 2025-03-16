@@ -2,50 +2,49 @@ package frc.robot.State;
 
 public class SequenceFunctions {
 
-    private static Sequence.State stateSelection;
-    private static Sequence.Input inputSelection;
-    private static Sequence.Action actionSelection;
-    private static Sequence.GamePiece gamePieceSelection;
-    private static Sequence.Level levelSelction;
-    
-    public static void setState(Sequence.State state) {
-        stateSelection = state;
-    }
+  private static Sequence.State stateSelection;
+  private static Sequence.Input inputSelection;
+  private static Sequence.Action actionSelection;
+  private static Sequence.GamePiece gamePieceSelection;
+  private static Sequence.Level levelSelction;
 
-    public static void setInput(Sequence.Input input) {
-        inputSelection = input;
-    }
+  public static void setState(Sequence.State state) {
+    stateSelection = state;
+  }
 
-    public static void setAction(Sequence.Action action) {
-        actionSelection = action;
-    }
+  public static void setInput(Sequence.Input input) {
+    inputSelection = input;
+  }
 
-    public static void setGamePiece(Sequence.GamePiece gamePiece) {
-        gamePieceSelection = gamePiece;
-    }
+  public static void setAction(Sequence.Action action) {
+    actionSelection = action;
+  }
 
-    public static void setLevel(Sequence.Level level) {
-        levelSelction = level;
-    }
+  public static void setGamePiece(Sequence.GamePiece gamePiece) {
+    gamePieceSelection = gamePiece;
+  }
 
-    public static Sequence.State getState() {
-        return stateSelection;
-    }
+  public static void setLevel(Sequence.Level level) {
+    levelSelction = level;
+  }
 
-    public static Sequence.Input getInput() {
-        return inputSelection;
-    }
+  public static Sequence.State getState() {
+    return stateSelection;
+  }
 
-    public static Sequence.Action getAction() {
-        return actionSelection;
-    }
+  public static Sequence.Input getInput() {
+    return inputSelection;
+  }
 
-    public static Sequence.GamePiece getGamePiece() {
-        return gamePieceSelection;
-    }
+  public static Sequence.Action getAction() {
+    return actionSelection;
+  }
 
-    public static Sequence.Level getLevel() {
-        return levelSelction;
-    }
+  public static Sequence.GamePiece getGamePiece() {
+    return gamePieceSelection;
+  }
 
+  public static Sequence.Level getLevel() {
+    return levelSelction;
+  }
 }

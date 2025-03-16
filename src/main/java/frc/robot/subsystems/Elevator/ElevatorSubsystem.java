@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.state.Score.ScoreInput;
 // import frc.robot.state.StateMachineCallback;
 import frc.robot.subsystems.ToggleableSubsystem;
-import org.littletonrobotics.junction.Logger;
 
 public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsystem {
 

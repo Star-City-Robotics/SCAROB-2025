@@ -4,26 +4,26 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.State.Sequence;
 import frc.robot.State.SequenceCommand;
 import frc.robot.State.SequenceFunctions;
-import frc.robot.State.Sequence.State;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.*;
 
 public class TestCommand extends Command {
 
-  private ElevatorSubsystem m_ElevatorSubsystem = new ElevatorSubsystem(true);
-  private SlapdownSubsystem m_SlapdownSubsystem = new SlapdownSubsystem();
-
-  private SequenceCommand sequenceCommand = new SequenceCommand(m_ElevatorSubsystem, m_SlapdownSubsystem);
-
   private ElevatorSubsystem elevatorSubsystem;
   private SlapdownSubsystem slapdownSubsystem;
 
+  private SequenceCommand sequenceCommand =
+      new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
+
   private boolean commandFinished = false;
 
-  public TestCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, SequenceCommand sequenceCommand) {
+  public TestCommand(
+      ElevatorSubsystem elevatorSubsystem,
+      SlapdownSubsystem slapdownSubsystem,
+      SequenceCommand sequenceCommand) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
-    this. sequenceCommand = sequenceCommand;
+    this.sequenceCommand = sequenceCommand;
     addRequirements(elevatorSubsystem, slapdownSubsystem);
   }
 
@@ -35,22 +35,18 @@ public class TestCommand extends Command {
 
   @Override
   public void execute() {
-    sequenceCommand.testRaiseElevator(31.0);
-  //   if (
-  //     SequenceFunctions.getState() == Sequence.State.HOME && 
-  //     SequenceFunctions.getInput() == Sequence.Input.BEGIN) {
-  //       SequenceCommand.moveSlapdownOut(Sequence.Input.BEGIN, Sequence.Input.RAISE_ELEVATOR);
-  //   }
-  //   if (
-  //     SequenceFunctions.getState() == Sequence.State.SLAPDOWN_OUT &&
-  //     SequenceFunctions.getInput() == Sequence.Input.RAISE_ELEVATOR) {
-  //       SequenceCommand.raiseElevator(31.0, Sequence.Input.RAISE_ELEVATOR, Sequence.Input.FINISHED);
-  //     }
-  //   if (
-  //     SequenceFunctions.getState() == Sequence.State.ElEVATOR_RAISED &&
-  //     SequenceFunctions.getInput() == Sequence.Input.FINISHED) {
-  //       commandFinished = true;
-  //     }
+    if (SequenceFunctions.getState() == Sequence.State.HOME
+        && SequenceFunctions.getInput() == Sequence.Input.BEGIN) {
+      sequenceCommand.moveSlapdownOut(Sequence.Input.BEGIN, Sequence.Input.RAISE_ELEVATOR);
+    }
+    if (SequenceFunctions.getState() == Sequence.State.SLAPDOWN_OUT
+        && SequenceFunctions.getInput() == Sequence.Input.RAISE_ELEVATOR) {
+      sequenceCommand.raiseElevator(31.0, Sequence.Input.RAISE_ELEVATOR, Sequence.Input.FINISHED);
+    }
+    if (SequenceFunctions.getState() == Sequence.State.ElEVATOR_RAISED
+        && SequenceFunctions.getInput() == Sequence.Input.FINISHED) {
+      commandFinished = true;
+    }
   }
 
   @Override
