@@ -1,4 +1,4 @@
-package frc.State;
+package frc.robot.State;
 
 public class Sequence {
 
