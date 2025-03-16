@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.State.Sequence;
+import frc.State.SequenceFunctions;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.*;
 
@@ -18,7 +19,8 @@ public class TestCommand extends Command {
 
   @Override
   public void initialize() {
-    
+    SequenceFunctions.setState(Sequence.State.HOME);
+    SequenceFunctions.setInput(Sequence.Input.BEGIN);
   }
 
   @Override
