@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.State.Sequence;
-import frc.State.SequenceCommand;
-import frc.State.SequenceFunctions;
-import frc.State.Sequence.State;
+import frc.robot.State.Sequence;
+import frc.robot.State.SequenceCommand;
+import frc.robot.State.SequenceFunctions;
+import frc.robot.State.Sequence.State;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.*;
 
