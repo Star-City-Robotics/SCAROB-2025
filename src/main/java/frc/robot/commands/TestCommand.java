@@ -32,7 +32,7 @@ public class TestCommand extends Command {
 
   @Override
   public void execute() {
-    sequenceCommand.raiseElevator(31.0, Sequence.Input.RAISE_ELEVATOR, Sequence.Input.FINISHED);
+    sequenceCommand.testRaiseElevator(31.0);
   //   if (
   //     SequenceFunctions.getState() == Sequence.State.HOME && 
   //     SequenceFunctions.getInput() == Sequence.Input.BEGIN) {
