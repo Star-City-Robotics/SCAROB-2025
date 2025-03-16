@@ -25,15 +25,15 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
-import frc.robot.commands.IntakeCoral;
-import frc.robot.commands.ResetSequenceCommand;
-import frc.robot.commands.RunSequenceCommand;
-import frc.robot.commands.SlapdownIntake;
+// import frc.robot.commands.IntakeCoral;
+// import frc.robot.commands.ResetSequenceCommand;
+// import frc.robot.commands.RunSequenceCommand;
+// import frc.robot.commands.SlapdownIntake;
 import frc.robot.generated.TunerConstants;
-import frc.robot.state.sequencer.Action;
-import frc.robot.state.sequencer.GamePiece;
-import frc.robot.state.sequencer.Level;
-import frc.robot.state.sequencer.SequenceManager;
+// import frc.robot.state.sequencer.Action;
+// import frc.robot.state.sequencer.GamePiece;
+// import frc.robot.state.sequencer.Level;
+// import frc.robot.state.sequencer.SequenceManager;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
@@ -67,8 +67,8 @@ public class RobotContainer {
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
   private final SensorSubsytem sensorSubsytem = new SensorSubsytem();
 
-  private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
-  private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
+  // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem, sensorSubsytem);
+  // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem, sensorSubsytem);
 
   /* Driver Buttons */
   private final Trigger dStart = xboxDriverController.start();
