@@ -10,17 +10,17 @@ import frc.robot.subsystems.intake.*;
 
 public class TestCommand extends Command {
 
-  private final ElevatorSubsystem elevatorSubsystem;
-  private final SlapdownSubsystem slapdownSubsystem;
+  private ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
+  private SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
 
-  private final SequenceCommand sequenceCommand;
+  private SequenceCommand sequenceCommand = new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
 
   private boolean commandFinished = false;
 
   public TestCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, SequenceCommand sequenceCommand) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
-    this.sequenceCommand = sequenceCommand;
+    this. sequenceCommand = sequenceCommand;
     addRequirements(elevatorSubsystem, slapdownSubsystem);
   }
 

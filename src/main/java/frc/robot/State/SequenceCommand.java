@@ -1,14 +1,19 @@
 package frc.robot.State;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.SlapdownSubsystem;
 
 public class SequenceCommand {
 
-    private ElevatorSubsystem elevatorSubsystem;
-    private SlapdownSubsystem slapdownSubsystem;
+    private final ElevatorSubsystem elevatorSubsystem;
+    private final SlapdownSubsystem slapdownSubsystem;
     
-    public SequenceCommand() {}
+    public SequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem) {
+        this.elevatorSubsystem = elevatorSubsystem;
+        this.slapdownSubsystem = slapdownSubsystem;
+        //addRequirements(elevatorSubsystem, slapdownSubsystem);
+    }
 
     public Sequence.Input raiseElevator(Double position, Sequence.Input currentInput, Sequence.Input newInput) {
         elevatorSubsystem.moveElevator(position);
