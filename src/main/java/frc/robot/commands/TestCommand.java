@@ -13,11 +13,14 @@ public class TestCommand extends Command {
   private final ElevatorSubsystem elevatorSubsystem;
   private final SlapdownSubsystem slapdownSubsystem;
 
+  private final SequenceCommand sequenceCommand;
+
   private boolean commandFinished = false;
 
-  public TestCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem) {
+  public TestCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, SequenceCommand sequenceCommand) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
+    this.sequenceCommand = sequenceCommand;
     addRequirements(elevatorSubsystem, slapdownSubsystem);
   }
 
@@ -29,22 +32,22 @@ public class TestCommand extends Command {
 
   @Override
   public void execute() {
-
-    if (
-      SequenceFunctions.getState() == Sequence.State.HOME && 
-      SequenceFunctions.getInput() == Sequence.Input.BEGIN) {
-        SequenceCommand.moveSlapdownOut(Sequence.Input.BEGIN, Sequence.Input.RAISE_ELEVATOR);
-    }
-    if (
-      SequenceFunctions.getState() == Sequence.State.SLAPDOWN_OUT &&
-      SequenceFunctions.getInput() == Sequence.Input.RAISE_ELEVATOR) {
-        SequenceCommand.raiseElevator(31.0, Sequence.Input.RAISE_ELEVATOR, Sequence.Input.FINISHED);
-      }
-    if (
-      SequenceFunctions.getState() == Sequence.State.ElEVATOR_RAISED &&
-      SequenceFunctions.getInput() == Sequence.Input.FINISHED) {
-        commandFinished = true;
-      }
+    sequenceCommand.raiseElevator(31.0, Sequence.Input.RAISE_ELEVATOR, Sequence.Input.FINISHED);
+  //   if (
+  //     SequenceFunctions.getState() == Sequence.State.HOME && 
+  //     SequenceFunctions.getInput() == Sequence.Input.BEGIN) {
+  //       SequenceCommand.moveSlapdownOut(Sequence.Input.BEGIN, Sequence.Input.RAISE_ELEVATOR);
+  //   }
+  //   if (
+  //     SequenceFunctions.getState() == Sequence.State.SLAPDOWN_OUT &&
+  //     SequenceFunctions.getInput() == Sequence.Input.RAISE_ELEVATOR) {
+  //       SequenceCommand.raiseElevator(31.0, Sequence.Input.RAISE_ELEVATOR, Sequence.Input.FINISHED);
+  //     }
+  //   if (
+  //     SequenceFunctions.getState() == Sequence.State.ElEVATOR_RAISED &&
+  //     SequenceFunctions.getInput() == Sequence.Input.FINISHED) {
+  //       commandFinished = true;
+  //     }
   }
 
   @Override
