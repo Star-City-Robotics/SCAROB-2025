@@ -11,8 +11,7 @@ public class TestCommand extends Command {
   private ElevatorSubsystem elevatorSubsystem;
   private SlapdownSubsystem slapdownSubsystem;
 
-  private SequenceCommand sequenceCommand =
-      new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
+  private SequenceCommand sequenceCommand = new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
 
   private boolean commandFinished = false;
 
@@ -28,7 +27,8 @@ public class TestCommand extends Command {
 
   @Override
   public void initialize() {
-    Sequence.number = 1;
+    Sequence.setNumber(1);
+    commandFinished = false;
   }
 
   @Override
@@ -47,15 +47,13 @@ public class TestCommand extends Command {
 
   @Override
   public boolean isFinished() {
-    if (commandFinished == true) {
-      return true;
-    }
+    if (commandFinished == true) return true;
     return false;
   }
 
   @Override
   public void end(boolean interupted) {
-    Sequence.number = 0;
+    Sequence.incrementNumber();
     commandFinished = false;
   }
 }

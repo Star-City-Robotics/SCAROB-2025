@@ -20,14 +20,14 @@ public class SequenceCommand {
   public void moveSlapdownOut() {
     slapdownSubsystem.angleIntake(slapdownOutPosition);
     if(slapdownSubsystem.getIntakePosition() == slapdownOutPosition) {
-        Sequence.number = Sequence.number + 1;
+        Sequence.incrementNumber();
     }
   }
 
   public void raiseElevator(Double position) {
     elevatorSubsystem.moveElevator(position);
     if (elevatorSubsystem.getElevatorPosition() == position) {
-        Sequence.number = Sequence.number + 1;
+        Sequence.incrementNumber();
     }
   }
 }

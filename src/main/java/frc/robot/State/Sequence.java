@@ -4,6 +4,14 @@ public class Sequence {
 
   public static int number = 0;
 
+  public static void incrementNumber() {
+    number = number + 1;
+  }
+
+  public static void setNumber(int setNumber) {
+    number = setNumber;
+  }
+
   public enum Action {
     SCORE,
     INTAKE
