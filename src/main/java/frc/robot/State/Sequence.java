@@ -12,6 +12,10 @@ public class Sequence {
     number = setNumber;
   }
 
+  public static int getNumber() {
+    return number;
+  }
+
   public enum Action {
     SCORE,
     INTAKE
