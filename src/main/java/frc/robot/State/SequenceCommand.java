@@ -11,7 +11,7 @@ public class SequenceCommand {
   public SequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
-    // addRequirements(elevatorSubsystem, slapdownSubsystem);
+    //addRequirements(elevatorSubsystem, slapdownSubsystem);
   }
 
   public Sequence.Input raiseElevator(
