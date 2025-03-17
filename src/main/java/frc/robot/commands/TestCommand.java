@@ -12,8 +12,7 @@ public class TestCommand extends Command {
   private ElevatorSubsystem elevatorSubsystem;
   private SlapdownSubsystem slapdownSubsystem;
 
-  private SequenceCommand sequenceCommand =
-      new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
+  private SequenceCommand sequenceCommand = new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
 
   private boolean commandFinished = false;
   private Sequence.State state = SequenceFunctions.getState();
