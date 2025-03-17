@@ -14,26 +14,19 @@ public class SequenceCommand {
     //addRequirements(elevatorSubsystem, slapdownSubsystem);
   }
 
-  public Sequence.Input raiseElevator(
-      Double position, Sequence.Input currentInput, Sequence.Input newInput) {
+  public void raiseElevator(Double position, Sequence.Input nextInput) {
     elevatorSubsystem.moveElevator(position);
     if (elevatorSubsystem.getElevatorPosition() == position) {
       SequenceFunctions.setState(Sequence.State.ElEVATOR_RAISED);
-      return newInput;
+      SequenceFunctions.setInput(nextInput);
     }
-    return currentInput;
   }
 
-  public void testRaiseElevator(Double position) {
-    elevatorSubsystem.moveElevator(position);
-  }
-
-  public Sequence.Input moveSlapdownOut(Sequence.Input currentInput, Sequence.Input newInput) {
+  public void moveSlapdownOut(Sequence.Input nextInput) {
     slapdownSubsystem.angleIntake(SequenceConstants.Slapdown.SLAPDOWN_UP_POSITION);
     if (slapdownSubsystem.getIntakePosition() == SequenceConstants.Slapdown.SLAPDOWN_UP_POSITION) {
       SequenceFunctions.setState(Sequence.State.SLAPDOWN_OUT);
-      return newInput;
+      SequenceFunctions.setInput(nextInput);
     }
-    return currentInput;
   }
 }

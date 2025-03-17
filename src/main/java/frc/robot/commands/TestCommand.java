@@ -16,6 +16,8 @@ public class TestCommand extends Command {
       new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
 
   private boolean commandFinished = false;
+  private Sequence.State state = SequenceFunctions.getState();
+  private Sequence.Input input = SequenceFunctions.getInput();
 
   public TestCommand(
       ElevatorSubsystem elevatorSubsystem,
@@ -35,16 +37,13 @@ public class TestCommand extends Command {
 
   @Override
   public void execute() {
-    if (SequenceFunctions.getState() == Sequence.State.HOME
-        && SequenceFunctions.getInput() == Sequence.Input.BEGIN) {
-      sequenceCommand.moveSlapdownOut(Sequence.Input.BEGIN, Sequence.Input.RAISE_ELEVATOR);
+    if (state == Sequence.State.HOME && input == Sequence.Input.BEGIN) {
+      sequenceCommand.moveSlapdownOut(Sequence.Input.RAISE_ELEVATOR);
     }
-    if (SequenceFunctions.getState() == Sequence.State.SLAPDOWN_OUT
-        && SequenceFunctions.getInput() == Sequence.Input.RAISE_ELEVATOR) {
-      sequenceCommand.raiseElevator(31.0, Sequence.Input.RAISE_ELEVATOR, Sequence.Input.FINISHED);
+    if (state == Sequence.State.SLAPDOWN_OUT && input == Sequence.Input.RAISE_ELEVATOR) {
+      sequenceCommand.raiseElevator(31.0, Sequence.Input.FINISHED);
     }
-    if (SequenceFunctions.getState() == Sequence.State.ElEVATOR_RAISED
-        && SequenceFunctions.getInput() == Sequence.Input.FINISHED) {
+    if (state == Sequence.State.ElEVATOR_RAISED && input == Sequence.Input.FINISHED) {
       commandFinished = true;
     }
   }
