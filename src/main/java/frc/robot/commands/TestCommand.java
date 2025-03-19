@@ -37,10 +37,13 @@ public class TestCommand extends Command {
     switch (Sequence.number) {
       case 1:
         sequenceCommand.moveSlapdownOut();
+        break;
       case 2:
         sequenceCommand.raiseElevator(31.0);
+        break;
       case 3:
         commandFinished = true;
+        break;
     }
 
   }
