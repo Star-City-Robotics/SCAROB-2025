@@ -8,27 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.5267779816857585,
-        "y": 3.1210638116864544
-      },
-      "isLocked": true,
-      "linkedName": "1-CoralPathBottom"
-    },
-    {
-      "anchor": {
-        "x": 4.148715454816918,
-        "y": 2.3329405694942578
-      },
-      "prevControl": {
-        "x": 4.705199392019546,
-        "y": 2.5981155701022534
-      },
-      "nextControl": {
-        "x": 3.414399302322507,
-        "y": 1.9830251933865313
+        "x": 6.145584477207313,
+        "y": 3.3830090813569993
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "1-CoralPathBottom"
     },
     {
       "anchor": {
@@ -36,11 +20,11 @@
         "y": 1.0456503378378375
       },
       "prevControl": {
-        "x": 0.8873184968867815,
-        "y": 0.9508645579390578
+        "x": 0.8264524390649801,
+        "y": 0.8994501916236863
       },
       "nextControl": null,
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": "BottomNewCoral-1"
     }
   ],

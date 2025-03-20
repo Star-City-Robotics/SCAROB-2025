@@ -63,12 +63,12 @@ public final class Constants {
     public static final double ElevatorHome = 0;
     public static final double ElevatorBarge = 36;
     public static final double ElevatorProcessor = 0;
-    public static final int ElevatorL3Intake = 17; 
+    public static final int ElevatorL3Intake = 17;
     public static final int ElevatorL2Intake = 9;
     public static final double SlapdownOut = -0.6;
-    public static final double SlapdownIntake = -2; 
-    public static final double SlapdownGroundIntake = -3.6; 
+    public static final double SlapdownIntake = -2;
+    public static final double SlapdownGroundIntake = -3.6;
     public static final double SlapdownOuttakeBarge = -2.5;
-    public static final double SlapdownOuttakeProcessor = -1.6; 
+    public static final double SlapdownOuttakeProcessor = -1.6;
   }
 }

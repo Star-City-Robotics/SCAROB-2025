@@ -13,7 +13,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix6.SignalLogger;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -21,7 +20,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -188,19 +186,22 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL4)),
             new WaitUntilCommand(
                 () ->
-                    elevatorSubsystem.getElevatorPosition()
-                        == Constants.ScorePositions.ElevatorL4), // Needs testing
-            new ParallelCommandGroup(
-                new InstantCommand(() -> coralManipulatorSubsystem.intake()), new WaitCommand(0.5)),
+                    Constants.ScorePositions.ElevatorL4 - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitCommand(2),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome)),
+            new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+
     NamedCommands.registerCommand(
         "Coral-Intake",
         new SequentialCommandGroup(
-            new ParallelCommandGroup(
-                new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-                new WaitCommand(0.25)),
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
+            new WaitCommand(0.075),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
   }
   /**
@@ -210,104 +211,167 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Elevator
-    // dY.whileTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(31)))
-    //     .onFalse(
-    //         new InstantCommand(
-    //             () ->
-    //                 elevatorSubsystem.moveElevator(
-    //                     0.1)));
-//Auto Score L4 Coral
-dY.onTrue(
-    new SequentialCommandGroup(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL4)),
-        new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL4),
-        new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-        new ScheduleCommand(new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+    dPOVUp.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
+            new WaitCommand(0.075),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
+    // Auto Score L4 Coral
+    dY.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL4)),
+            new WaitUntilCommand(
+                () ->
+                    Constants.ScorePositions.ElevatorL4 - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitCommand(2),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
-//Auto Score L3 Coral
-dB.onTrue(
-    new SequentialCommandGroup(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3)),
-        new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL3),
-        new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-        new ScheduleCommand(new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+    // Auto Score L3 Coral
+    dB.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3)),
+            new WaitUntilCommand(
+                () ->
+                    elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL3),
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
-//Auto Score L2 Coral
-dA.onTrue(
-    new SequentialCommandGroup(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL2)),
-        new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL2),
-        new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-        new ScheduleCommand(new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+    // Auto Score L2 Coral
+    dA.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL2)),
+            // new WaitUntilCommand(
+            //     () ->
+            //         elevatorSubsystem.getElevatorPosition() ==
+            // Constants.ScorePositions.ElevatorL2),
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
-//Auto Score L1 Coral
-dX.onTrue(
-    new SequentialCommandGroup(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL1)),
-        new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL1),
-        new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-        new ScheduleCommand(new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+    // Auto Score L1 Coral
+    dX.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL1)),
+            new WaitUntilCommand(
+                () ->
+                    elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL1),
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
-//Auto Pickup a Algae from L3 
-dRightBumper.onTrue(
-    new SequentialCommandGroup(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3Intake)),
-        new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL3Intake),
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownIntake)),
-        new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
-        new ScheduleCommand(new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
-
-//Auto Pickup a Algae from L2 
-dRightBumper.onTrue(
-    new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL2Intake)),
-            new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL2Intake),
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownIntake)),
+    // Auto Pickup a Algae from L3
+    dRightBumper.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3Intake)),
+            new WaitUntilCommand(
+                () ->
+                    elevatorSubsystem.getElevatorPosition()
+                        == Constants.ScorePositions.ElevatorL3Intake),
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownIntake)),
             new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
-            new ScheduleCommand(new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
-//Pickup from Ground 
-dPOVDown.onTrue(
-    new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownGroundIntake)),
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+
+    // Auto Pickup a Algae from L2
+    dRightBumper.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL2Intake)),
+            new WaitUntilCommand(
+                () ->
+                    elevatorSubsystem.getElevatorPosition()
+                        == Constants.ScorePositions.ElevatorL2Intake),
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownIntake)),
             new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
-            new ScheduleCommand(new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers()))));
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+    // Pickup from Ground
+    dPOVDown.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownGroundIntake)),
+            new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers()))));
 
-//Auto Score Algae to Barge 
-dLeftTrigger.onTrue(
-    new SequentialCommandGroup(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorBarge)),
-        new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorBarge),
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOuttakeBarge)),
-        new InstantCommand(() -> slapdownSubsystem.outtakeRollers()),
-        new ScheduleCommand(new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
-
-//Auto Score Algae to Processor
-dRightTrigger.onTrue(
-    new SequentialCommandGroup(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorProcessor)),
-            new WaitUntilCommand(() -> elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorProcessor),
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOuttakeProcessor)),
+    // Auto Score Algae to Barge
+    dLeftTrigger.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorBarge)),
+            new WaitUntilCommand(
+                () ->
+                    elevatorSubsystem.getElevatorPosition()
+                        == Constants.ScorePositions.ElevatorBarge),
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOuttakeBarge)),
             new InstantCommand(() -> slapdownSubsystem.outtakeRollers()),
-            new ScheduleCommand(new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+
+    // Auto Score Algae to Processor
+    dRightTrigger.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorProcessor)),
+            new WaitUntilCommand(
+                () ->
+                    elevatorSubsystem.getElevatorPosition()
+                        == Constants.ScorePositions.ElevatorProcessor),
+            new InstantCommand(
+                () ->
+                    slapdownSubsystem.angleIntake(
+                        Constants.ScorePositions.SlapdownOuttakeProcessor)),
+            new InstantCommand(() -> slapdownSubsystem.outtakeRollers()),
+            new ScheduleCommand(
+                new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
@@ -331,7 +395,7 @@ dRightTrigger.onTrue(
     // controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
     // Reset gyro to 0° when B button is pressed
-    // dB.onTrue(Commands.runOnce(() -> drive.resetGyro()));
+    dPOVLeft.onTrue(Commands.runOnce(() -> drive.resetGyro()));
 
     // dLeftBumper
     //     .whileTrue(new InstantCommand(() -> slapdownSubsystem.intakeRollers()))
@@ -347,7 +411,9 @@ dRightTrigger.onTrue(
 
     // dRightTrigger.onTrue(intakeCoralCommand);
 
-    dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(-0.6)));
+    // dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(-0.6)));
+    dPOVRight.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(0)));
+
     // dLeftTrigger.onTrue(new InstantCommand(() -> sensorSubsytem.stopSensorBasedCommads()));
 
     // dLeftBumper.onTrue(Commands.runOnce(SignalLogger::start));

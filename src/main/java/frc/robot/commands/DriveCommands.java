@@ -91,12 +91,12 @@ public class DriveCommands {
           ChassisSpeeds speeds =
               isFlipped
                   ? new ChassisSpeeds(
-                      -linearVelocity.getX() * drive.getMaxLinearSpeedMetersPerSec(),
-                      -linearVelocity.getY() * drive.getMaxLinearSpeedMetersPerSec(),
-                      omega * drive.getMaxAngularSpeedRadPerSec())
-                  : new ChassisSpeeds(
                       linearVelocity.getX() * drive.getMaxLinearSpeedMetersPerSec(),
                       linearVelocity.getY() * drive.getMaxLinearSpeedMetersPerSec(),
+                      omega * drive.getMaxAngularSpeedRadPerSec())
+                  : new ChassisSpeeds(
+                      -linearVelocity.getX() * drive.getMaxLinearSpeedMetersPerSec(),
+                      -linearVelocity.getY() * drive.getMaxLinearSpeedMetersPerSec(),
                       omega * drive.getMaxAngularSpeedRadPerSec());
 
           drive.runVelocity(
