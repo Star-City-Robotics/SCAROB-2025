@@ -211,12 +211,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    // Intake Coral
     dPOVUp.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
             new WaitCommand(0.075),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
+            
     // Auto Score L4 Coral
     dY.onTrue(
         new SequentialCommandGroup(
@@ -229,7 +231,7 @@ public class RobotContainer {
                     Constants.ScorePositions.ElevatorL4 - elevatorSubsystem.getElevatorPosition()
                         <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(2),
+            new WaitCommand(0.5),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
@@ -243,10 +245,11 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3)),
             new WaitUntilCommand(
                 () ->
-                    elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL3),
+                    Constants.ScorePositions.ElevatorL3 - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new ScheduleCommand(
-                new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
+            new WaitCommand(0.5),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
@@ -257,13 +260,13 @@ public class RobotContainer {
                 () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL2)),
-            // new WaitUntilCommand(
-            //     () ->
-            //         elevatorSubsystem.getElevatorPosition() ==
-            // Constants.ScorePositions.ElevatorL2),
+            new WaitUntilCommand(
+                () ->
+                    Constants.ScorePositions.ElevatorL2 - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new ScheduleCommand(
-                new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
+            new WaitCommand(0.5),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
@@ -276,10 +279,11 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL1)),
             new WaitUntilCommand(
                 () ->
-                    elevatorSubsystem.getElevatorPosition() == Constants.ScorePositions.ElevatorL1),
+                    Constants.ScorePositions.ElevatorL1 - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new ScheduleCommand(
-                new WaitCommand(0.5).andThen(() -> coralManipulatorSubsystem.stopMotors())),
+            new WaitCommand(0.5),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
@@ -292,8 +296,8 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3Intake)),
             new WaitUntilCommand(
                 () ->
-                    elevatorSubsystem.getElevatorPosition()
-                        == Constants.ScorePositions.ElevatorL3Intake),
+                    Constants.ScorePositions.ElevatorL3 - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
             new InstantCommand(
                 () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownIntake)),
             new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
@@ -311,8 +315,8 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL2Intake)),
             new WaitUntilCommand(
                 () ->
-                    elevatorSubsystem.getElevatorPosition()
-                        == Constants.ScorePositions.ElevatorL2Intake),
+                    Constants.ScorePositions.ElevatorL2 - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
             new InstantCommand(
                 () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownIntake)),
             new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
@@ -338,8 +342,8 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorBarge)),
             new WaitUntilCommand(
                 () ->
-                    elevatorSubsystem.getElevatorPosition()
-                        == Constants.ScorePositions.ElevatorBarge),
+                    Constants.ScorePositions.ElevatorBarge - elevatorSubsystem.getElevatorPosition()
+                        <= 0.15),
             new InstantCommand(
                 () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOuttakeBarge)),
             new InstantCommand(() -> slapdownSubsystem.outtakeRollers()),
@@ -356,12 +360,6 @@ public class RobotContainer {
             new InstantCommand(
                 () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
             new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorProcessor)),
-            new WaitUntilCommand(
-                () ->
-                    elevatorSubsystem.getElevatorPosition()
-                        == Constants.ScorePositions.ElevatorProcessor),
-            new InstantCommand(
                 () ->
                     slapdownSubsystem.angleIntake(
                         Constants.ScorePositions.SlapdownOuttakeProcessor)),
@@ -369,9 +367,7 @@ public class RobotContainer {
             new ScheduleCommand(
                 new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers())),
             new InstantCommand(
-                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut))));
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
@@ -412,6 +408,8 @@ public class RobotContainer {
     // dRightTrigger.onTrue(intakeCoralCommand);
 
     // dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(-0.6)));
+
+    // Slapdown fully up position
     dPOVRight.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(0)));
 
     // dLeftTrigger.onTrue(new InstantCommand(() -> sensorSubsytem.stopSensorBasedCommads()));

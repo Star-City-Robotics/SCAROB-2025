@@ -57,7 +57,7 @@ public final class Constants {
 
   public class ScorePositions {
     public static final int ElevatorL4 = 31;
-    public static final int ElevatorL3 = 17;
+    public static final int ElevatorL3 = 18;
     public static final int ElevatorL2 = 9;
     public static final int ElevatorL1 = 4;
     public static final double ElevatorHome = 0;
