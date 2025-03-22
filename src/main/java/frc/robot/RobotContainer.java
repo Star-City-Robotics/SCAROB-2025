@@ -18,11 +18,14 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.State.Sequence;
 import frc.robot.State.SequenceCommand;
+import frc.robot.State.SequenceFunctions;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.TestCommand;
 // import frc.robot.commands.IntakeCoral;
@@ -72,6 +75,8 @@ public class RobotContainer {
 
   private final TestCommand testCommand =
       new TestCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
+
+  private Command selectedCommand;
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem,
   // sensorSubsytem);
   // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem,
@@ -182,7 +187,20 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    dRightTrigger.whileTrue(testCommand);
+    dY.whileTrue(new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L4)));
+    dB.whileTrue(new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L3)));
+    dA.whileTrue(new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L2)));
+    dX.whileTrue(new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L1)));
+
+    dLeftBumper.whileTrue(new InstantCommand(()-> SequenceFunctions.setGamePiece(Sequence.GamePiece.ALGAE)));
+    dRightBumper.whileTrue(new InstantCommand(()-> SequenceFunctions.setGamePiece(Sequence.GamePiece.CORAL)));
+
+    dLeftTrigger.whileTrue(new InstantCommand(()-> SequenceFunctions.setAction(Sequence.Action.INTAKE)));
+    dRightTrigger.whileTrue(new InstantCommand(()-> SequenceFunctions.setAction(Sequence.Action.SCORE)));
+
+    //if (SequenceFunctions.getA)
+
+    dPOVUp.whileTrue(selectedCommand);
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
