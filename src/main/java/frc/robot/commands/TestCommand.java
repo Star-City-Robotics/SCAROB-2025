@@ -11,7 +11,8 @@ public class TestCommand extends Command {
   private ElevatorSubsystem elevatorSubsystem;
   private SlapdownSubsystem slapdownSubsystem;
 
-  private SequenceCommand sequenceCommand = new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
+  private SequenceCommand sequenceCommand =
+      new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
 
   private boolean commandFinished = false;
 
@@ -34,6 +35,7 @@ public class TestCommand extends Command {
   @Override
   public void execute() {
 
+    // System.out.println("NUMBERRRRRRRRRR: " + Sequence.number);
     switch (Sequence.number) {
       case 1:
         sequenceCommand.moveSlapdownOut();
@@ -45,7 +47,6 @@ public class TestCommand extends Command {
         commandFinished = true;
         break;
     }
-
   }
 
   @Override
