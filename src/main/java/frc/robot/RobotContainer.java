@@ -216,7 +216,7 @@ public class RobotContainer {
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
-            new WaitCommand(0.115),
+            new WaitCommand(0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
     // Auto Score L4 Coral
@@ -231,7 +231,7 @@ public class RobotContainer {
                     Constants.ScorePositions.ElevatorL4 - elevatorSubsystem.getElevatorPosition()
                         <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(0.5),
+            new WaitCommand(0.25),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
@@ -248,7 +248,7 @@ public class RobotContainer {
                     Constants.ScorePositions.ElevatorL3 - elevatorSubsystem.getElevatorPosition()
                         <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(0.5),
+            new WaitCommand(0.25),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
@@ -265,7 +265,7 @@ public class RobotContainer {
                     Constants.ScorePositions.ElevatorL2 - elevatorSubsystem.getElevatorPosition()
                         <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(0.5),
+            new WaitCommand(0.25),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
