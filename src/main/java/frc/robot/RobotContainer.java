@@ -237,21 +237,21 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
     // Auto Score L3 Coral
-    dB.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(
-                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3)),
-            new WaitUntilCommand(
-                () ->
-                    Constants.ScorePositions.ElevatorL3 - elevatorSubsystem.getElevatorPosition()
-                        <= 0.15),
-            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(0.25),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+    // dB.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(
+    //             () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+    //         new InstantCommand(
+    //             () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL3)),
+    //         new WaitUntilCommand(
+    //             () ->
+    //                 Constants.ScorePositions.ElevatorL3 - elevatorSubsystem.getElevatorPosition()
+    //                     <= 0.15),
+    //         new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+    //         new WaitCommand(0.25),
+    //         new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
+    //         new InstantCommand(
+    //             () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
     // Auto Score L2 Coral
     dA.onTrue(
@@ -391,6 +391,10 @@ public class RobotContainer {
 
     // Switch to X pattern when X button is pressed
     // controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
+
+    dB.onTrue(
+        Commands.deadline(
+            new WaitCommand(0.01), DriveCommands.joystickDrive(drive, () -> 1, () -> 0, () -> 0)));
 
     // Reset gyro to 0° when B button is pressed
     dPOVLeft.onTrue(Commands.runOnce(() -> drive.resetGyro()));
