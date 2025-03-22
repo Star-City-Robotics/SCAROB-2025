@@ -198,7 +198,11 @@ public class RobotContainer {
     dLeftTrigger.whileTrue(new InstantCommand(()-> SequenceFunctions.setAction(Sequence.Action.INTAKE)));
     dRightTrigger.whileTrue(new InstantCommand(()-> SequenceFunctions.setAction(Sequence.Action.SCORE)));
 
-    //if (SequenceFunctions.getA)
+    if ( 
+        SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE) &&
+        SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
+
+        }
 
     dPOVUp.whileTrue(selectedCommand);
 

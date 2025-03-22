@@ -8,7 +8,7 @@ public class SequenceCommand {
   private final ElevatorSubsystem elevatorSubsystem;
   private final SlapdownSubsystem slapdownSubsystem;
 
-  private final double slapdownOutPosition = SequenceConstants.Slapdown.SLAPDOWN_OUT_POSITION;
+  private final double slapdownOutPosition = SequenceConstants.Slapdown.OUT;
 
   public SequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;

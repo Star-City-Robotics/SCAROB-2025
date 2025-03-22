@@ -5,6 +5,7 @@ public class SequenceFunctions {
   private static Sequence.Action actionSelection;
   private static Sequence.GamePiece gamePieceSelection;
   private static Sequence.Level levelSelction;
+  private static SequenceConstants.Elevator levelConstantSelection;
 
   public static boolean checkAction(Sequence.Action action) {
     return action == actionSelection;
@@ -28,5 +29,13 @@ public class SequenceFunctions {
 
   public static void setLevel(Sequence.Level level) {
     levelSelction = level;
+  }
+
+  public static void setLevelConstant(SequenceConstants.Elevator level) {
+    level = levelConstantSelection;
+  }
+
+  public static SequenceConstants.Elevator getEleatorConstant() {
+    return levelConstantSelection;
   }
 }
