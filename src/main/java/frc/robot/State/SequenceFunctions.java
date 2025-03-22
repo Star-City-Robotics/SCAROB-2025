@@ -6,6 +6,18 @@ public class SequenceFunctions {
   private static Sequence.GamePiece gamePieceSelection;
   private static Sequence.Level levelSelction;
 
+  public static boolean checkAction(Sequence.Action action) {
+    return action == actionSelection;
+  }
+
+  public static boolean checkGamePiece(Sequence.GamePiece gamePiece) {
+    return gamePiece == gamePieceSelection;
+  }
+
+  public static boolean checkLevel(Sequence.Level level) {
+    return level == levelSelction;
+  }
+
   public static void setAction(Sequence.Action action) {
     actionSelection = action;
   }
@@ -16,22 +28,5 @@ public class SequenceFunctions {
 
   public static void setLevel(Sequence.Level level) {
     levelSelction = level;
-  }
-
-  public static boolean isAction(Sequence.Action action) {
-    if (action == actionSelection) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-  public static Sequence.GamePiece getGamePiece() {
-    return gamePieceSelection;
-  }
-
-  public static Sequence.Level getLevel() {
-    return levelSelction;
   }
 }
