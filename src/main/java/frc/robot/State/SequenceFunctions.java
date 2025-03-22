@@ -9,11 +9,23 @@ public class SequenceFunctions {
   private static Sequence.Level levelSelction;
 
   public static boolean checkState(Sequence.State state) {
-    return state == stateSelection ? true : false;
+    return state == stateSelection;
   }
 
   public static boolean checkInput(Sequence.Input input) {
-    return input == inputSelection ? true : false;
+    return input == inputSelection;
+  }
+
+  public static boolean checkAction(Sequence.Action action) {
+    return action == actionSelection;
+  }
+
+  public static boolean checkGamePiece(Sequence.GamePiece gamePiece) {
+    return gamePiece == gamePieceSelection;
+  }
+
+  public static boolean checkLevel(Sequence.Level level) {
+    return level == levelSelction;
   }
 
   public static void setState(Sequence.State state) {
@@ -38,21 +50,5 @@ public class SequenceFunctions {
 
   public static Sequence.State getState() {
     return stateSelection;
-  }
-
-  public static Sequence.Input getInput() {
-    return inputSelection;
-  }
-
-  public static Sequence.Action getAction() {
-    return actionSelection;
-  }
-
-  public static Sequence.GamePiece getGamePiece() {
-    return gamePieceSelection;
-  }
-
-  public static Sequence.Level getLevel() {
-    return levelSelction;
   }
 }
