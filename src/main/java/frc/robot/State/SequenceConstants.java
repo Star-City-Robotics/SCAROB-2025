@@ -12,5 +12,7 @@ public class SequenceConstants {
   public class Slapdown {
     public static final double UP = 0.0;
     public static final double OUT = -1.6;
+    public static final double DOWN = -3;
+    public static final double MIDDLE = -2;
   }
 }

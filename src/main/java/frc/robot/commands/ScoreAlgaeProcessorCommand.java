@@ -7,17 +7,18 @@ import frc.robot.State.SequenceFunctions;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.*;
 
-public class TestCommand extends Command {
+public class ScoreAlgaeProcessorCommand extends Command {
 
   private ElevatorSubsystem elevatorSubsystem;
   private SlapdownSubsystem slapdownSubsystem;
+  private CoralManipulatorSubsystem coralManipulatorSubsystem;
 
   private SequenceCommand sequenceCommand =
-      new SequenceCommand(elevatorSubsystem, slapdownSubsystem);
+      new SequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
 
   private boolean commandFinished = false;
 
-  public TestCommand(
+  public ScoreAlgaeProcessorCommand(
       ElevatorSubsystem elevatorSubsystem,
       SlapdownSubsystem slapdownSubsystem,
       SequenceCommand sequenceCommand) {
@@ -36,13 +37,12 @@ public class TestCommand extends Command {
   @Override
   public void execute() {
 
-    // System.out.println("NUMBERRRRRRRRRR: " + Sequence.number);
     switch (Sequence.number) {
       case 1:
         sequenceCommand.moveSlapdownOut();
         break;
       case 2:
-        sequenceCommand.raiseElevator(31.0);
+        sequenceCommand.raiseElevator(SequenceFunctions.getElevatorConstant());
         break;
       case 3:
         commandFinished = true;
