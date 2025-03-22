@@ -10,13 +10,21 @@ import frc.robot.subsystems.intake.SlapdownSubsystem;
 
 public class RunSequenceCommand extends Command {
 
-  ElevatorSubsystem elevatorSubsystem;
-  SlapdownSubsystem slapdownSubsystem;
-  CoralManipulatorSubsystem coralManipulatorSubsystem;
-  SequenceCommand sequenceCommand =
-      new SequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
+  // ElevatorSubsystem elevatorSubsystem;
+  // SlapdownSubsystem slapdownSubsystem;
+  // CoralManipulatorSubsystem coralManipulatorSubsystem;
 
-  // private ScoreCoralCommand ScoreCoralCommand =
+  // SequenceCommand sequenceCommand =
+  //   new SequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
+
+  ScoreCoralCommand scoreCoralCommand;
+  ScoreAlgaeProcessorCommand scoreAlgaeProcessorCommand;
+  ScoreAlgaeBargeCommand scoreAlgaeBargeCommand;
+  IntakeCoralCommand intakeCoralCommand;
+  IntakeAglaeReefCommand intakeAglaeReefCommand;
+  IntakeAlgaeGroundCommand intakeAlgaeGroundCommand;
+
+  // private ScoreCoralCommand scoreCoralCommand =
   //     new ScoreCoralCommand(
   //         elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
   // private ScoreAlgaeProcessorCommand scoreAlgaeProcessorCommand =
@@ -30,13 +38,7 @@ public class RunSequenceCommand extends Command {
   // private IntakeAlgaeGroundCommand intakeAlgaeGroundCommand =
   //     new IntakeAlgaeGroundCommand(slapdownSubsystem, sequenceCommand);
 
-  public RunSequenceCommand(
-    ScoreCoralCommand scoreCoralCommand,
-    ScoreAlgaeProcessorCommand scoreAlgaeProcessorCommand,
-    ScoreAlgaeBargeCommand scoreAlgaeBargeCommand,
-    IntakeCoralCommand intakeCoralCommand,
-    IntakeAglaeReefCommand intakeAglaeReefCommand,
-    IntakeAlgaeGroundCommand intakeAlgaeGroundCommand
+  // public RunSequenceCommand(
       //   ElevatorSubsystem elevatorSubsystem,
       //   SlapdownSubsystem slapdownSubsystem,
       //   CoralManipulatorSubsystem coralManipulatorSubsystem,
@@ -46,9 +48,21 @@ public class RunSequenceCommand extends Command {
       // this.coralManipulatorSubsystem = coralManipulatorSubsystem;
       // this.sequenceCommand = sequenceCommand;
       // addRequirements(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
-      ) {
-        
-      }
+      // ) {}
+
+  public RunSequenceCommand(
+    ScoreCoralCommand scoreCoralCommand,
+    ScoreAlgaeBargeCommand scoreAlgaeBargeCommand,
+    ScoreAlgaeProcessorCommand scoreAlgaeProcessorCommand,
+    IntakeCoralCommand intakeCoralCommand,
+    IntakeAglaeReefCommand intakeAglaeReefCommand,
+    IntakeAlgaeGroundCommand intakeAlgaeGroundCommand) {
+      this.scoreCoralCommand = scoreCoralCommand;
+      this.scoreAlgaeProcessorCommand = scoreAlgaeProcessorCommand;
+      this.intakeCoralCommand = intakeCoralCommand;
+      this.intakeAglaeReefCommand = intakeAglaeReefCommand;
+      this.intakeAlgaeGroundCommand = intakeAlgaeGroundCommand;
+  }
 
   @Override
   public void initialize() {
@@ -57,7 +71,7 @@ public class RunSequenceCommand extends Command {
             || SequenceFunctions.checkLevel(Sequence.Level.L3))
         && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
         && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-      // intakeAglaeReefCommand.schedule();
+      intakeAglaeReefCommand.schedule();
       System.out.print("SEQUENCEEEEE INTAKE ALGAE REEF");
     }
 
@@ -65,33 +79,33 @@ public class RunSequenceCommand extends Command {
     if (SequenceFunctions.checkLevel(Sequence.Level.L1)
         && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
         && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-      // intakeAlgaeGroundCommand.schedule();
+      //intakeAlgaeGroundCommand.schedule();
     }
 
     // Intake Coral
     if (SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL)
         && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-      // intakeCoralCommand.schedule();
+      intakeCoralCommand.schedule();
     }
 
     // Score Algae Processor
     if (SequenceFunctions.checkLevel(Sequence.Level.L1)
         && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
         && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-      // scoreAlgaeProcessorCommand.schedule();
+      scoreAlgaeProcessorCommand.schedule();
     }
 
     // Score Algae Barge
     if (SequenceFunctions.checkLevel(Sequence.Level.L4)
         && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
         && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-      // scoreAlgaeBargeCommand.schedule();
+      scoreAlgaeBargeCommand.schedule();
     }
 
     // Score Coral all levels
     if (SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL)
         && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-      // scoreCoralCommand.schedule();
+      scoreCoralCommand.schedule();
     }
   }
 

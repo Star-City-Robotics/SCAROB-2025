@@ -84,6 +84,10 @@ public class RobotContainer {
 
   private final DefaultCommand defaultCommand = new DefaultCommand();
 
+  private final ScoreCoralCommand testCommand =
+      new ScoreCoralCommand(
+          elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
+
   private final ScoreCoralCommand ScoreCoralCommand =
       new ScoreCoralCommand(
           elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
@@ -98,10 +102,7 @@ public class RobotContainer {
   private final IntakeAlgaeGroundCommand intakeAlgaeGroundCommand =
       new IntakeAlgaeGroundCommand(slapdownSubsystem, sequenceCommand);
 
-  //   private final RunSequenceCommand runSequenceCommand =
-  //       new RunSequenceCommand(
-  //           elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
-  private final RunSequenceCommand runSequenceCommand = new RunSequenceCommand();
+  private RunSequenceCommand runSequenceCommand = new RunSequenceCommand(ScoreCoralCommand, scoreAlgaeBargeCommand, scoreAlgaeProcessorCommand, intakeCoralCommand, intakeAglaeReefCommand, intakeAlgaeGroundCommand);
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem,
   // sensorSubsytem);
   // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem,
@@ -267,7 +268,7 @@ public class RobotContainer {
     // controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
     // Reset gyro to 0° when B button is pressed
-    dB.onTrue(Commands.runOnce(() -> drive.resetGyro()));
+    //dB.onTrue(Commands.runOnce(() -> drive.resetGyro()));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
