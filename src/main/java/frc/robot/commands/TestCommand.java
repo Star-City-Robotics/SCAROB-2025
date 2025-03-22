@@ -36,13 +36,13 @@ public class TestCommand extends Command {
 
   @Override
   public void execute() {
-    if (state == Sequence.State.HOME && input == Sequence.Input.BEGIN) {
+    if (SequenceFunctions.checkState(Sequence.State.HOME) == true && SequenceFunctions.checkInput(Sequence.Input.BEGIN) == true) {
       sequenceCommand.moveSlapdownOut(Sequence.Input.RAISE_ELEVATOR);
     }
-    if (state == Sequence.State.SLAPDOWN_OUT && input == Sequence.Input.RAISE_ELEVATOR) {
+    else if (state == Sequence.State.SLAPDOWN_OUT && input == Sequence.Input.RAISE_ELEVATOR) {
       sequenceCommand.raiseElevator(31.0, Sequence.Input.FINISHED);
     }
-    if (state == Sequence.State.ElEVATOR_RAISED && input == Sequence.Input.FINISHED) {
+    else if (state == Sequence.State.ElEVATOR_RAISED && input == Sequence.Input.FINISHED) {
       commandFinished = true;
     }
   }

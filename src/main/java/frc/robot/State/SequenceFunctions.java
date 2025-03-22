@@ -8,6 +8,14 @@ public class SequenceFunctions {
   private static Sequence.GamePiece gamePieceSelection;
   private static Sequence.Level levelSelction;
 
+  public static boolean checkState(Sequence.State state) {
+    return state == stateSelection ? true : false;
+  }
+
+  public static boolean checkInput(Sequence.Input input) {
+    return input == inputSelection ? true : false;
+  }
+
   public static void setState(Sequence.State state) {
     stateSelection = state;
   }
