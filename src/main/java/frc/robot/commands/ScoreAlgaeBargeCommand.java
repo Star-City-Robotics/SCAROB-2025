@@ -19,7 +19,8 @@ public class ScoreAlgaeBargeCommand extends Command {
   private boolean commandFinished = false;
 
   public ScoreAlgaeBargeCommand(
-    ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem,
+      ElevatorSubsystem elevatorSubsystem,
+      SlapdownSubsystem slapdownSubsystem,
       SequenceCommand sequenceCommand) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;

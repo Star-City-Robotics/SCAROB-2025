@@ -19,8 +19,7 @@ public class IntakeAlgaeGroundCommand extends Command {
   private boolean commandFinished = false;
 
   public IntakeAlgaeGroundCommand(
-      SlapdownSubsystem slapdownSubsystem,
-      SequenceCommand sequenceCommand) {
+      SlapdownSubsystem slapdownSubsystem, SequenceCommand sequenceCommand) {
     this.slapdownSubsystem = slapdownSubsystem;
     this.sequenceCommand = sequenceCommand;
     addRequirements(slapdownSubsystem);

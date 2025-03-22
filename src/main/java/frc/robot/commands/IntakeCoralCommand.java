@@ -18,8 +18,7 @@ public class IntakeCoralCommand extends Command {
   private boolean commandFinished = false;
 
   public IntakeCoralCommand(
-      CoralManipulatorSubsystem coralManipulatorSubsystem,
-      SequenceCommand sequenceCommand) {
+      CoralManipulatorSubsystem coralManipulatorSubsystem, SequenceCommand sequenceCommand) {
     this.coralManipulatorSubsystem = coralManipulatorSubsystem;
     this.sequenceCommand = sequenceCommand;
     addRequirements(coralManipulatorSubsystem);

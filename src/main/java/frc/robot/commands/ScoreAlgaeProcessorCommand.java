@@ -18,8 +18,7 @@ public class ScoreAlgaeProcessorCommand extends Command {
   private boolean commandFinished = false;
 
   public ScoreAlgaeProcessorCommand(
-      SlapdownSubsystem slapdownSubsystem,
-      SequenceCommand sequenceCommand) {
+      SlapdownSubsystem slapdownSubsystem, SequenceCommand sequenceCommand) {
     this.slapdownSubsystem = slapdownSubsystem;
     this.sequenceCommand = sequenceCommand;
     addRequirements(slapdownSubsystem);
@@ -41,7 +40,7 @@ public class ScoreAlgaeProcessorCommand extends Command {
       case 2:
         sequenceCommand.outtakeAlgae();
         break;
-      case 3: 
+      case 3:
         sequenceCommand.waitFor(0.5);
         break;
       case 4:

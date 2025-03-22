@@ -84,17 +84,19 @@ public class RobotContainer {
   private final DefaultCommand defaultCommand = new DefaultCommand();
 
   private final ScoreCoralCommand testCommand =
-      new ScoreCoralCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
+      new ScoreCoralCommand(
+          elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
 
   private final ScoreCoralCommand ScoreCoralCommand =
-      new ScoreCoralCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
-  private final ScoreAlgaeProcessorCommand scoreAlgaeProcessorCommand = 
+      new ScoreCoralCommand(
+          elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
+  private final ScoreAlgaeProcessorCommand scoreAlgaeProcessorCommand =
       new ScoreAlgaeProcessorCommand(slapdownSubsystem, sequenceCommand);
   private final ScoreAlgaeBargeCommand scoreAlgaeBargeCommand =
       new ScoreAlgaeBargeCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
-  private final IntakeCoralCommand intakeCoralCommand = 
+  private final IntakeCoralCommand intakeCoralCommand =
       new IntakeCoralCommand(coralManipulatorSubsystem, sequenceCommand);
-  private final IntakeAglaeReefCommand intakeAglaeReefCommand = 
+  private final IntakeAglaeReefCommand intakeAglaeReefCommand =
       new IntakeAglaeReefCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
   private final IntakeAlgaeGroundCommand intakeAlgaeGroundCommand =
       new IntakeAlgaeGroundCommand(slapdownSubsystem, sequenceCommand);
@@ -211,70 +213,77 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     dY.whileTrue(
-        new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L4)).alongWith(
-        new InstantCommand(()->SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L4))));
+        new InstantCommand(() -> SequenceFunctions.setLevel(Sequence.Level.L4))
+            .alongWith(
+                new InstantCommand(
+                    () -> SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L4))));
     dB.whileTrue(
-        new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L3)).alongWith(
-        new InstantCommand(()-> SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L3))));
+        new InstantCommand(() -> SequenceFunctions.setLevel(Sequence.Level.L3))
+            .alongWith(
+                new InstantCommand(
+                    () -> SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L3))));
     dA.whileTrue(
-        new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L2)).alongWith(
-        new InstantCommand(()-> SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L2))));
+        new InstantCommand(() -> SequenceFunctions.setLevel(Sequence.Level.L2))
+            .alongWith(
+                new InstantCommand(
+                    () -> SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L2))));
     dX.whileTrue(
-        new InstantCommand(()-> SequenceFunctions.setLevel(Sequence.Level.L1)).alongWith(
-        new InstantCommand(()-> SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L1))));
+        new InstantCommand(() -> SequenceFunctions.setLevel(Sequence.Level.L1))
+            .alongWith(
+                new InstantCommand(
+                    () -> SequenceFunctions.setLevelConstant(SequenceConstants.Elevator.L1))));
 
-    dLeftBumper.whileTrue(new InstantCommand(()-> SequenceFunctions.setGamePiece(Sequence.GamePiece.ALGAE)));
-    dRightBumper.whileTrue(new InstantCommand(()-> SequenceFunctions.setGamePiece(Sequence.GamePiece.CORAL)));
+    dLeftBumper.whileTrue(
+        new InstantCommand(() -> SequenceFunctions.setGamePiece(Sequence.GamePiece.ALGAE)));
+    dRightBumper.whileTrue(
+        new InstantCommand(() -> SequenceFunctions.setGamePiece(Sequence.GamePiece.CORAL)));
 
-    dLeftTrigger.whileTrue(new InstantCommand(()-> SequenceFunctions.setAction(Sequence.Action.INTAKE)));
-    dRightTrigger.whileTrue(new InstantCommand(()-> SequenceFunctions.setAction(Sequence.Action.SCORE)));
+    dLeftTrigger.whileTrue(
+        new InstantCommand(() -> SequenceFunctions.setAction(Sequence.Action.INTAKE)));
+    dRightTrigger.whileTrue(
+        new InstantCommand(() -> SequenceFunctions.setAction(Sequence.Action.SCORE)));
 
-    //Intake Algae L2 or L3
-    if ( 
-        (SequenceFunctions.checkLevel(Sequence.Level.L2) ||
-        SequenceFunctions.checkLevel(Sequence.Level.L3)) &&
-        SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE) &&
-        SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-            selectedCommand = testCommand;
-        }
-    
-    //Intake Algae ground
-    if (
-        SequenceFunctions.checkLevel(Sequence.Level.L1) &&
-        SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE) &&
-        SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-            selectedCommand = testCommand;
-        }
+    // Intake Algae L2 or L3
+    if ((SequenceFunctions.checkLevel(Sequence.Level.L2)
+            || SequenceFunctions.checkLevel(Sequence.Level.L3))
+        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
+        && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
+      selectedCommand = defaultCommand;
+      System.out.print("SEQUNCEEEEE INTAKE ALGAE REEF");
+    }
 
-    //Intake Coral
-    if (
-        SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL) &&
-        SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-            selectedCommand = testCommand;
-        }
+    // Intake Algae ground
+    if (SequenceFunctions.checkLevel(Sequence.Level.L1)
+        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
+        && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
+      selectedCommand = defaultCommand;
+    }
 
-    //Score Algae Processor
-    if (
-        SequenceFunctions.checkLevel(Sequence.Level.L1) &&
-        SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE) &&
-        SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-            selectedCommand = testCommand;
-        }
-    
-    //Score Algae Barge
-    if (
-        SequenceFunctions.checkLevel(Sequence.Level.L4) &&
-        SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE) &&
-        SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-            selectedCommand = testCommand;
-        }
+    // Intake Coral
+    if (SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL)
+        && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
+      selectedCommand = defaultCommand;
+    }
 
-    //Score Coral all levels
-    if (
-        SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL) &&
-        SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-            selectedCommand = testCommand;
-        }
+    // Score Algae Processor
+    if (SequenceFunctions.checkLevel(Sequence.Level.L1)
+        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
+        && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
+      selectedCommand = testCommand;
+    }
+
+    // Score Algae Barge
+    if (SequenceFunctions.checkLevel(Sequence.Level.L4)
+        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
+        && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
+      selectedCommand = testCommand;
+    }
+
+    // Score Coral all levels
+    if (SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL)
+        && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
+      selectedCommand = testCommand;
+    }
 
     dPOVUp.whileTrue(selectedCommand);
 

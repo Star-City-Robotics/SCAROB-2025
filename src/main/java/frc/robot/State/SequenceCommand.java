@@ -1,8 +1,6 @@
 package frc.robot.State;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Constants.CoralManipulator;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.CoralManipulatorSubsystem;
 import frc.robot.subsystems.intake.SlapdownSubsystem;
@@ -20,7 +18,10 @@ public class SequenceCommand {
 
   private final Timer timer = new Timer();
 
-  public SequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, CoralManipulatorSubsystem coralManipulatorSubsystem) {
+  public SequenceCommand(
+      ElevatorSubsystem elevatorSubsystem,
+      SlapdownSubsystem slapdownSubsystem,
+      CoralManipulatorSubsystem coralManipulatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
     this.coralManipulatorSubsystem = coralManipulatorSubsystem;
@@ -108,7 +109,7 @@ public class SequenceCommand {
   }
 
   public void outtakeCoral() {
-    coralManipulatorSubsystem.intake(); 
-    Sequence.incrementNumber(); 
+    coralManipulatorSubsystem.intake();
+    Sequence.incrementNumber();
   }
 }
