@@ -86,7 +86,7 @@ public class SequenceCommand {
     Sequence.incrementNumber();
   }
 
-  public void wait(double time) {
+  public void waitFor(double time) {
     timer.reset();
     timer.start();
     if (timer.hasElapsed(time)) {

@@ -44,6 +44,27 @@ public class ScoreAlgaeBargeCommand extends Command {
         sequenceCommand.raiseElevator(SequenceFunctions.getElevatorConstant());
         break;
       case 3:
+        sequenceCommand.moveSlapdownMiddle();
+        break;
+      case 4:
+        sequenceCommand.outtakeAlgae();
+        break;
+      case 5:
+        sequenceCommand.waitFor(0.5);
+        break;
+      case 6:
+        sequenceCommand.stopIntakeMotors();
+        break;
+      case 7:
+        sequenceCommand.moveSlapdownOut();
+        break;
+      case 8:
+        sequenceCommand.elevatorHome();
+        break;
+      case 9:
+        sequenceCommand.moveSlapdownUp();
+        break;
+      case 10:
         commandFinished = true;
         break;
     }
@@ -57,7 +78,7 @@ public class ScoreAlgaeBargeCommand extends Command {
 
   @Override
   public void end(boolean interupted) {
-    Sequence.incrementNumber();
+    Sequence.setNumber(0);
     commandFinished = false;
   }
 }

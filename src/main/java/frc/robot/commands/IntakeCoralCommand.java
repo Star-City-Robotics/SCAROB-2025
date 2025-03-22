@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.State.Sequence;
 import frc.robot.State.SequenceCommand;
-import frc.robot.State.SequenceFunctions;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.*;
 
@@ -37,12 +36,15 @@ public class IntakeCoralCommand extends Command {
 
     switch (Sequence.number) {
       case 1:
-        sequenceCommand.moveSlapdownOut();
+        sequenceCommand.intakeCoral();
         break;
       case 2:
-        sequenceCommand.raiseElevator(SequenceFunctions.getElevatorConstant());
+        sequenceCommand.waitFor(0.115);
         break;
       case 3:
+        sequenceCommand.stopCoralManipulators();
+        break;
+      case 4:
         commandFinished = true;
         break;
     }
@@ -56,7 +58,7 @@ public class IntakeCoralCommand extends Command {
 
   @Override
   public void end(boolean interupted) {
-    Sequence.incrementNumber();
+    Sequence.setNumber(0);
     commandFinished = false;
   }
 }

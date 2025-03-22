@@ -56,7 +56,7 @@ public class IntakeAlgaeGroundCommand extends Command {
 
   @Override
   public void end(boolean interupted) {
-    Sequence.incrementNumber();
+    Sequence.setNumber(0);
     commandFinished = false;
   }
 }

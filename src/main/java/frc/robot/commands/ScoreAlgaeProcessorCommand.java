@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.State.Sequence;
 import frc.robot.State.SequenceCommand;
-import frc.robot.State.SequenceFunctions;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
 import frc.robot.subsystems.intake.*;
 
@@ -37,12 +36,21 @@ public class ScoreAlgaeProcessorCommand extends Command {
 
     switch (Sequence.number) {
       case 1:
-        sequenceCommand.moveSlapdownOut();
+        sequenceCommand.moveSlapdownMiddle();
         break;
       case 2:
-        sequenceCommand.raiseElevator(SequenceFunctions.getElevatorConstant());
+        sequenceCommand.outtakeAlgae();
         break;
-      case 3:
+      case 3: 
+        sequenceCommand.waitFor(0.5);
+        break;
+      case 4:
+        sequenceCommand.stopIntakeMotors();
+        break;
+      case 5:
+        sequenceCommand.moveSlapdownUp();
+        break;
+      case 6:
         commandFinished = true;
         break;
     }
@@ -56,7 +64,7 @@ public class ScoreAlgaeProcessorCommand extends Command {
 
   @Override
   public void end(boolean interupted) {
-    Sequence.incrementNumber();
+    Sequence.setNumber(0);
     commandFinished = false;
   }
 }

@@ -47,6 +47,21 @@ public class ScoreCoralCommand extends Command {
         sequenceCommand.raiseElevator(SequenceFunctions.getElevatorConstant());
         break;
       case 3:
+        sequenceCommand.outtakeCoral();
+        break;
+      case 4:
+        sequenceCommand.waitFor(0.5);
+        break;
+      case 5:
+        sequenceCommand.stopCoralManipulators();
+        break;
+      case 6:
+        sequenceCommand.elevatorHome();
+        break;
+      case 7:
+        sequenceCommand.moveSlapdownUp();
+        break;
+      case 8:
         commandFinished = true;
         break;
     }
@@ -60,7 +75,7 @@ public class ScoreCoralCommand extends Command {
 
   @Override
   public void end(boolean interupted) {
-    Sequence.incrementNumber();
+    Sequence.setNumber(0);
     commandFinished = false;
   }
 }
