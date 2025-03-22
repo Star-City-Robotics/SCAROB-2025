@@ -98,9 +98,10 @@ public class RobotContainer {
   private final IntakeAlgaeGroundCommand intakeAlgaeGroundCommand =
       new IntakeAlgaeGroundCommand(slapdownSubsystem, sequenceCommand);
 
-  private final RunSequenceCommand runSequenceCommand =
-      new RunSequenceCommand(
-          elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
+  //   private final RunSequenceCommand runSequenceCommand =
+  //       new RunSequenceCommand(
+  //           elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
+  private final RunSequenceCommand runSequenceCommand = new RunSequenceCommand();
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem,
   // sensorSubsytem);
   // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem,
