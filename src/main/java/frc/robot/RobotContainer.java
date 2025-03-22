@@ -237,7 +237,7 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
     // Auto Score L3 Coral
-    // dB.onTrue(
+    //  dB.onTrue(
     //     new SequentialCommandGroup(
     //         new InstantCommand(
     //             () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
@@ -332,8 +332,9 @@ public class RobotContainer {
             new InstantCommand(
                 () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownGroundIntake)),
             new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
-            new ScheduleCommand(
-                new WaitCommand(0.5).andThen(() -> slapdownSubsystem.stopRollers()))));
+            new WaitUntilCommand(() -> slapdownSubsystem.detectAlgae() == true),
+            new InstantCommand(() -> slapdownSubsystem.stopRollers())));
+
 
     // Auto Score Algae to Barge
     dLeftTrigger.onTrue(

@@ -84,7 +84,7 @@ public class SlapdownSubsystem extends SubsystemBase {
 
   public boolean detectAlgae() {
     LaserCan.Measurement measurement = slapdownSensor.getMeasurement();
-    if (measurement.distance_mm <= 20) {
+    if (measurement.distance_mm <= 10) {
       return true;
     }
     return false;
