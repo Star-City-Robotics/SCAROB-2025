@@ -271,21 +271,23 @@ public class RobotContainer {
                 () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
 
     // Auto Score L1 Coral
-    dX.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(
-                () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL1)),
-            new WaitUntilCommand(
-                () ->
-                    Constants.ScorePositions.ElevatorL1 - elevatorSubsystem.getElevatorPosition()
-                        <= 0.15),
-            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(0.25),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+    // dX.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(
+    //             () -> slapdownSubsystem.angleIntake(Constants.ScorePositions.SlapdownOut)),
+    //         new InstantCommand(
+    //             () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorL1)),
+    //         new WaitUntilCommand(
+    //             () ->
+    //                 Constants.ScorePositions.ElevatorL1 - elevatorSubsystem.getElevatorPosition()
+    //                     <= 0.15),
+    //         new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+    //         new WaitCommand(0.25),
+    //         new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
+    //         new InstantCommand(
+    //             () -> elevatorSubsystem.moveElevator(Constants.ScorePositions.ElevatorHome))));
+
+    dX.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
 
     // Auto Pickup a Algae from L3
     dRightBumper.onTrue(

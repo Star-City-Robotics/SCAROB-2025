@@ -246,4 +246,9 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
   public Command sysIdDynamic(SysIdRoutine.Direction direction) {
     return m_sysIdRoutine.dynamic(direction);
   }
+
+  public final void resetPosition() {
+    leaderMotor.setPosition(0);
+    followerMotor.setPosition(0);
+  }
 }
