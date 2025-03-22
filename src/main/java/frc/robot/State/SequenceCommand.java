@@ -1,5 +1,6 @@
 package frc.robot.State;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.CoralManipulator;
 import frc.robot.subsystems.Elevator.ElevatorSubsystem;
@@ -16,6 +17,8 @@ public class SequenceCommand {
   private final double slapdownUpPosition = SequenceConstants.Slapdown.UP;
   private final double slapdownDownPosition = SequenceConstants.Slapdown.OUT;
   private final double slapdownMiddlePosition = SequenceConstants.Slapdown.MIDDLE;
+
+  private final Timer timer = new Timer();
 
   public SequenceCommand(ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem, CoralManipulatorSubsystem coralManipulatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
@@ -80,10 +83,32 @@ public class SequenceCommand {
 
   public void outtakeAlgae() {
     slapdownSubsystem.outtakeRollers();
-    if (slapdownSubsystem.detectAlgae() != true)
     Sequence.incrementNumber();
   }
 
-  
+  public void wait(double time) {
+    timer.reset();
+    timer.start();
+    if (timer.hasElapsed(time)) {
+      timer.stop();
+      Sequence.incrementNumber();
+    }
+  }
 
+  public void intakeCoral() {
+    coralManipulatorSubsystem.intake();
+    if (coralManipulatorSubsystem.coralDetected()) {
+      Sequence.incrementNumber();
+    }
+  }
+
+  public void stopCoralManipulators() {
+    coralManipulatorSubsystem.stopMotors();
+    Sequence.incrementNumber();
+  }
+
+  public void outtakeCoral() {
+    coralManipulatorSubsystem.intake(); 
+    Sequence.incrementNumber(); 
+  }
 }
