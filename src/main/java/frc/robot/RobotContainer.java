@@ -216,7 +216,7 @@ public class RobotContainer {
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
-            new WaitCommand(0.15),
+            new WaitCommand(0.0775),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
     // Auto Score L4 Coral
