@@ -21,11 +21,12 @@ public class ScoreCoralCommand extends Command {
   public ScoreCoralCommand(
       ElevatorSubsystem elevatorSubsystem,
       SlapdownSubsystem slapdownSubsystem,
+      CoralManipulatorSubsystem coralManipulatorSubsystem,
       SequenceCommand sequenceCommand) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
     this.sequenceCommand = sequenceCommand;
-    addRequirements(elevatorSubsystem, slapdownSubsystem);
+    addRequirements(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
   }
 
   @Override

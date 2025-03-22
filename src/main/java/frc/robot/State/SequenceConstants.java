@@ -7,6 +7,7 @@ public class SequenceConstants {
     public static final double L3 = 0;
     public static final double L2 = 0;
     public static final double L1 = 0;
+    public static final double HOME = 0.1;
   }
 
   public class Slapdown {

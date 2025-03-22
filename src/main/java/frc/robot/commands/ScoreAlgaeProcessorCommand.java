@@ -19,13 +19,11 @@ public class ScoreAlgaeProcessorCommand extends Command {
   private boolean commandFinished = false;
 
   public ScoreAlgaeProcessorCommand(
-      ElevatorSubsystem elevatorSubsystem,
       SlapdownSubsystem slapdownSubsystem,
       SequenceCommand sequenceCommand) {
-    this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
     this.sequenceCommand = sequenceCommand;
-    addRequirements(elevatorSubsystem, slapdownSubsystem);
+    addRequirements(slapdownSubsystem);
   }
 
   @Override
