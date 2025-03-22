@@ -32,6 +32,7 @@ import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeAglaeReefCommand;
 import frc.robot.commands.IntakeAlgaeGroundCommand;
 import frc.robot.commands.IntakeCoralCommand;
+import frc.robot.commands.RunSequenceCommand;
 import frc.robot.commands.ScoreAlgaeBargeCommand;
 import frc.robot.commands.ScoreAlgaeProcessorCommand;
 import frc.robot.commands.ScoreCoralCommand;
@@ -83,10 +84,6 @@ public class RobotContainer {
 
   private final DefaultCommand defaultCommand = new DefaultCommand();
 
-  private final ScoreCoralCommand testCommand =
-      new ScoreCoralCommand(
-          elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
-
   private final ScoreCoralCommand ScoreCoralCommand =
       new ScoreCoralCommand(
           elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
@@ -101,7 +98,8 @@ public class RobotContainer {
   private final IntakeAlgaeGroundCommand intakeAlgaeGroundCommand =
       new IntakeAlgaeGroundCommand(slapdownSubsystem, sequenceCommand);
 
-  private Command selectedCommand = defaultCommand;
+  private final RunSequenceCommand runSequenceCommand = 
+    new RunSequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem,
   // sensorSubsytem);
   // private final SlapdownIntake slapdownIntake = new SlapdownIntake(slapdownSubsystem,
@@ -243,49 +241,7 @@ public class RobotContainer {
     dRightTrigger.whileTrue(
         new InstantCommand(() -> SequenceFunctions.setAction(Sequence.Action.SCORE)));
 
-    // Intake Algae L2 or L3
-    if ((SequenceFunctions.checkLevel(Sequence.Level.L2)
-            || SequenceFunctions.checkLevel(Sequence.Level.L3))
-        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
-        && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-      selectedCommand = defaultCommand;
-      System.out.print("SEQUNCEEEEE INTAKE ALGAE REEF");
-    }
-
-    // Intake Algae ground
-    if (SequenceFunctions.checkLevel(Sequence.Level.L1)
-        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
-        && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-      selectedCommand = defaultCommand;
-    }
-
-    // Intake Coral
-    if (SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL)
-        && SequenceFunctions.checkAction(Sequence.Action.INTAKE)) {
-      selectedCommand = defaultCommand;
-    }
-
-    // Score Algae Processor
-    if (SequenceFunctions.checkLevel(Sequence.Level.L1)
-        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
-        && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-      selectedCommand = testCommand;
-    }
-
-    // Score Algae Barge
-    if (SequenceFunctions.checkLevel(Sequence.Level.L4)
-        && SequenceFunctions.checkGamePiece(Sequence.GamePiece.ALGAE)
-        && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-      selectedCommand = testCommand;
-    }
-
-    // Score Coral all levels
-    if (SequenceFunctions.checkGamePiece(Sequence.GamePiece.CORAL)
-        && SequenceFunctions.checkAction(Sequence.Action.SCORE)) {
-      selectedCommand = testCommand;
-    }
-
-    dPOVUp.whileTrue(selectedCommand);
+    dPOVUp.whileTrue(runSequenceCommand);
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(

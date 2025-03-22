@@ -21,14 +21,17 @@ public class SequenceFunctions {
 
   public static void setAction(Sequence.Action action) {
     actionSelection = action;
+    System.out.println("ACTIONNNNNN: " + actionSelection);
   }
 
   public static void setGamePiece(Sequence.GamePiece gamePiece) {
     gamePieceSelection = gamePiece;
+    System.out.println("PIECEEEEEEE: " + gamePieceSelection);
   }
 
   public static void setLevel(Sequence.Level level) {
     levelSelction = level;
+    System.out.println("LEVELLLLLLLLL: " + levelSelction);
   }
 
   public static void setLevelConstant(Double level) {
