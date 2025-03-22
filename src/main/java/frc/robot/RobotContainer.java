@@ -29,6 +29,10 @@ import frc.robot.State.SequenceConstants;
 import frc.robot.State.SequenceFunctions;
 import frc.robot.commands.DefaultCommand;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.IntakeAglaeReefCommand;
+import frc.robot.commands.IntakeAlgaeGroundCommand;
+import frc.robot.commands.IntakeCoralCommand;
+import frc.robot.commands.ScoreAlgaeBargeCommand;
 import frc.robot.commands.ScoreAlgaeProcessorCommand;
 import frc.robot.commands.ScoreCoralCommand;
 // import frc.robot.commands.IntakeCoral;
@@ -78,10 +82,22 @@ public class RobotContainer {
       new SequenceCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
 
   private final DefaultCommand defaultCommand = new DefaultCommand();
+
   private final ScoreCoralCommand testCommand =
+      new ScoreCoralCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
+
+  private final ScoreCoralCommand ScoreCoralCommand =
       new ScoreCoralCommand(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem, sequenceCommand);
   private final ScoreAlgaeProcessorCommand scoreAlgaeProcessorCommand = 
       new ScoreAlgaeProcessorCommand(slapdownSubsystem, sequenceCommand);
+  private final ScoreAlgaeBargeCommand scoreAlgaeBargeCommand =
+      new ScoreAlgaeBargeCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
+  private final IntakeCoralCommand intakeCoralCommand = 
+      new IntakeCoralCommand(coralManipulatorSubsystem, sequenceCommand);
+  private final IntakeAglaeReefCommand intakeAglaeReefCommand = 
+      new IntakeAglaeReefCommand(elevatorSubsystem, slapdownSubsystem, sequenceCommand);
+  private final IntakeAlgaeGroundCommand intakeAlgaeGroundCommand =
+      new IntakeAlgaeGroundCommand(slapdownSubsystem, sequenceCommand);
 
   private Command selectedCommand = defaultCommand;
   // private final IntakeCoral intakeCoralCommand = new IntakeCoral(coralManipulatorSubsystem,

@@ -25,6 +25,7 @@ public class ScoreCoralCommand extends Command {
       SequenceCommand sequenceCommand) {
     this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
+    this.coralManipulatorSubsystem = coralManipulatorSubsystem;
     this.sequenceCommand = sequenceCommand;
     addRequirements(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
   }

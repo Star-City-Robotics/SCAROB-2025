@@ -19,11 +19,12 @@ public class ScoreAlgaeBargeCommand extends Command {
   private boolean commandFinished = false;
 
   public ScoreAlgaeBargeCommand(
-      SlapdownSubsystem slapdownSubsystem,
+    ElevatorSubsystem elevatorSubsystem, SlapdownSubsystem slapdownSubsystem,
       SequenceCommand sequenceCommand) {
+    this.elevatorSubsystem = elevatorSubsystem;
     this.slapdownSubsystem = slapdownSubsystem;
     this.sequenceCommand = sequenceCommand;
-    addRequirements(slapdownSubsystem);
+    addRequirements(elevatorSubsystem, slapdownSubsystem);
   }
 
   @Override

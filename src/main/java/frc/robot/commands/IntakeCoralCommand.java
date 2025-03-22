@@ -19,14 +19,11 @@ public class IntakeCoralCommand extends Command {
   private boolean commandFinished = false;
 
   public IntakeCoralCommand(
-      ElevatorSubsystem elevatorSubsystem,
-      SlapdownSubsystem slapdownSubsystem,
       CoralManipulatorSubsystem coralManipulatorSubsystem,
       SequenceCommand sequenceCommand) {
-    this.elevatorSubsystem = elevatorSubsystem;
-    this.slapdownSubsystem = slapdownSubsystem;
+    this.coralManipulatorSubsystem = coralManipulatorSubsystem;
     this.sequenceCommand = sequenceCommand;
-    addRequirements(elevatorSubsystem, slapdownSubsystem, coralManipulatorSubsystem);
+    addRequirements(coralManipulatorSubsystem);
   }
 
   @Override
