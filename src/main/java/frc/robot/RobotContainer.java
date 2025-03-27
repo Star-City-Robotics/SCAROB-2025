@@ -335,7 +335,6 @@ public class RobotContainer {
             new WaitUntilCommand(() -> slapdownSubsystem.detectAlgae() == true),
             new InstantCommand(() -> slapdownSubsystem.stopRollers())));
 
-
     // Auto Score Algae to Barge
     dLeftTrigger.onTrue(
         new SequentialCommandGroup(
