@@ -11,6 +11,9 @@ public class ResetTransitions {
     {SequenceState.RESETTING, SequenceInput.RESET_DONE, "resetState", SequenceState.HOME},
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

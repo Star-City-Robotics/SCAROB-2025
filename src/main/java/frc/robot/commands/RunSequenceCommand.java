@@ -30,12 +30,17 @@ public class RunSequenceCommand extends Command {
   //     addRequirements(m_elevatorSubsystem, m_armSubsystem, m_clamperSubsystem,
   // m_intakeSubsystem);
   // }
+
+  /**
+   * @param elevatorSubsystem
+   */
   public RunSequenceCommand(ElevatorSubsystem elevatorSubsystem) {
     m_scoreStateMachine = SequenceManager.getStateMachine(elevatorSubsystem);
     m_elevatorSubsystem = elevatorSubsystem;
     addRequirements(m_elevatorSubsystem);
   }
 
+  /** */
   public void runStateMachine() {
     System.out.println("RunSequenceCommand: running score command state machine");
     m_sequenceStarted = true;
@@ -68,6 +73,7 @@ public class RunSequenceCommand extends Command {
     m_scoreStateMachine.setInput(SequenceInput.BEGIN);
   }
 
+  /** */
   @Override
   public void initialize() {
     m_sequenceStarted = false;
@@ -77,6 +83,7 @@ public class RunSequenceCommand extends Command {
     }
   }
 
+  /** */
   @Override
   public void execute() {
     if (!m_sequenceStarted && m_scoreStateMachine.isReady()) {
@@ -84,6 +91,9 @@ public class RunSequenceCommand extends Command {
     }
   }
 
+  /**
+   * @param interrupted
+   */
   @Override
   public void end(boolean interrupted) {
     if (!m_sequenceDone) {
@@ -94,6 +104,9 @@ public class RunSequenceCommand extends Command {
     }
   }
 
+  /**
+   * @return
+   */
   @Override
   public boolean isFinished() {
     return m_sequenceDone;

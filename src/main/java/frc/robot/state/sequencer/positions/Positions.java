@@ -1,5 +1,6 @@
 package frc.robot.state.sequencer.positions;
 
+/** */
 public class Positions {
   public double raiseElevatorPosition;
   public double raiseElevatorThreshold;

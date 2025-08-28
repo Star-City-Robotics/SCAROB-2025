@@ -30,12 +30,17 @@ import java.util.LinkedList;
 import java.util.List;
 import org.littletonrobotics.junction.Logger;
 
+/** */
 public class Vision extends SubsystemBase {
   private final VisionConsumer consumer;
   private final VisionIO[] io;
   private final VisionIOInputsAutoLogged[] inputs;
   private final Alert[] disconnectedAlerts;
 
+  /**
+   * @param consumer
+   * @param io
+   */
   public Vision(VisionConsumer consumer, VisionIO... io) {
     this.consumer = consumer;
     this.io = io;
@@ -59,11 +64,13 @@ public class Vision extends SubsystemBase {
    * Returns the X angle to the best target, which can be used for simple servoing with vision.
    *
    * @param cameraIndex The index of the camera to use.
+   * @return
    */
   public Rotation2d getTargetX(int cameraIndex) {
     return inputs[cameraIndex].latestTargetObservation.tx();
   }
 
+  /** */
   @Override
   public void periodic() {
     for (int i = 0; i < io.length; i++) {
@@ -178,8 +185,15 @@ public class Vision extends SubsystemBase {
         allRobotPosesRejected.toArray(new Pose3d[allRobotPosesRejected.size()]));
   }
 
+  /** */
   @FunctionalInterface
   public static interface VisionConsumer {
+
+    /**
+     * @param visionRobotPoseMeters
+     * @param timestampSeconds
+     * @param visionMeasurementStdDevs
+     */
     public void accept(
         Pose2d visionRobotPoseMeters,
         double timestampSeconds,

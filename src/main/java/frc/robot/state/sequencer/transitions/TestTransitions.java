@@ -27,6 +27,9 @@ public class TestTransitions {
     {SequenceState.SCORING, SequenceInput.BUTTON_RELEASED, "startReset", SequenceState.FINISHING}
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

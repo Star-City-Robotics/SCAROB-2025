@@ -24,6 +24,7 @@ import frc.robot.state.StateMachineCallback;
 import frc.robot.subsystems.ToggleableSubsystem;
 import org.littletonrobotics.junction.Logger;
 
+/** */
 public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsystem {
 
   // motors for the elevator
@@ -46,11 +47,17 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
 
   private boolean enabled;
 
+  /**
+   * @return
+   */
   @Override
   public boolean isEnabled() {
     return enabled;
   }
 
+  /**
+   * @param enabled
+   */
   public ElevatorSubsystem(boolean enabled) {
     this.enabled = enabled;
     if (!enabled) return;
@@ -61,6 +68,9 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
    * Elevator MOTOR MOVEMENT
    */
 
+  /**
+   * @param position
+   */
   public void moveElevator(double position) {
     if (!enabled) return;
 
@@ -78,11 +88,20 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
         mmReq1.withPosition(desiredPosition).withFeedForward(arbitraryFeedForward));
   }
 
+  /**
+   * @param position
+   * @param callback
+   */
   public void moveElevator(double position, StateMachineCallback callback) {
     stateMachineCallback = callback;
     moveElevator(position);
   }
 
+  /**
+   * @param position
+   * @param callback
+   * @param threshold
+   */
   public void moveElevator(double position, StateMachineCallback callback, double threshold) {
     stateMachineCallback = callback;
     callbackOnThreshold = true;
@@ -91,12 +110,13 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
     moveElevator(position);
   }
 
+  /** */
   public void stopElevator() {
     if (!enabled) return;
     leaderMotor.setControl(brake);
   }
 
-  // Initialize Motors
+  /** Initialize Motors */
   private void initializeElevatorMotors() {
     if (!enabled) return;
 
@@ -160,6 +180,7 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
     followerMotor.setNeutralMode(NeutralModeValue.Brake); // TODO: check if this is needed
   }
 
+  /** */
   public void periodic() {
     if (!enabled) return;
 
@@ -188,11 +209,18 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
     Logger.recordOutput("Elevator/Position", getElevatorPosition());
   }
 
+  /**
+   * @return
+   */
   public double getElevatorPosition() {
     if (!enabled) return 0;
     return leaderMotor.getPosition().getValueAsDouble();
   }
 
+  /**
+   * @param position
+   * @return
+   */
   public boolean isAtPosition(double position) {
     double tolerance = 2;
     return Math.abs(getElevatorPosition() - position) < tolerance;
@@ -239,14 +267,23 @@ public class ElevatorSubsystem extends SubsystemBase implements ToggleableSubsys
               null,
               this));
 
+  /**
+   * @param direction
+   * @return
+   */
   public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
     return m_sysIdRoutine.quasistatic(direction);
   }
 
+  /**
+   * @param direction
+   * @return
+   */
   public Command sysIdDynamic(SysIdRoutine.Direction direction) {
     return m_sysIdRoutine.dynamic(direction);
   }
 
+  /** */
   public final void resetPosition() {
     leaderMotor.setPosition(0);
     followerMotor.setPosition(0);

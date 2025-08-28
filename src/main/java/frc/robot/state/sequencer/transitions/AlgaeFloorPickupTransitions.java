@@ -38,6 +38,9 @@ public class AlgaeFloorPickupTransitions {
     }
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

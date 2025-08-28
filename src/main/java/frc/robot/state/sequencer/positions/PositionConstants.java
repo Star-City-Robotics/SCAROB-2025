@@ -15,6 +15,7 @@ public final class PositionConstants {
 
   public final class CORAL_SCORE {
     // TODO needs real positions, we haven't worked on this yet
+
     public static final class CORAL_L1 {
       public static final double raiseElevatorPosition = 4;
     }

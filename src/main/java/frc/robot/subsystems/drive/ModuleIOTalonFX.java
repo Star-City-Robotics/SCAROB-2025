@@ -94,6 +94,9 @@ public class ModuleIOTalonFX implements ModuleIO {
   private final Debouncer turnConnectedDebounce = new Debouncer(0.5);
   private final Debouncer turnEncoderConnectedDebounce = new Debouncer(0.5);
 
+  /**
+   * @param constants
+   */
   public ModuleIOTalonFX(
       SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
           constants) {
@@ -187,6 +190,9 @@ public class ModuleIOTalonFX implements ModuleIO {
     ParentDevice.optimizeBusUtilizationForAll(driveTalon, turnTalon);
   }
 
+  /**
+   * @param inputs
+   */
   @Override
   public void updateInputs(ModuleIOInputs inputs) {
     // Refresh all signals
@@ -228,6 +234,9 @@ public class ModuleIOTalonFX implements ModuleIO {
     turnPositionQueue.clear();
   }
 
+  /**
+   * @param output
+   */
   @Override
   public void setDriveOpenLoop(double output) {
     driveTalon.setControl(
@@ -237,6 +246,9 @@ public class ModuleIOTalonFX implements ModuleIO {
         });
   }
 
+  /**
+   * @param output
+   */
   @Override
   public void setTurnOpenLoop(double output) {
     turnTalon.setControl(
@@ -246,6 +258,9 @@ public class ModuleIOTalonFX implements ModuleIO {
         });
   }
 
+  /**
+   * @param velocityRadPerSec
+   */
   @Override
   public void setDriveVelocity(double velocityRadPerSec) {
     double velocityRotPerSec = Units.radiansToRotations(velocityRadPerSec);
@@ -256,6 +271,9 @@ public class ModuleIOTalonFX implements ModuleIO {
         });
   }
 
+  /**
+   * @param rotation
+   */
   @Override
   public void setTurnPosition(Rotation2d rotation) {
     turnTalon.setControl(

@@ -31,6 +31,9 @@ public class PositionsFactory {
   //     return positions;
   // }
 
+  /**
+   * @return
+   */
   public static Positions getCoralScoreL1Positions() {
     Positions positions = new Positions();
     positions.raiseElevatorPosition = CORAL_L1.raiseElevatorPosition;
@@ -41,6 +44,9 @@ public class PositionsFactory {
     return positions;
   }
 
+  /**
+   * @return
+   */
   public static Positions getCoralScoreL2Positions() {
     Positions positions = new Positions();
     positions.raiseElevatorPosition = CORAL_L2.raiseElevatorPosition;
@@ -51,6 +57,9 @@ public class PositionsFactory {
     return positions;
   }
 
+  /**
+   * @return
+   */
   public static Positions getCoralScoreL3Positions() {
     Positions positions = new Positions();
     positions.raiseElevatorPosition = CORAL_L3.raiseElevatorPosition;
@@ -61,6 +70,9 @@ public class PositionsFactory {
     return positions;
   }
 
+  /**
+   * @return
+   */
   public static Positions getCoralScoreL4Positions() {
     Positions positions = new Positions();
     positions.raiseElevatorPosition = CORAL_L4.raiseElevatorPosition;

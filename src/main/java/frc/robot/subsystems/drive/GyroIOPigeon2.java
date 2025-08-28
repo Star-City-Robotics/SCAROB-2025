@@ -36,6 +36,7 @@ public class GyroIOPigeon2 implements GyroIO {
   private final Queue<Double> yawTimestampQueue;
   private final StatusSignal<AngularVelocity> yawVelocity = pigeon.getAngularVelocityZWorld();
 
+  /** */
   public GyroIOPigeon2() {
     pigeon.getConfigurator().apply(new Pigeon2Configuration());
     pigeon.getConfigurator().setYaw(0.0);
@@ -46,6 +47,9 @@ public class GyroIOPigeon2 implements GyroIO {
     yawPositionQueue = PhoenixOdometryThread.getInstance().registerSignal(pigeon.getYaw());
   }
 
+  /**
+   * @param inputs
+   */
   @Override
   public void updateInputs(GyroIOInputs inputs) {
     inputs.connected = BaseStatusSignal.refreshAll(yaw, yawVelocity).equals(StatusCode.OK);
@@ -62,6 +66,7 @@ public class GyroIOPigeon2 implements GyroIO {
     yawPositionQueue.clear();
   }
 
+  /** */
   @Override
   public void reset() {
     pigeon.setYaw(0);

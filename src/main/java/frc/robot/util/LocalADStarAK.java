@@ -18,6 +18,7 @@ import org.littletonrobotics.junction.inputs.LoggableInputs;
 // NOTE: This file is available at
 // https://gist.github.com/mjansen4857/a8024b55eb427184dbd10ae8923bd57d
 
+/** */
 public class LocalADStarAK implements Pathfinder {
   private final ADStarIO io = new ADStarIO();
 
@@ -121,6 +122,9 @@ public class LocalADStarAK implements Pathfinder {
       table.put("CurrentPathPoints", pointsLogged);
     }
 
+    /**
+     * @param table
+     */
     @Override
     public void fromLog(LogTable table) {
       isNewPathAvailable = table.get("IsNewPathAvailable", false);
@@ -136,10 +140,15 @@ public class LocalADStarAK implements Pathfinder {
       currentPathPoints = pathPoints;
     }
 
+    /** */
     public void updateIsNewPathAvailable() {
       isNewPathAvailable = adStar.isNewPathAvailable();
     }
 
+    /**
+     * @param constraints
+     * @param goalEndState
+     */
     public void updateCurrentPathPoints(PathConstraints constraints, GoalEndState goalEndState) {
       PathPlannerPath currentPath = adStar.getCurrentPath(constraints, goalEndState);
 

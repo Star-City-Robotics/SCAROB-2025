@@ -52,6 +52,9 @@ public class VisionIOPhotonVisionSim extends VisionIOPhotonVision {
     visionSim.addCamera(cameraSim, robotToCamera);
   }
 
+  /**
+   * @param inputs
+   */
   @Override
   public void updateInputs(VisionIOInputs inputs) {
     visionSim.update(poseSupplier.get());

@@ -40,6 +40,7 @@ public class Robot extends LoggedRobot {
   private RobotContainer robotContainer;
   private LaserCan lc;
 
+  /** */
   public Robot() {
     // Record metadata
     Logger.recordMetadata("ProjectName", BuildConstants.MAVEN_NAME);

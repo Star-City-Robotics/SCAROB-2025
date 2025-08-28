@@ -20,6 +20,9 @@ public class CoralFeederPickupTransitions {
     {SequenceState.STOPPING_INTAKE, SequenceInput.STOPPED_INTAKE, "resetState", SequenceState.HOME}
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

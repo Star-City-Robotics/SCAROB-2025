@@ -26,6 +26,9 @@ public class AlgaeHandoffTransitions {
     }
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

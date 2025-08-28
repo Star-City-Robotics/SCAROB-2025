@@ -32,6 +32,10 @@ public class SequenceStateMachine extends StateMachine {
   // this.handIntakeSubsystem = handIntakeSubsystem;
   // setCurrentState(SequenceState.HOME);
   // }
+
+  /**
+   * @param elevatorSubsystem
+   */
   public SequenceStateMachine(ElevatorSubsystem elevatorSubsystem) { // add hand here
     this.elevatorSubsystem = elevatorSubsystem;
     setCurrentState(SequenceState.HOME);
@@ -41,10 +45,16 @@ public class SequenceStateMachine extends StateMachine {
    * COMMAND INTERFACE
    */
 
+  /**
+   * @return
+   */
   public boolean isReady() {
     return currentState == SequenceState.HOME;
   }
 
+  /**
+   * @param sequence
+   */
   public void setSequence(Sequence sequence) {
     currentSequence = sequence;
     currentAction = SequenceManager.getActionSelection();
@@ -63,6 +73,9 @@ public class SequenceStateMachine extends StateMachine {
    * SUBSYSTEM INTERFACE
    */
 
+  /**
+   * @param input
+   */
   protected void handleSubsystemCallback(Input input) {
     if (isResetting) {
       SequenceInput sequenceInput = (SequenceInput) input;
@@ -77,6 +90,9 @@ public class SequenceStateMachine extends StateMachine {
     }
   }
 
+  /**
+   * @return
+   */
   public StateMachineCallback getSubsystemCallback() {
     return subsystemCallback;
   }
@@ -85,26 +101,42 @@ public class SequenceStateMachine extends StateMachine {
    * STATE OPERATION METHODS
    */
 
+  /**
+   * @return
+   */
   public boolean raiseElevator() {
     elevatorSubsystem.moveElevator(
         positions.raiseElevatorPosition, subsystemCallback, positions.raiseElevatorThreshold);
     return true;
   }
+
   // Add intakecode
+
+  /**
+   * @return
+   */
   public boolean outTaking() {
     return true;
   }
 
+  /**
+   * @return
+   */
   public boolean raiseElevatorNoThreshold() {
     elevatorSubsystem.moveElevator(positions.raiseElevatorPosition, subsystemCallback);
     return true;
   }
 
+  /**
+   * @return
+   */
   public boolean elevatorSecondStage() {
     elevatorSubsystem.moveElevator(positions.secondStageElevatorPosition, subsystemCallback);
     return true;
   }
-
+  /**
+   * @return
+   */
   public boolean moveElevatorHome() {
     isResetting = true;
     elevatorSubsystem.moveElevator(
@@ -178,6 +210,10 @@ public class SequenceStateMachine extends StateMachine {
   // }
 
   // Drive the elevator to a new position when the operator overrides it midstream
+
+  /**
+   * @return
+   */
   public boolean updateElevator() {
     // Find the new elevator position by using the new level with the current action and game piece
     // Sequence updatedLevelSequence = SequenceFactory.getSequence(updatedLevel, currentGamePiece,
@@ -199,6 +235,9 @@ public class SequenceStateMachine extends StateMachine {
   //     return true;
   // }
 
+  /**
+   * @return
+   */
   public boolean startReset() {
     isResetting = true;
     // stop current movements
@@ -215,6 +254,9 @@ public class SequenceStateMachine extends StateMachine {
   //     return true;
   // }
 
+  /**
+   * @return
+   */
   public boolean resetState() {
     currentSequence = null;
     currentAction = null;

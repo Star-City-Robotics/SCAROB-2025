@@ -48,7 +48,11 @@ public class DriveCommands {
   private static final double WHEEL_RADIUS_RAMP_RATE = 0.05; // Rad/Sec^2
 
   private DriveCommands() {}
-
+  /**
+   * @param x
+   * @param y
+   * @return
+   */
   private static Translation2d getLinearVelocityFromJoysticks(double x, double y) {
     // Apply deadband
     double linearMagnitude = MathUtil.applyDeadband(Math.hypot(x, y), DEADBAND);
@@ -65,6 +69,11 @@ public class DriveCommands {
 
   /**
    * Field relative drive command using two joysticks (controlling linear and angular velocities).
+   *
+   * @param drive
+   * @param xSupplier p * @param ySupplier
+   * @param omegaSupplier
+   * @return
    */
   public static Command joystickDrive(
       Drive drive,
@@ -113,6 +122,12 @@ public class DriveCommands {
    * Field relative drive command using joystick for linear control and PID for angular control.
    * Possible use cases include snapping to an angle, aiming at a vision target, or controlling
    * absolute rotation with a joystick.
+   *
+   * @param drive
+   * @param xSupplier
+   * @param ySupplier
+   * @param rotationSupplier
+   * @return
    */
   public static Command joystickDriveAtAngle(
       Drive drive,
@@ -167,6 +182,9 @@ public class DriveCommands {
    * Measures the velocity feedforward constants for the drive motors.
    *
    * <p>This command should only be used in voltage control mode.
+   *
+   * @param drive
+   * @return
    */
   public static Command feedforwardCharacterization(Drive drive) {
     List<Double> velocitySamples = new LinkedList<>();
@@ -226,7 +244,12 @@ public class DriveCommands {
                 }));
   }
 
-  /** Measures the robot's wheel radius by spinning in a circle. */
+  /**
+   * Measures the robot's wheel radius by spinning in a circle.
+   *
+   * @param drive
+   * @return
+   */
   public static Command wheelRadiusCharacterization(Drive drive) {
     SlewRateLimiter limiter = new SlewRateLimiter(WHEEL_RADIUS_RAMP_RATE);
     WheelRadiusCharacterizationState state = new WheelRadiusCharacterizationState();

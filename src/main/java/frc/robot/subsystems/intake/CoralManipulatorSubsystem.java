@@ -8,6 +8,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+/** */
 public class CoralManipulatorSubsystem extends SubsystemBase {
 
   private final SparkFlex coralManipulator1 =
@@ -20,8 +21,10 @@ public class CoralManipulatorSubsystem extends SubsystemBase {
       coralManipulator2.getClosedLoopController();
   private final LaserCan coralSensor = new LaserCan(Constants.CoralManipulator.CORAL_SENSOR_ID);
 
+  /** */
   public CoralManipulatorSubsystem() {}
 
+  /** */
   public void intakeAfterDetection() {
     coralManipulator1_controller.setReference(
         coralManipulator1.getEncoder().getPosition() + 100, ControlType.kPosition);
@@ -29,16 +32,21 @@ public class CoralManipulatorSubsystem extends SubsystemBase {
         coralManipulator2.getEncoder().getPosition() + 100, ControlType.kPosition);
   }
 
+  /** */
   public void intake() {
     coralManipulator1.set(-0.25);
     coralManipulator2.set(0.25);
   }
 
+  /** */
   public void stopMotors() {
     coralManipulator1.stopMotor();
     coralManipulator2.stopMotor();
   }
 
+  /**
+   * @return
+   */
   public boolean coralDetected() {
     LaserCan.Measurement measurement = coralSensor.getMeasurement();
     if (measurement.distance_mm <= 20) {
@@ -47,11 +55,16 @@ public class CoralManipulatorSubsystem extends SubsystemBase {
     return false;
   }
 
+  /** */
   public void resetEncoders() {
     coralManipulator1.getEncoder().setPosition(0);
     coralManipulator2.getEncoder().setPosition(0);
   }
 
+  /**
+   * @param positionInput
+   * @return
+   */
   public boolean reachedPosition(double positionInput) {
     return coralManipulator2.getEncoder().getPosition() >= positionInput;
   }

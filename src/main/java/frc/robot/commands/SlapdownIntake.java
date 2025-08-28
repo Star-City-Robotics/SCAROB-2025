@@ -10,6 +10,10 @@ public class SlapdownIntake extends Command {
 
   private boolean hasAlgae = false;
 
+  /**
+   * @param slapdown
+   * @param sensor
+   */
   public SlapdownIntake(SlapdownSubsystem slapdown, SensorSubsytem sensor) {
     this.slapdown = slapdown;
     this.sensor = sensor;
@@ -17,11 +21,13 @@ public class SlapdownIntake extends Command {
     addRequirements(sensor);
   }
 
+  /** */
   @Override
   public void initialize() {
     // slapdown.angleDown();
   }
 
+  /** */
   @Override
   public void execute() {
 
@@ -37,6 +43,9 @@ public class SlapdownIntake extends Command {
     //   }
   }
 
+  /**
+   * @return
+   */
   @Override
   public boolean isFinished() {
     if (hasAlgae == true && slapdown.reachedAngle(0)) {
@@ -45,6 +54,9 @@ public class SlapdownIntake extends Command {
     return false;
   }
 
+  /**
+   * @param interrupted
+   */
   @Override
   public void end(boolean interrupted) {
     // slapdown.stopAngle();

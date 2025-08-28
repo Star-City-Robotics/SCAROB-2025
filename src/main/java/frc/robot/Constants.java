@@ -24,6 +24,7 @@ public final class Constants {
   public static final Mode simMode = Mode.SIM;
   public static final Mode currentMode = RobotBase.isReal() ? Mode.REAL : simMode;
 
+  /** */
   public static enum Mode {
     /** Running on a real robot. */
     REAL,
@@ -35,6 +36,7 @@ public final class Constants {
     REPLAY
   }
 
+  /** */
   public class CoralManipulator {
     public static final int CORAL_MANIPULATOR_1_ID = 41;
     public static final int CORAL_MANIPULATOR_2_ID = 42;
@@ -42,6 +44,7 @@ public final class Constants {
     public static final int CORAL_SENSOR_ID = 43;
   }
 
+  /** */
   public class Slapdown {
     public static final int SLAPDOWN_ANGLE_ID = 51;
     public static final int SLAPDOWN_ROLLER_1_ID = 52;
@@ -50,11 +53,13 @@ public final class Constants {
     public static final int SLAPDOWN_SENSOR_ID = 54;
   }
 
+  /** */
   public class Intake {
     public static final int INTAKE_ID = 61;
     public static final int INTAKE_SENSOR_ID = 62;
   }
 
+  /** */
   public class ScorePositions {
     public static final int ElevatorL4 = 31;
     public static final int ElevatorL3 = 18;

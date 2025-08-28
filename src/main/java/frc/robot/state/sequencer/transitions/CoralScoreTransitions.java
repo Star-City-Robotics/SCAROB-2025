@@ -78,6 +78,9 @@ public class CoralScoreTransitions {
     }
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

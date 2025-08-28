@@ -2,16 +2,23 @@ package frc.robot.state.sequencer;
 
 import frc.robot.subsystems.Elevator.*;
 
+/** */
 public class SequenceManager {
   private static SequenceStateMachine stateMachine;
   private static Level levelSelection = Level.L2; // L2 is default
   private static Action actionSelection;
   private static GamePiece pieceSelection = GamePiece.CORAL; // coral is default
 
+  /**
+   * @return
+   */
   public static Level getLevelSelection() {
     return levelSelection;
   }
 
+  /**
+   * @param level
+   */
   public static void setLevelSelection(Level level) {
     levelSelection = level;
 
@@ -22,22 +29,37 @@ public class SequenceManager {
     }
   }
 
+  /**
+   * @return
+   */
   public static GamePiece getGamePieceSelection() {
     return pieceSelection;
   }
 
+  /**
+   * @param piece
+   */
   public static void setGamePieceSelection(GamePiece piece) {
     pieceSelection = piece;
   }
 
+  /**
+   * @return
+   */
   public static boolean shouldDetectGamePiece() {
     return pieceSelection == GamePiece.CORAL;
   }
 
+  /**
+   * @return
+   */
   public static Action getActionSelection() {
     return actionSelection;
   }
 
+  /**
+   * @param action
+   */
   public static void setActionSelection(Action action) {
     actionSelection = action;
   }
@@ -50,6 +72,11 @@ public class SequenceManager {
   // }
   // return stateMachine;
   // }
+
+  /**
+   * @param elevatorSubsystem
+   * @return
+   */
   public static SequenceStateMachine getStateMachine(ElevatorSubsystem elevatorSubsystem) {
     if (stateMachine == null) {
       stateMachine = new SequenceStateMachine(elevatorSubsystem);
@@ -57,6 +84,9 @@ public class SequenceManager {
     return stateMachine;
   }
 
+  /**
+   * @return
+   */
   public static Sequence getSequence() {
     // return SequenceFactory.getSequence(levelSelection, pieceSelection, actionSelection);
     return SequenceFactory.getSequence(levelSelection);

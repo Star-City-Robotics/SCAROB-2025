@@ -25,11 +25,15 @@ public class GyroIONavX implements GyroIO {
   private final Queue<Double> yawPositionQueue;
   private final Queue<Double> yawTimestampQueue;
 
+  /** */
   public GyroIONavX() {
     yawTimestampQueue = PhoenixOdometryThread.getInstance().makeTimestampQueue();
     yawPositionQueue = PhoenixOdometryThread.getInstance().registerSignal(navX::getYaw);
   }
 
+  /**
+   * @param inputs
+   */
   @Override
   public void updateInputs(GyroIOInputs inputs) {
     inputs.connected = navX.isConnected();
@@ -46,6 +50,7 @@ public class GyroIONavX implements GyroIO {
     yawPositionQueue.clear();
   }
 
+  /** */
   @Override
   public void reset() {
     navX.reset();

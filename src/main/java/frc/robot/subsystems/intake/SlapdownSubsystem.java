@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import org.littletonrobotics.junction.Logger;
 
+/** */
 public class SlapdownSubsystem extends SubsystemBase {
 
   private final SparkFlex slapdownAngleMotor =
@@ -28,10 +29,12 @@ public class SlapdownSubsystem extends SubsystemBase {
   private final RelativeEncoder slapdown_encoder;
   // private final double RotationOffset;
 
+  /** */
   public SlapdownSubsystem() {
 
     SparkFlexConfig sparkFlexConfigAngle = new SparkFlexConfig();
 
+    sparkFlexConfigAngle.inverted(false);
     sparkFlexConfigAngle.closedLoop.p(0.05);
     sparkFlexConfigAngle.closedLoop.i(0);
     sparkFlexConfigAngle.closedLoop.d(0);
@@ -44,32 +47,44 @@ public class SlapdownSubsystem extends SubsystemBase {
 
     slapdown_encoder = slapdownAngleMotor.getEncoder();
 
-    slapdownAngleMotor.setInverted(false);
+    // REVLib: deprecated
+    // slapdownAngleMotor.setInverted(false);
+
+    // NOTE: SparkBaseConfig#invert "has no effect if the controller is a follower.
+    // To invert a follower, see the follow() method."
   }
 
+  /** */
   public void periodic() {
     Logger.recordOutput("Slapdown/Position", slapdownAngleMotor.getEncoder().getPosition());
     SmartDashboard.putNumber("Slapdown_position", slapdownAngleMotor.getEncoder().getPosition());
   }
 
+  /** */
   public void outtakeRollers() {
     slapdownRoller1Motor.set(-0.5);
     slapdownRoller2Motor.set(0.5);
   }
 
+  /** */
   public void intakeRollers() {
     slapdownRoller1Motor.set(0.5);
     slapdownRoller2Motor.set(-0.5);
   }
 
+  /** */
   public void stopRollers() {
     slapdownRoller1Motor.stopMotor();
     slapdownRoller2Motor.stopMotor();
   }
 
+  /**
+   * @param rotation
+   */
   public void angleIntake(double rotation) {
     slapdown_controller.setReference(rotation, ControlType.kPosition);
   }
+
   // public void angleDown() {
   //   slapdownAngleMotor.set(0.1);
   // }
@@ -82,6 +97,9 @@ public class SlapdownSubsystem extends SubsystemBase {
   //   slapdownAngleMotor.stopMotor();
   // }
 
+  /**
+   * @return
+   */
   public boolean detectAlgae() {
     LaserCan.Measurement measurement = slapdownSensor.getMeasurement();
     if (measurement.distance_mm <= 10) {
@@ -90,6 +108,10 @@ public class SlapdownSubsystem extends SubsystemBase {
     return false;
   }
 
+  /**
+   * @param rotations
+   * @return
+   */
   public boolean reachedAngle(int rotations) {
     if (slapdownAngleMotor.getEncoder().getPosition() == rotations) {
       return true;

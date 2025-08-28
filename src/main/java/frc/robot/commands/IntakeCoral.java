@@ -10,6 +10,10 @@ public class IntakeCoral extends Command {
 
   private boolean hasCoral = false;
 
+  /**
+   * @param coralManipulator
+   * @param sensor
+   */
   public IntakeCoral(CoralManipulatorSubsystem coralManipulator, SensorSubsytem sensor) {
     this.coralManipulator = coralManipulator;
     this.sensor = sensor;
@@ -17,11 +21,13 @@ public class IntakeCoral extends Command {
     addRequirements(sensor);
   }
 
+  /** */
   @Override
   public void initialize() {
     coralManipulator.intake();
   }
 
+  /** */
   @Override
   public void execute() {
     if (coralManipulator.coralDetected() == true || sensor.commandStop == true) {
@@ -30,6 +36,7 @@ public class IntakeCoral extends Command {
     }
   }
 
+  /** */
   @Override
   public boolean isFinished() {
     if (hasCoral == true) {
@@ -40,6 +47,7 @@ public class IntakeCoral extends Command {
     }
   }
 
+  /** */
   @Override
   public void end(boolean interupted) {
     coralManipulator.stopMotors();

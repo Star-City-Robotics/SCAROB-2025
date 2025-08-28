@@ -1,5 +1,6 @@
 package frc.robot.state.sequencer;
 
+/** */
 public enum Sequence {
   RESET,
 

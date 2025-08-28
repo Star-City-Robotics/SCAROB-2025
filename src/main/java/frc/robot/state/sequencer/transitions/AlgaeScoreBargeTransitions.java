@@ -49,6 +49,9 @@ public class AlgaeScoreBargeTransitions {
     }
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

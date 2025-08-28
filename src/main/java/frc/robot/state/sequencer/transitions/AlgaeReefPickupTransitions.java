@@ -70,6 +70,9 @@ public class AlgaeReefPickupTransitions {
   };
    */
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

@@ -101,6 +101,7 @@ public class RobotContainer {
   private final Trigger opPOVUp = xboxOperatorController.povUp();
   private final Trigger opPOVLeft = xboxOperatorController.povLeft();
   private final Trigger opPOVRight = xboxOperatorController.povRight();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     switch (Constants.currentMode) {
@@ -204,6 +205,7 @@ public class RobotContainer {
             new WaitCommand(0.075),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
   }
+
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -434,6 +436,7 @@ public class RobotContainer {
     // dB.whileTrue(elevatorSubsystem.sysIdDynamic(SysIdRoutine.Direction.kForward));
     // dX.whileTrue(elevatorSubsystem.sysIdDynamic(SysIdRoutine.Direction.kReverse));
   }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

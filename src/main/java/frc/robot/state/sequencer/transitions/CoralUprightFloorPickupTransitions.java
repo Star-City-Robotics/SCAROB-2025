@@ -38,6 +38,9 @@ public class CoralUprightFloorPickupTransitions {
     }
   };
 
+  /**
+   * @return
+   */
   public static Object[][] getTransitionTable() {
     return transitionTable;
   }

@@ -29,12 +29,17 @@ public class ResetSequenceCommand extends Command {
   //     addRequirements(m_elevatorSubsystem, m_armSubsystem, m_clamperSubsystem,
   // m_intakeSubsystem);
   // }
+
+  /**
+   * @param elevatorSubsystem
+   */
   public ResetSequenceCommand(ElevatorSubsystem elevatorSubsystem) {
     m_scoreStateMachine = SequenceManager.getStateMachine(elevatorSubsystem);
     m_elevatorSubsystem = elevatorSubsystem;
     addRequirements(m_elevatorSubsystem);
   }
 
+  /** */
   @Override
   public void initialize() {
     m_sequenceDone = false;
@@ -44,6 +49,7 @@ public class ResetSequenceCommand extends Command {
     m_scoreStateMachine.setInput(SequenceInput.BEGIN);
   }
 
+  /** */
   @Override
   public void end(boolean interrupted) {
     if (!m_sequenceDone) {
@@ -53,6 +59,7 @@ public class ResetSequenceCommand extends Command {
     }
   }
 
+  /** */
   @Override
   public boolean isFinished() {
     return m_sequenceDone;

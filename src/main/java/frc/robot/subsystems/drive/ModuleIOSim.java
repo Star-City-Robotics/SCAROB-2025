@@ -53,6 +53,9 @@ public class ModuleIOSim implements ModuleIO {
   private double driveAppliedVolts = 0.0;
   private double turnAppliedVolts = 0.0;
 
+  /**
+   * @param constants
+   */
   public ModuleIOSim(
       SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
           constants) {
@@ -72,6 +75,9 @@ public class ModuleIOSim implements ModuleIO {
     turnController.enableContinuousInput(-Math.PI, Math.PI);
   }
 
+  /**
+   * @param inputs
+   */
   @Override
   public void updateInputs(ModuleIOInputs inputs) {
     // Run closed-loop control
@@ -115,18 +121,27 @@ public class ModuleIOSim implements ModuleIO {
     inputs.odometryTurnPositions = new Rotation2d[] {inputs.turnPosition};
   }
 
+  /**
+   * @param output
+   */
   @Override
   public void setDriveOpenLoop(double output) {
     driveClosedLoop = false;
     driveAppliedVolts = output;
   }
 
+  /**
+   * @param output
+   */
   @Override
   public void setTurnOpenLoop(double output) {
     turnClosedLoop = false;
     turnAppliedVolts = output;
   }
 
+  /**
+   * @param velocityRadPerSec
+   */
   @Override
   public void setDriveVelocity(double velocityRadPerSec) {
     driveClosedLoop = true;
@@ -134,6 +149,9 @@ public class ModuleIOSim implements ModuleIO {
     driveController.setSetpoint(velocityRadPerSec);
   }
 
+  /**
+   * @param rotation
+   */
   @Override
   public void setTurnPosition(Rotation2d rotation) {
     turnClosedLoop = true;

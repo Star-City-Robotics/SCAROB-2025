@@ -57,6 +57,9 @@ public class VisionIOLimelight implements VisionIO {
         table.getDoubleArrayTopic("botpose_orb_wpiblue").subscribe(new double[] {});
   }
 
+  /**
+   * @param inputs
+   */
   @Override
   public void updateInputs(VisionIOInputs inputs) {
     // Update connection status based on whether an update has been seen in the last 250ms
@@ -142,7 +145,12 @@ public class VisionIOLimelight implements VisionIO {
     }
   }
 
-  /** Parses the 3D pose from a Limelight botpose array. */
+  /**
+   * Parses the 3D pose from a Limelight bopose array.
+   *
+   * @param rawLLArray
+   * @return
+   */
   private static Pose3d parsePose(double[] rawLLArray) {
     return new Pose3d(
         rawLLArray[0],

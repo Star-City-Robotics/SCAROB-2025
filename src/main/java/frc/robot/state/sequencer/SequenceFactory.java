@@ -13,6 +13,11 @@ import frc.robot.state.sequencer.transitions.TestTransitions;
 public class SequenceFactory {
   // public static Sequence getSequence(Level levelSelection, GamePiece pieceSelection, Action
   // actionSelection) {
+
+  /**
+   * @param levelSelection
+   * @return
+   */
   public static Sequence getSequence(Level levelSelection) {
     /*
      * CORAL SEQUENCES
@@ -53,6 +58,10 @@ public class SequenceFactory {
     return null;
   }
 
+  /**
+   * @param sequence
+   * @return
+   */
   public static Object[][] getTransitionTable(Sequence sequence) {
     switch (sequence) {
       case RESET:
@@ -91,6 +100,10 @@ public class SequenceFactory {
     }
   }
 
+  /**
+   * @param sequence
+   * @return
+   */
   public static Positions getPositions(Sequence sequence) {
     switch (sequence) {
       case RESET:

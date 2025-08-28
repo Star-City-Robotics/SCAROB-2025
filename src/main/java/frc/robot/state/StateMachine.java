@@ -4,6 +4,7 @@ import frc.robot.commands.CommandCallback;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+/** */
 public abstract class StateMachine {
   private Object stateTransitionTable[][];
   private HashMap<String, Method> methods;
@@ -19,10 +20,15 @@ public abstract class StateMachine {
    */
 
   // gives the state machine a handle to notify the command
+
+  /**
+   * @param callback
+   */
   public void setCallback(CommandCallback callback) {
     commandCallback = callback;
   }
 
+  /** */
   protected void processComplete() {
     if (commandCallback != null) {
       commandCallback.processComplete();
@@ -45,18 +51,30 @@ public abstract class StateMachine {
    * INPUT AND STATE TRANSITION HANDLING METHODS
    */
 
+  /**
+   * @param input
+   */
   public void setInput(Input input) {
     run(input);
   }
 
+  /**
+   * @return
+   */
   public State getCurrentState() {
     return currentState;
   }
 
+  /**
+   * @param state
+   */
   protected void setCurrentState(State state) {
     currentState = state;
   }
 
+  /**
+   * @param table
+   */
   protected void setStateTransitionTable(Object[][] table) {
     stateTransitionTable = table;
     methods = new HashMap<String, Method>();
@@ -84,6 +102,9 @@ public abstract class StateMachine {
     }
   }
 
+  /**
+   * @param input
+   */
   private void run(Input input) {
     Object[] operationAndNextState = lookupOperationAndNextState(currentState, input);
     if (operationAndNextState == null) {
