@@ -60,6 +60,13 @@ public final class Constants {
     public static final int ElevatorL2Intake = 9;
   }
 
+  public class CoralManipulator {
+    public static final int CORAL_MANIPULATOR_1_ID = 41;
+    public static final int CORAL_MANIPULATOR_2_ID = 42;
+
+    public static final int CORAL_SENSOR_ID = 43;
+  }
+
   public static enum Mode {
     /** Running on a real robot. */
     REAL,

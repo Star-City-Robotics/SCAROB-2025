@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
@@ -23,6 +25,7 @@ import frc.robot.Constants.Elevator;
 import frc.robot.Constants.Slapdown;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.CoralManipulatorSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.SlapdownSubsystem;
 import frc.robot.subsystems.drive.Drive;
@@ -49,8 +52,8 @@ public class RobotContainer {
   private final LoggedDashboardChooser<Command> autoChooser;
 
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
-
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
+  private final CoralManipulatorSubsystem coralManipulatorSubsystem = new CoralManipulatorSubsystem();
 
   /* Driver Buttons */
   private final Trigger dStart = xboxDriverController.start();
@@ -155,9 +158,28 @@ public class RobotContainer {
     dA.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))));
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))
+        )
+    );
 
     dB.onTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome)));
+
+    dY.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected()),
+            new WaitUntilCommand(() -> !coralManipulatorSubsystem.coralDetected()),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())
+        )
+    );
+
+    dX.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitCommand(1),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())
+        )
+    );
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
