@@ -14,10 +14,19 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.Constants.Elevator;
+import frc.robot.Constants.Slapdown;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.SlapdownSubsystem;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
@@ -36,11 +45,46 @@ public class RobotContainer {
   // Subsystems
   private final Drive drive;
 
-  // Controller
-  private final CommandXboxController controller = new CommandXboxController(0);
-
+  private final CommandXboxController xboxDriverController = new CommandXboxController(0);
+  private final CommandXboxController xboxOperatorController = new CommandXboxController(1);
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
+
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
+
+  private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
+
+  /* Driver Buttons */
+  private final Trigger dStart = xboxDriverController.start();
+  private final Trigger dBack = xboxDriverController.back();
+  private final Trigger dY = xboxDriverController.y();
+  private final Trigger dB = xboxDriverController.b();
+  private final Trigger dA = xboxDriverController.a();
+  private final Trigger dX = xboxDriverController.x();
+  private final Trigger dLeftBumper = xboxDriverController.leftBumper();
+  private final Trigger dRightBumper = xboxDriverController.rightBumper();
+  private final Trigger dLeftTrigger = xboxDriverController.leftTrigger();
+  private final Trigger dRightTrigger = xboxDriverController.rightTrigger();
+  private final Trigger dPOVDown = xboxDriverController.povDown();
+  private final Trigger dPOVUp = xboxDriverController.povUp();
+  private final Trigger dPOVLeft = xboxDriverController.povLeft();
+  private final Trigger dPOVRight = xboxDriverController.povRight();
+
+  /* Operator Buttons */
+  private final Trigger opStart = xboxOperatorController.start();
+  private final Trigger opBack = xboxOperatorController.back();
+  private final Trigger opY = xboxOperatorController.y();
+  private final Trigger opB = xboxOperatorController.b();
+  private final Trigger opA = xboxOperatorController.a();
+  private final Trigger opX = xboxOperatorController.x();
+  private final Trigger opLeftBumper = xboxOperatorController.leftBumper();
+  private final Trigger opRightBumper = xboxOperatorController.rightBumper();
+  private final Trigger opLeftTrigger = xboxOperatorController.leftTrigger();
+  private final Trigger opRightTrigger = xboxOperatorController.rightTrigger();
+  private final Trigger opPOVDown = xboxOperatorController.povDown();
+  private final Trigger opPOVUp = xboxOperatorController.povUp();
+  private final Trigger opPOVLeft = xboxOperatorController.povLeft();
+  private final Trigger opPOVRight = xboxOperatorController.povRight();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -109,29 +153,44 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    dA.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(
+                () -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Elevator.ElevatorL2)))
+    );
+    
+    dB.onTrue(
+        new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))
+    );
+
+
+
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
             drive,
-            () -> -controller.getLeftY(),
-            () -> -controller.getLeftX(),
-            () -> -controller.getRightX()));
+            () -> -xboxDriverController.getLeftY(),
+            () -> -xboxDriverController.getLeftX(),
+            () -> -xboxDriverController.getRightX()));
 
     // Lock to 0° when A button is held
-    controller
+    xboxDriverController
         .a()
         .whileTrue(
             DriveCommands.joystickDriveAtAngle(
                 drive,
-                () -> -controller.getLeftY(),
-                () -> -controller.getLeftX(),
+                () -> -xboxDriverController.getLeftY(),
+                () -> -xboxDriverController.getLeftX(),
                 () -> new Rotation2d()));
 
     // Switch to X pattern when X button is pressed
-    controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
+    xboxDriverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
     // Reset gyro to 0° when B button is pressed
-    controller
+    xboxDriverController
         .b()
         .onTrue(
             Commands.runOnce(
