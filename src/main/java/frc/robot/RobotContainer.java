@@ -16,8 +16,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
@@ -156,17 +154,10 @@ public class RobotContainer {
 
     dA.onTrue(
         new SequentialCommandGroup(
-            new InstantCommand(
-                () -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Elevator.ElevatorL2)))
-    );
-    
-    dB.onTrue(
-        new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))
-    );
+            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))));
 
-
+    dB.onTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome)));
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
@@ -178,7 +169,7 @@ public class RobotContainer {
 
     // Lock to 0° when A button is held
     xboxDriverController
-        .a()
+        .povDown()
         .whileTrue(
             DriveCommands.joystickDriveAtAngle(
                 drive,
@@ -191,7 +182,7 @@ public class RobotContainer {
 
     // Reset gyro to 0° when B button is pressed
     xboxDriverController
-        .b()
+        .povLeft()
         .onTrue(
             Commands.runOnce(
                     () ->

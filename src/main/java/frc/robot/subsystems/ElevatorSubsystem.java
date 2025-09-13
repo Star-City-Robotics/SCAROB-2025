@@ -19,11 +19,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-//import frc.robot.state.Score.ScoreInput;
+// import frc.robot.state.Score.ScoreInput;
 import frc.robot.Constants.Elevator;
-//import frc.robot.state.StateMachineCallback;
-//import frc.robot.subsystems.ToggleableSubsystem;
-import org.littletonrobotics.junction.Logger;
+// import frc.robot.state.StateMachineCallback;
+// import frc.robot.subsystems.ToggleableSubsystem;
 
 public class ElevatorSubsystem extends SubsystemBase {
 
@@ -62,8 +61,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     // do not go outside boundary thresholds
     if (position * Elevator.gearRatioModifier > Elevator.maxElevatorPosition) {
       desiredPosition = Elevator.maxElevatorPosition;
-    } else if (position * Elevator.gearRatioModifier
-        < Elevator.minElevatorPosition) {
+    } else if (position * Elevator.gearRatioModifier < Elevator.minElevatorPosition) {
       desiredPosition = Elevator.minElevatorPosition;
     } else {
       desiredPosition = position * Elevator.gearRatioModifier;
@@ -72,7 +70,6 @@ public class ElevatorSubsystem extends SubsystemBase {
     leaderMotor.setControl(
         mmReq1.withPosition(desiredPosition).withFeedForward(arbitraryFeedForward));
   }
-
 
   public void moveElevator(double position, double threshold) {
     callbackOnThreshold = true;
@@ -101,7 +98,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     /* Configure current limits */
     MotionMagicConfigs mm = cfg.MotionMagic;
     mm.MotionMagicCruiseVelocity = 100; // 5 rotations per second cruise
-    mm.MotionMagicAcceleration = 10; // Take approximately 0.5 seconds to reach max vel
+    mm.MotionMagicAcceleration = 20; // Take approximately 0.5 seconds to reach max vel
     // Take approximately 0.2 seconds to reach max accel
     mm.MotionMagicJerk = 0;
 
@@ -213,4 +210,3 @@ public class ElevatorSubsystem extends SubsystemBase {
     followerMotor.setPosition(0);
   }
 }
-

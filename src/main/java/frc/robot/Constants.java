@@ -8,7 +8,6 @@
 package frc.robot;
 
 import com.ctre.phoenix6.signals.InvertedValue;
-
 import edu.wpi.first.wpilibj.RobotBase;
 
 /**
