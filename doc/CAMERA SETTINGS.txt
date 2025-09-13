@@ -1,7 +1,0 @@
-CAMERA SETTINGS:
-
-Exposure: 59
-Black Level Offset: 0
-Sensor Gain: 7.6
-Red Balance: 1102
-Blue Balance: 1136
