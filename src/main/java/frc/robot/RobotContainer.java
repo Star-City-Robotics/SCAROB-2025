@@ -53,7 +53,8 @@ public class RobotContainer {
 
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
-  private final CoralManipulatorSubsystem coralManipulatorSubsystem = new CoralManipulatorSubsystem();
+  private final CoralManipulatorSubsystem coralManipulatorSubsystem =
+      new CoralManipulatorSubsystem();
 
   /* Driver Buttons */
   private final Trigger dStart = xboxDriverController.start();
@@ -158,9 +159,7 @@ public class RobotContainer {
     dA.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))
-        )
-    );
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))));
 
     dB.onTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome)));
 
@@ -168,18 +167,14 @@ public class RobotContainer {
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected()),
-            new WaitUntilCommand(() -> !coralManipulatorSubsystem.coralDetected()),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())
-        )
-    );
+            new WaitCommand(0.3),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
     dX.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitCommand(1),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())
-        )
-    );
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
