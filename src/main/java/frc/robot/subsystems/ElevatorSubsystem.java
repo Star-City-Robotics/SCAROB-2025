@@ -19,10 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-// import frc.robot.state.Score.ScoreInput;
+
 import frc.robot.Constants.Elevator;
-// import frc.robot.state.StateMachineCallback;
-// import frc.robot.subsystems.ToggleableSubsystem;
+
 
 public class ElevatorSubsystem extends SubsystemBase {
 

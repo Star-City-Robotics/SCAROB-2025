@@ -26,6 +26,8 @@ public class SlapdownSubsystem extends SubsystemBase {
     sparkFlexConfigAngle.closedLoop.i(0);
     sparkFlexConfigAngle.closedLoop.d(0);
     sparkFlexConfigAngle.closedLoop.outputRange(-0.1, .1);
+    // Newer version of setInverted
+    // sparkFlexConfigAngle.inverted(true);
 
     slapdownAngleMotor.configure(
         sparkFlexConfigAngle, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
