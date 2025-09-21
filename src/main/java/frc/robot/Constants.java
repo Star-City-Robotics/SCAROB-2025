@@ -51,8 +51,8 @@ public final class Constants {
 
     public static final int ElevatorL4 = 31;
     public static final int ElevatorL3 = 18;
-    public static final int ElevatorL2 = 9;
-    public static final int ElevatorL1 = 4;
+    public static final int ElevatorL2 = 11;
+    public static final int ElevatorL1 = 5;
     public static final double ElevatorHome = 0;
     public static final double ElevatorBarge = 36;
     public static final double ElevatorProcessor = 0;

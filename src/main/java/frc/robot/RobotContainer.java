@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -144,6 +145,27 @@ public class RobotContainer {
     autoChooser.addOption(
         "Drive SysId (Dynamic Reverse)", drive.sysIdDynamic(SysIdRoutine.Direction.kReverse));
 
+    NamedCommands.registerCommand(
+        "Score-Coral",
+        new SequentialCommandGroup(
+            new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.Slapdown.SlapdownOut)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorL4)),
+            new WaitUntilCommand(
+                () -> Elevator.ElevatorL4 - elevatorSubsystem.getElevatorPosition() <= 0.15),
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitCommand(2),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
+            new InstantCommand(
+                () -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorHome))));
+
+    NamedCommands.registerCommand(
+        "Coral-Intake",
+        new SequentialCommandGroup(
+            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+            new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
+            new WaitCommand(0.075),
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -156,25 +178,36 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    dA.onTrue(
+    dY.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
             new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))));
+    dX.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL3))));
+    dA.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL2))));
+    dB.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL1))));
 
-    dB.onTrue(new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome)));
-
-    dY.onTrue(
+    dRightBumper.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected()),
             new WaitCommand(0.3),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
-    dX.onTrue(
+    dLeftBumper.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitCommand(1),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
+            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))));
 
     // Default command, normal field-relative drive
     drive.setDefaultCommand(
