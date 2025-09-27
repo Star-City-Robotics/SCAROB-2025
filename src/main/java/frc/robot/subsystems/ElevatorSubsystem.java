@@ -153,6 +153,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     return Math.abs(getElevatorPosition() - position) < tolerance;
   }
 
+  @Override
+  public void periodic() {
+    log();
+  }
+
   private void log() {
     SmartDashboard.putNumber(
         "elevator motor 1 position", leaderMotor.getPosition().getValueAsDouble());
