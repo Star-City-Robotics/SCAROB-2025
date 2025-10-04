@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Test"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Score-Coral"
+            "pathName": "Middle-out"
           }
         }
       ]

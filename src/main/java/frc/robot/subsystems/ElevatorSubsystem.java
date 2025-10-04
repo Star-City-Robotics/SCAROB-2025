@@ -95,7 +95,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     /* Configure current limits */
     MotionMagicConfigs mm = cfg.MotionMagic;
     mm.MotionMagicCruiseVelocity = 100; // 5 rotations per second cruise
-    mm.MotionMagicAcceleration = 20; // Take approximately 0.5 seconds to reach max vel
+    mm.MotionMagicAcceleration = 25; // Take approximately 0.5 seconds to reach max vel
     // Take approximately 0.2 seconds to reach max accel
     mm.MotionMagicJerk = 0;
 

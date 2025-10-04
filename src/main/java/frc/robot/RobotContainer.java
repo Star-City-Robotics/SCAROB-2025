@@ -145,13 +145,19 @@ public class RobotContainer {
     autoChooser.addOption(
         "Drive SysId (Dynamic Reverse)", drive.sysIdDynamic(SysIdRoutine.Direction.kReverse));
 
+    // Configure the button bindings
+    configureButtonBindings();
+    registerNamedCommands();
+  }
+
+  private void registerNamedCommands() {
     NamedCommands.registerCommand(
         "Score-Coral",
         new SequentialCommandGroup(
             new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorL4)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorL3)),
             new WaitUntilCommand(
-                () -> Elevator.ElevatorL4 - elevatorSubsystem.getElevatorPosition() <= 0.15),
+                () -> Elevator.ElevatorL3 - elevatorSubsystem.getElevatorPosition() <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitCommand(2),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
@@ -166,8 +172,17 @@ public class RobotContainer {
             new WaitCommand(0.075),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
-    // Configure the button bindings
-    configureButtonBindings();
+    NamedCommands.registerCommand(
+        "Reset-Gyro",
+        // Commands.runOnce(
+        //         () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new
+        // Rotation2d())),
+        //         drive)
+        //     .ignoringDisable(true));
+        new InstantCommand(
+                () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
+                drive)
+            .ignoringDisable(true));
   }
 
   /**
@@ -210,6 +225,22 @@ public class RobotContainer {
             new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))));
 
     // Default command, normal field-relative drive
+    // if (DriverStation.getAlliance().get() == Alliance.Blue) {
+    //   drive.setDefaultCommand(
+    //       DriveCommands.joystickDrive(
+    //           drive,
+    //           () -> xboxDriverController.getLeftY(),
+    //           () -> xboxDriverController.getLeftX(),
+    //           () -> xboxDriverController.getRightX()));
+    // } else if (DriverStation.getAlliance().get() == Alliance.Red) {
+    //   drive.setDefaultCommand(
+    //       DriveCommands.joystickDrive(
+    //           drive,
+    //           () -> xboxDriverController.getLeftY(),
+    //           () -> xboxDriverController.getLeftX(),
+    //           () -> xboxDriverController.getRightX()));
+    // }
+
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
             drive,
@@ -218,28 +249,28 @@ public class RobotContainer {
             () -> -xboxDriverController.getRightX()));
 
     // Lock to 0° when A button is held
-    xboxDriverController
-        .povDown()
-        .whileTrue(
-            DriveCommands.joystickDriveAtAngle(
-                drive,
-                () -> -xboxDriverController.getLeftY(),
-                () -> -xboxDriverController.getLeftX(),
-                () -> new Rotation2d()));
+    // xboxDriverController
+    //     .povDown()
+    //     .whileTrue(
+    //         DriveCommands.joystickDriveAtAngle(
+    //             drive,
+    //             () -> -xboxDriverController.getLeftY(),
+    //             () -> -xboxDriverController.getLeftX(),
+    //             () -> new Rotation2d()));
 
     // Switch to X pattern when X button is pressed
     xboxDriverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
     // Reset gyro to 0° when B button is pressed
-    xboxDriverController
-        .povLeft()
-        .onTrue(
-            Commands.runOnce(
-                    () ->
-                        drive.setPose(
-                            new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
-                    drive)
-                .ignoringDisable(true));
+    dPOVLeft.onTrue(
+        Commands.runOnce(
+                () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
+                drive)
+            .ignoringDisable(true));
+
+    dPOVDown.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut))));
   }
 
   /**

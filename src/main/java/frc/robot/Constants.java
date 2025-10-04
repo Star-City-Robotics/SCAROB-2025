@@ -49,7 +49,7 @@ public final class Constants {
     public static final double minElevatorPosition = 0;
     public static final double maxElevatorPosition = 37 * gearRatioModifier;
 
-    public static final int ElevatorL4 = 31;
+    public static final int ElevatorL4 = 32;
     public static final int ElevatorL3 = 18;
     public static final int ElevatorL2 = 11;
     public static final int ElevatorL1 = 5;
