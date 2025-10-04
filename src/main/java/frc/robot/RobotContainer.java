@@ -126,6 +126,8 @@ public class RobotContainer {
         break;
     }
 
+    registerNamedCommands();
+
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
 
@@ -147,7 +149,6 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
-    registerNamedCommands();
   }
 
   private void registerNamedCommands() {
@@ -155,9 +156,9 @@ public class RobotContainer {
         "Score-Coral",
         new SequentialCommandGroup(
             new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorL3)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorL4)),
             new WaitUntilCommand(
-                () -> Elevator.ElevatorL3 - elevatorSubsystem.getElevatorPosition() <= 0.15),
+                () -> Elevator.ElevatorL4 - elevatorSubsystem.getElevatorPosition() <= 0.15),
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
             new WaitCommand(2),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
