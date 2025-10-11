@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.RelativeEncoder;
+import au.grapplerobotics.LaserCan;
+import au.grapplerobotics.interfaces.LaserCanInterface.Measurement;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -16,7 +17,13 @@ public class SlapdownSubsystem extends SubsystemBase {
       new SparkFlex(Slapdown.SLAPDOWN_ANGLE_ID, MotorType.kBrushless);
   private final SparkClosedLoopController slapdownController =
       slapdownAngleMotor.getClosedLoopController();
-  private final RelativeEncoder slapdownEncoder;
+
+  private final SparkFlex slapdownRoller1 =
+      new SparkFlex(Slapdown.SLAPDOWN_ROLLER_1_ID, MotorType.kBrushless);
+  private final SparkFlex slapdownRoller2 =
+      new SparkFlex(Slapdown.SLAPDOWN_ROLLER_2_ID, MotorType.kBrushless);
+
+  private final LaserCan slapdownSensor = new LaserCan(Slapdown.SLAPDOWN_SENSOR_ID);
 
   public SlapdownSubsystem() {
 
@@ -33,8 +40,6 @@ public class SlapdownSubsystem extends SubsystemBase {
     slapdownAngleMotor.configure(
         sparkFlexConfigAngle, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
-    slapdownEncoder = slapdownAngleMotor.getEncoder();
-
     slapdownAngleMotor.setInverted(false);
   }
 
@@ -47,5 +52,26 @@ public class SlapdownSubsystem extends SubsystemBase {
       return true;
     }
     return false;
+  }
+
+  public void intakeRollers() {
+    slapdownRoller1.set(-0.5);
+    slapdownRoller2.set(0.5);
+  }
+
+  public void outakeRollers() {
+    slapdownRoller1.set(0.5);
+    slapdownRoller2.set(-0.5);
+  }
+
+  public void stopRollers() {
+    slapdownRoller1.stopMotor();
+    slapdownRoller2.stopMotor();
+  }
+
+  public boolean algaeDetected() {
+    if (slapdownRoller1.get() == 0) return true;
+    Measurement measurement = slapdownSensor.getMeasurement();
+    return measurement.distance_mm <= 10;
   }
 }

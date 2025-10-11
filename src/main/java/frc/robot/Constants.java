@@ -28,7 +28,7 @@ public final class Constants {
 
     public static final double SlapdownOut = -0.6;
     public static final double SlapdownIntake = -2;
-    public static final double SlapdownGroundIntake = -3.6;
+    public static final double SlapdownGroundIntake = -5;
     public static final double SlapdownOuttakeBarge = -2.5;
     public static final double SlapdownOuttakeProcessor = -1.6;
   }

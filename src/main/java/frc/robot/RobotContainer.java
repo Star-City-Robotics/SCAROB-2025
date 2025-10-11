@@ -225,6 +225,19 @@ public class RobotContainer {
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))));
 
+    dRightTrigger.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
+            new WaitUntilCommand(() -> slapdownSubsystem.algaeDetected()),
+            new WaitCommand(0.1),
+            new InstantCommand(() -> slapdownSubsystem.stopRollers())));
+
+    dLeftTrigger.onTrue(
+        new SequentialCommandGroup(
+            new InstantCommand(() -> slapdownSubsystem.outakeRollers()),
+            new WaitCommand(1),
+            new InstantCommand(() -> slapdownSubsystem.stopRollers())));
+
     // Default command, normal field-relative drive
     // if (DriverStation.getAlliance().get() == Alliance.Blue) {
     //   drive.setDefaultCommand(
@@ -260,18 +273,20 @@ public class RobotContainer {
     //             () -> new Rotation2d()));
 
     // Switch to X pattern when X button is pressed
-    xboxDriverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
+    // xboxDriverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
-    // Reset gyro to 0° when B button is pressed
     dPOVLeft.onTrue(
         Commands.runOnce(
                 () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                 drive)
             .ignoringDisable(true));
 
+    dPOVRight.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
+
+    dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)));
+
     dPOVDown.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut))));
+        new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownGroundIntake)));
   }
 
   /**
@@ -281,5 +296,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return autoChooser.get();
+  }
+
+  public void teleopInit() {
+    slapdownSubsystem.angleIntake(Slapdown.SlapdownOut);
   }
 }
