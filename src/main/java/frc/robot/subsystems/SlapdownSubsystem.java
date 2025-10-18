@@ -32,7 +32,7 @@ public class SlapdownSubsystem extends SubsystemBase {
     sparkFlexConfigAngle.closedLoop.p(0.05);
     sparkFlexConfigAngle.closedLoop.i(0);
     sparkFlexConfigAngle.closedLoop.d(0);
-    sparkFlexConfigAngle.closedLoop.outputRange(-0.1, .1);
+    sparkFlexConfigAngle.closedLoop.outputRange(-0.8, .8);
 
     // Newer version of setInverted
     // sparkFlexConfigAngle.inverted(true);
@@ -55,13 +55,13 @@ public class SlapdownSubsystem extends SubsystemBase {
   }
 
   public void intakeRollers() {
-    slapdownRoller1.set(-0.5);
-    slapdownRoller2.set(0.5);
+    slapdownRoller1.set(0.5);
+    slapdownRoller2.set(-0.5);
   }
 
   public void outakeRollers() {
-    slapdownRoller1.set(0.5);
-    slapdownRoller2.set(-0.5);
+    slapdownRoller1.set(-0.5);
+    slapdownRoller2.set(0.5);
   }
 
   public void stopRollers() {

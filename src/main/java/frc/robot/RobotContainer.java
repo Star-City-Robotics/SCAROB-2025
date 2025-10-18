@@ -208,8 +208,8 @@ public class RobotContainer {
             new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL2))));
     dB.onTrue(
         new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL1))));
+            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOuttakeBarge)),
+            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorBarge))));
 
     dRightBumper.onTrue(
         new SequentialCommandGroup(
@@ -221,7 +221,7 @@ public class RobotContainer {
     dLeftBumper.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(1),
+            new WaitCommand(0.5),
             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
             new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))));
 
@@ -235,8 +235,13 @@ public class RobotContainer {
     dLeftTrigger.onTrue(
         new SequentialCommandGroup(
             new InstantCommand(() -> slapdownSubsystem.outakeRollers()),
-            new WaitCommand(1),
+            new WaitCommand(0.5),
             new InstantCommand(() -> slapdownSubsystem.stopRollers())));
+
+    dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)));
+
+    dPOVDown.onTrue(
+        new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownGroundIntake)));
 
     // Default command, normal field-relative drive
     // if (DriverStation.getAlliance().get() == Alliance.Blue) {
@@ -275,18 +280,13 @@ public class RobotContainer {
     // Switch to X pattern when X button is pressed
     // xboxDriverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
-    dPOVLeft.onTrue(
+    opPOVLeft.onTrue(
         Commands.runOnce(
                 () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                 drive)
             .ignoringDisable(true));
 
-    dPOVRight.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
-
-    dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)));
-
-    dPOVDown.onTrue(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownGroundIntake)));
+    opPOVRight.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
   }
 
   /**

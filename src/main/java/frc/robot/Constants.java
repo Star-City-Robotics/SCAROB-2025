@@ -26,11 +26,11 @@ public final class Constants {
 
     public static final int SLAPDOWN_SENSOR_ID = 54;
 
-    public static final double SlapdownOut = -0.6;
-    public static final double SlapdownIntake = -2;
-    public static final double SlapdownGroundIntake = -5;
-    public static final double SlapdownOuttakeBarge = -2.5;
-    public static final double SlapdownOuttakeProcessor = -1.6;
+    public static final double SlapdownOut = -0.6 * 5;
+    public static final double SlapdownIntake = -10;
+    public static final double SlapdownGroundIntake = -27;
+    public static final double SlapdownOuttakeBarge = -2.5 * 5;
+    public static final double SlapdownOuttakeProcessor = -1.6 * 5;
   }
 
   public final class Elevator {
@@ -49,13 +49,12 @@ public final class Constants {
     public static final double minElevatorPosition = 0;
     public static final double maxElevatorPosition = 37 * gearRatioModifier;
 
-    public static final int ElevatorL4 = 32;
+    public static final int ElevatorL4 = 31;
     public static final int ElevatorL3 = 18;
     public static final int ElevatorL2 = 11;
     public static final int ElevatorL1 = 5;
     public static final double ElevatorHome = 0;
-    public static final double ElevatorBarge = 36;
-    public static final double ElevatorProcessor = 0;
+    public static final double ElevatorBarge = 37;
     public static final int ElevatorL3Intake = 17;
     public static final int ElevatorL2Intake = 9;
   }
