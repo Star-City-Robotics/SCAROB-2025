@@ -280,13 +280,13 @@ public class RobotContainer {
     // Switch to X pattern when X button is pressed
     // xboxDriverController.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
 
-    opPOVLeft.onTrue(
+    dPOVRight.onTrue(
         Commands.runOnce(
                 () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                 drive)
             .ignoringDisable(true));
 
-    opPOVRight.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
+    dPOVLeft.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
   }
 
   /**
