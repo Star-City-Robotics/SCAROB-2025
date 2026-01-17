@@ -52,10 +52,10 @@ public class RobotContainer {
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
 
-  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
-  private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
-  private final CoralManipulatorSubsystem coralManipulatorSubsystem =
-      new CoralManipulatorSubsystem();
+//   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(true);
+//   private final SlapdownSubsystem slapdownSubsystem = new SlapdownSubsystem();
+//   private final CoralManipulatorSubsystem coralManipulatorSubsystem =
+//       new CoralManipulatorSubsystem();
 
   /* Driver Buttons */
   private final Trigger dStart = xboxDriverController.start();
@@ -152,39 +152,39 @@ public class RobotContainer {
   }
 
   private void registerNamedCommands() {
-    NamedCommands.registerCommand(
-        "Score-Coral",
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorL4)),
-            new WaitUntilCommand(
-                () -> Elevator.ElevatorL4 - elevatorSubsystem.getElevatorPosition() <= 0.15),
-            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(2),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
-            new InstantCommand(
-                () -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorHome))));
+//     NamedCommands.registerCommand(
+//         "Score-Coral",
+//         new SequentialCommandGroup(
+//             new InstantCommand(() -> slapdownSubsystem.angleIntake(Constants.Slapdown.SlapdownOut)),
+//             new InstantCommand(() -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorL4)),
+//             new WaitUntilCommand(
+//                 () -> Elevator.ElevatorL4 - elevatorSubsystem.getElevatorPosition() <= 0.15),
+//             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+//             new WaitCommand(2),
+//             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
+//             new InstantCommand(
+//                 () -> elevatorSubsystem.moveElevator(Constants.Elevator.ElevatorHome))));
 
-    NamedCommands.registerCommand(
-        "Coral-Intake",
-        new SequentialCommandGroup(
-            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
-            new WaitCommand(0.075),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
+//     NamedCommands.registerCommand(
+//         "Coral-Intake",
+//         new SequentialCommandGroup(
+//             new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+//             new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected() == true),
+//             new WaitCommand(0.075),
+//             new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
-    NamedCommands.registerCommand(
-        "Reset-Gyro",
-        // Commands.runOnce(
-        //         () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new
-        // Rotation2d())),
-        //         drive)
-        //     .ignoringDisable(true));
-        new InstantCommand(
-                () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
-                drive)
-            .ignoringDisable(true));
-  }
+//     NamedCommands.registerCommand(
+//         "Reset-Gyro",
+//         // Commands.runOnce(
+//         //         () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new
+//         // Rotation2d())),
+//         //         drive)
+//         //     .ignoringDisable(true));
+//         new InstantCommand(
+//                 () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
+//                 drive)
+//             .ignoringDisable(true));
+   }
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -194,54 +194,54 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    dY.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))));
-    dX.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL3))));
-    dA.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL2))));
-    dB.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOuttakeBarge)),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorBarge))));
+    // dY.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+    //         new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL4))));
+    // dX.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+    //         new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL3))));
+    // dA.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)),
+    //         new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorL2))));
+    // dB.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOuttakeBarge)),
+    //         new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorBarge))));
 
-    dRightBumper.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected()),
-            new WaitCommand(0.3),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
+    // dRightBumper.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+    //         new WaitUntilCommand(() -> coralManipulatorSubsystem.coralDetected()),
+    //         new WaitCommand(0.3),
+    //         new InstantCommand(() -> coralManipulatorSubsystem.stopMotors())));
 
-    dLeftBumper.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> coralManipulatorSubsystem.intake()),
-            new WaitCommand(0.5),
-            new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
-            new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))));
+    // dLeftBumper.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> coralManipulatorSubsystem.intake()),
+    //         new WaitCommand(0.5),
+    //         new InstantCommand(() -> coralManipulatorSubsystem.stopMotors()),
+    //         new InstantCommand(() -> elevatorSubsystem.moveElevator(Elevator.ElevatorHome))));
 
-    dRightTrigger.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
-            new WaitUntilCommand(() -> slapdownSubsystem.algaeDetected()),
-            new WaitCommand(0.1),
-            new InstantCommand(() -> slapdownSubsystem.stopRollers())));
+    // dRightTrigger.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> slapdownSubsystem.intakeRollers()),
+    //         new WaitUntilCommand(() -> slapdownSubsystem.algaeDetected()),
+    //         new WaitCommand(0.1),
+    //         new InstantCommand(() -> slapdownSubsystem.stopRollers())));
 
-    dLeftTrigger.onTrue(
-        new SequentialCommandGroup(
-            new InstantCommand(() -> slapdownSubsystem.outakeRollers()),
-            new WaitCommand(0.5),
-            new InstantCommand(() -> slapdownSubsystem.stopRollers())));
+    // dLeftTrigger.onTrue(
+    //     new SequentialCommandGroup(
+    //         new InstantCommand(() -> slapdownSubsystem.outakeRollers()),
+    //         new WaitCommand(0.5),
+    //         new InstantCommand(() -> slapdownSubsystem.stopRollers())));
 
-    dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)));
+    // dPOVUp.onTrue(new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownOut)));
 
-    dPOVDown.onTrue(
-        new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownGroundIntake)));
+    // dPOVDown.onTrue(
+    //     new InstantCommand(() -> slapdownSubsystem.angleIntake(Slapdown.SlapdownGroundIntake)));
 
     // Default command, normal field-relative drive
     // if (DriverStation.getAlliance().get() == Alliance.Blue) {
@@ -286,7 +286,7 @@ public class RobotContainer {
                 drive)
             .ignoringDisable(true));
 
-    dPOVLeft.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
+    // dPOVLeft.onTrue(new InstantCommand(() -> elevatorSubsystem.resetPosition()));
   }
 
   /**
@@ -298,7 +298,7 @@ public class RobotContainer {
     return autoChooser.get();
   }
 
-  public void teleopInit() {
-    slapdownSubsystem.angleIntake(Slapdown.SlapdownOut);
-  }
+//   public void teleopInit() {
+//     slapdownSubsystem.angleIntake(Slapdown.SlapdownOut);
+//   }
 }
